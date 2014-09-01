@@ -15,13 +15,11 @@ html
     link href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" rel="stylesheet" data-turbolinks-track="true"
     = stylesheet_link_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", "navigation", "plugins/popover", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "navigation", "plugins/popover", "jquery.countdown", "data-turbolinks-track" => true
     = javascript_include_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
     = csrf_meta_tags
     body data-location-scope="#{(@location ? @location['area'] : "")}" data-action="#{action_name}" data-content-type="#{controller_name.singularize.titleize}" data-test="#{apikey(request.url)}" data-user-id="#{(@user ? @user.id : "")}" data-parent-id="#{(@parent_project ? @parent_project.id : "")}"
   body
-    = render "shared/countdown"
-
     = link_to "Create An Event", "javascript:void()", class: "show_create_event"
     #show style="display:none"
       = render "events/form"
@@ -53,9 +51,9 @@ html
             span.icon-bar
         /! Collect the nav links, forms, and other content for toggling
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          form.navbar-form.navbar-left.form-wpc role="search"
-            button.btn.btn-default.btn-find data-target="#myModal" data-toggle="modal" type="submit"  Find an Event near me
-            button.btn.btn-default.btn-find type="submit"  Create an Events
+          .navbar-form.navbar-left.form-wpc role="search"
+            button.btn.btn-default.btn-find data-toggle="modal" data-target=".bs-example-modal-sm" Find an Event near me
+            button.btn.btn-default.btn-find.show_create_event type="submit"  Create an Events
           #myModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
             .modal-dialog
               .modal-content
@@ -207,6 +205,8 @@ html
     / = render "shared/countdown"
     / = link_to "Create An Event", new_event_path
     = yield
+    .modal.fade.bs-example-modal-sm tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+      = render "home/find_event"
 
     - if session[:location]
       #map-used data-map="#{session[:location][:map_type]}"
@@ -215,3 +215,8 @@ javascript:
   $(".show_create_event").click(function(){
     $("#show").show();
   })
+
+  countdown( new Date(2014, 9 - 1, 21));
+  $('.days').html(countdown.DAYS);
+  $('.hours').html(countdown.HOURS);
+  $('.minutes').html(countdown.MINUTES);

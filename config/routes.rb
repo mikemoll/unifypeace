@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :events do
     collection do
       get "approved_event/:id", :to => 'events#approved_event', :as => "approved_event"
+      get "/c/:category", to: "events#categories", as: :category
     end
   end
   root 'home#index'

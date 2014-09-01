@@ -62,7 +62,7 @@
                 = f.label "Drag marker to location"
           #show_map style="display:none"
             | Drag this
-            = image_tag "markers/multi-icon.png", id: "content-type", class: "drag show", type: "red", value: "project", style: "margin: 0 2px;"
+            = image_tag "marker.png", id: "content-type", class: "drag show", type: "red", value: "project", style: "margin: 0 2px;"
       .form-group style=("display: block;overflow: hidden;") 
         .col-md-5.text-right style="font-size:12px;line-height:35px;" 
           | Address
@@ -94,11 +94,11 @@
         .col-md-7
           = select_tag :affiliated_organization_id, options_for_select(AffiliatedOrganization.all.map{|a_o| [a_o.name, a_o.id]}), prompt: "Select One", class: "form-control"
     .footer-form-event
-      button.btn.btn-find.col-md-offset-5 Submit
-
-          
+      button.btn.btn-find.col-md-offset-5 Submit          
 
 javascript:
+  var newAddedMarker = null;
+
   $(document).ready(function() {
     $('#enter_').click(function(){
       if ($(this).is(':checked')){
@@ -126,7 +126,12 @@ javascript:
       console.log(r = result);
       var lat = result["geometry"]["location"]["k"]
       var lng = result["geometry"]["location"]["B"]
-      map.setView(new L.LatLng(lat, lng), 8);
+      map.setView(new L.LatLng(lat, lng), 15);
+      if(newAddedMarker){
+        newAddedMarker.setLatLng([lat, lng]);
+      }else{
+        newAddedMarker = L.marker([lat, lng], {}).addTo(map);
+      }
     });
 
     $("#geocomplete").click(function(){

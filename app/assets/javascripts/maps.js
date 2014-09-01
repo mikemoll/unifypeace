@@ -220,7 +220,6 @@ if(mapType == "earth"){
 }
 
 
-
 setTimeout(function() {
   $(".drag").draggable({
     helper: 'clone',
@@ -243,7 +242,7 @@ setTimeout(function() {
       // }else if(model == 'social'){
       //   var leftTop = [ui.offset.left - 213, ui.offset.top -499]
       // }else if(model == 'discussion'){
-      var leftTop = [ui.offset.left + 100, ui.offset.top -499]
+      var leftTop = [ui.offset.left + 10, ui.offset.top - 300]
       // }
 
       console.log(map.containerPointToLatLng(leftTop))
@@ -279,7 +278,7 @@ var putMarker = function(position, options){
         $("#event_lat").val(data.latitude);
         $("#event_long").val(data.longitude);
         $("#geocomplete").val(data.address);
-        $("#address").val(data.address);
+        $("#address").val(data.formatted_address);
         $("#event_country").val(data.region);
         $("#event_postal_code").val(data.postal_code);
       }else{

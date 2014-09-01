@@ -9,11 +9,11 @@ class HomeController < ApplicationController
       @all << if @location["area"].eql? "worldwide"
         Event.all
       else
-        Event.where('(city = ? OR country = ?)', @location[:city_name], @location[:country_name]).near([@location[:latitude], @location[:longitude]], 20, units: :km)
+        Event.where('(city = ? OR country = ?)', @location[:city_name], @location[:country_name]).near([@location[:latitude], @location[:longitude]], 20, units: :km) rescue nil
       end
 
       @all = @all.flatten
-      @markers = get_marker_and_location(@all) if @all
+      @markers = get_marker_and_location(@all) if @all rescue nil
     end
 
     set_title_location(@location)

@@ -13,7 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-
 //= require plugins/leaflet.markercluster-src
-
 //= require maps-leaflet
+//= require jstz-1.0.4.min
+//= require jquery.plugin
+//= requite jquery.countdown

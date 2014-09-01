@@ -6,7 +6,8 @@ html
     = yield :metatags
     meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     - if request.url.include? "localhost"
-      script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places&sensor=false" type="text/javascript"
+      / script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places&sensor=false" type="text/javascript"
+      script src="//maps.googleapis.com/maps/api/js?sensor=false&libraries=places" type="text/javascript"
     - else
       script src="https://maps.googleapis.com/maps/api/js?v=3&key=#{apikey(request.url)}&libraries=places&sensor=false" type="text/javascript"
     script type="text/javascript" src="https://www.google.com/jsapi"

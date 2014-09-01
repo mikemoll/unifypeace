@@ -47,6 +47,18 @@ p
 p
   strong Longitude:
   = @event.long
+p
+  strong Country:
+  = @event.country
+p
+  strong Region:
+  = @event.region
+p
+  strong Postal Code:
+  = @event.postal_code
+p
+  strong Status:
+  = @event.status
 
 = link_to 'Edit', edit_event_path(@event)
 | &nbsp;|&nbsp;

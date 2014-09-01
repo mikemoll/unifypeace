@@ -8,11 +8,11 @@
         - @event.errors.full_messages.each do |message|
           li= message
   .field
-    = f.label :title
+    = f.label "Title Of Your Event"
     br
-      = f.text_field :title
+      = f.text_field :title , placeholder: "e.g Global Peace Meditation"
   .field
-    = f.label :category_id
+    = f.label "Event Type"
     br
     ul
     - @categories.each do |category|
@@ -20,33 +20,41 @@
         = check_box_tag "category_ids[]", category.id, @event.category_ids.include?(category.id)
         = f.label category.name
   .field
-    = f.label :website_link
+    = f.label "Website/Facebook Link"
     br
-      = f.text_field :website_link
+      = f.text_field :website_link, placeholder: "https://www.facebook.com/event"
   .field
-    = f.label :start_date
+    = f.label "Event Date & Time"
     br
-      = f.date_field :start_date
+      = f.date_field :start_date, placeholder: "Select a date & time"
   .field
-    = f.label :description
+    = f.label "Event Description"
     br
-      = f.text_area :description
+      = f.text_area :description, placeholder: "Please write a brief description of your event"
   .field
-    = f.label :location
+    = f.label :estimated_attendees
+    br
+      = select_tag :estimated_attendees, options_for_attendees, class: "form-control",  prompt: "Select One"
+  .field
+    = f.label "Address"
     br
       = f.text_field :location, id: "geocomplete"
   .field
+    = f.text_field :country, name: "country"
+    = f.text_field :region, name: "administrative_area_level_1"
+    = f.text_field :postal_code, name: "postal_code"
+  .field
     = f.label :organizer_name
     br
-      = f.text_field :organizer_name
+      = f.text_field :organizer_name, placeholder: "Michelle Paix"
   .field
     = f.label :organizer_email
     br
-      = f.text_field :organizer_email
+      = f.text_field :organizer_email, placeholder: "michelle@unify.org"
   .field
-    = f.label :affiliated_organization_id
+    = f.label "Affiliated Organization"
     br
-      = select_tag :affiliated_organization_id, options_for_select(AffiliatedOrganization.all.map{|a_o| [a_o.name, a_o.id]})
+      = select_tag :affiliated_organization_id, options_for_select(AffiliatedOrganization.all.map{|a_o| [a_o.name, a_o.id]}),  prompt: "Select One"
   .field
     = f.hidden_field :lat, name: "lat"
   .field

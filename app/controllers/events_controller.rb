@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.where(status: "approved")
   end
 
   # GET /events/1
@@ -20,16 +20,19 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+    @categories = Category.all
   end
 
   # POST /events
   # POST /events.json
   def create
     @event = Event.new(event_params)
-
+    @event.affiliated_organization_id = params[:affiliated_organization_id]
+    @event.category_ids = params[:category_ids]
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        EventCraetedMailer.event_created_infirmation(@event.slug, @event.organizer_email).deliver
+        format.html { redirect_to @event, notice: 'Thank you for creating an event for World Peace Day, we will confirm your event within 48 hours, and contact you once it has been approved.' }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -41,9 +44,11 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    @event.categories.destroy
+    @event.category_ids = params[:category_ids]
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.html { redirect_to @event, notice: 'Event has been updated.' }
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
@@ -65,11 +70,11 @@ class EventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
-      @event = Event.find(params[:id])
+      @event = Event.friendly.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :category_id, :website_link, :date_and_time, :description, :location, :organizer_name, :organizer_email, :affiliated_organization_id, :latitude, :longitude)
+      params.require(:event).permit(:title, :category_id, :website_link, :date_and_time, :description, :location, :organizer_name, :organizer_email, :affiliated_organization_id, :latitude, :longitude, :status)
     end
 end

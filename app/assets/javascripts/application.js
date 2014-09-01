@@ -18,3 +18,4 @@
 //= require jstz-1.0.4.min
 //= require jquery.plugin
 //= requite jquery.countdown
+//= require jquery/jquery.geocomplete

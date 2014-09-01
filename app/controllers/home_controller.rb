@@ -67,8 +67,14 @@ class HomeController < ApplicationController
       event = Event.find params[:event_id]
       EventCreatedMailer.contact_organizer(params[:subject], params[:message], event.organizer_name, event.organizer_email).deliver
     end
-    
+
     redirect_to root_url
+  end
+
+  def set_timezone
+    session[:timezone] = params[:timezone]
+
+    render nothing: true
   end
 
   def page_not_found; end

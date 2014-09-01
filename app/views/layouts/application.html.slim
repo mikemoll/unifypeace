@@ -15,7 +15,7 @@ html
     link href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" rel="stylesheet" data-turbolinks-track="true"
     = stylesheet_link_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", "navigation", "plugins/popover", "jquery.downCount", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "navigation", "plugins/popover", "jquery.plugin", "jquery.countdown", "data-turbolinks-track" => true
     = javascript_include_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
     = csrf_meta_tags
     body data-location-scope="#{(@location ? @location['area'] : "")}" data-action="#{action_name}" data-content-type="#{controller_name.singularize.titleize}" data-test="#{apikey(request.url)}" data-user-id="#{(@user ? @user.id : "")}" data-parent-id="#{(@parent_project ? @parent_project.id : "")}"
@@ -34,9 +34,9 @@ html
                 = link_to image_tag("log (11).png"), root_path
             .logo-title
               .col-md-4
-                h1.text-left Peach
+                h1.text-left Peace
                 h2.text-left Global Events Map
-                h3.text-left Peach Day Coalition
+                h3.text-left Peace Day Coalition
     nav.navbar.navbar-default.navbar-wpc role="navigation"
       .container
         /! Brand and toggle get grouped for better mobile display
@@ -49,7 +49,7 @@ html
         /! Collect the nav links, forms, and other content for toggling
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
           .navbar-form.navbar-left.form-wpc role="search"
-            button.btn.btn-default.btn-find data-toggle="modal" data-target=".bs-example-modal-sm" Find an Event near me
+            button.btn.btn-default.btn-find.find-event data-toggle="modal" data-target=".bs-example-modal-sm" Find an Event near me
             button.btn.btn-default.btn-find.show_create_event type="submit"  Create an Events
           #myModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
             .modal-dialog
@@ -78,20 +78,7 @@ html
                           button.btn.btn-default.btn-location Set Location
                 .modal-footer
                   button.btn.btn-default.btn-location data-dismiss="modal" type="button"  Close
-          ul.nav.navbar-nav.countdown
-            li
-              span.days 00
-              p.days_ref days
-            li.seperator
-              = ":"
-            li
-              span.hours 00
-              p.hours_ref hours
-            li.seperator
-              = ":"
-            li
-              span.minutes 00
-              p.minutes_ref mins
+          .countdown
           ul.nav.navbar-nav.countdown-result
             li
               span.seperator-result
@@ -101,7 +88,8 @@ html
               span.seperator-result
                 | 12PM
                 b PST
-              span.pst-count World Peach Moment
+              span.pst-count World Peace Moment
+          .clear
     .maps
       #show style="display:none"
         = render "events/form"
@@ -127,7 +115,6 @@ javascript:
     $("#show").slideToggle();
   })
 
-  $('.countdown').downCount({
-            date: '09/21/2014 00:00:00',
-            offset: +7
-        });
+  timezone = jstz.determine()
+  date = new Date("09/21/2014")
+  $('.countdown').countdown({until: date, format: 'dHM'});

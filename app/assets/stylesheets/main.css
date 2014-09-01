@@ -100,6 +100,9 @@
 .btn-location {
   width: 100%;
 }
+.find-event{
+  margin-right: 10px;
+}
 .navbar-wpc {
   background: url('bg-nav.png') repeat;
   width: 100%;
@@ -113,7 +116,7 @@
   margin-top: 37px;
 }
 .countdown {
-  margin-top: 25px;
+  margin-top: 20px;
   margin-left: 15px;
 }
 .countdown p,
@@ -130,16 +133,30 @@
 .countdown p {
   font-size: 17px;
 }
+.countdown-section{
+  font-family: 'bebas-neue';
+  text-transform: uppercase;
+  text-align: center;
+  color: #ffffff;
+  float: left;
+  margin-left: 10px;
+}
 .countdown .days,
 .countdown .hours,
-.countdown .minutes {
+.countdown .minutes,
+.countdown-amount {
   background-color: #000000;
   border: 1px solid #2aaacb;
+  font-size: 25px;
+}
+.countdown-period{
+  font-size: 17px;
+  padding: 5px 10px;
 }
 .countdown .days_ref,
 .countdown .hours_ref,
-.countdown .minutes_ref {
-  margin-top: 12px;
+.countdown .minutes_ref,
+.countdown-period {
   background: #64838c;
   /* Old browsers */
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -164,7 +181,6 @@
 }
 .countdown-result {
   font-family: 'bebas-neue';
-  margin-top: 25px;
   margin-left: 15px;
   display: inline-block;
 }

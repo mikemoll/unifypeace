@@ -32,3 +32,5 @@ gem "geoip"
 gem "fog"
 gem "truncate_html"
 gem 'html5_validators'
+gem "less-rails"
+gem "therubyracer"

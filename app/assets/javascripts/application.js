@@ -20,6 +20,7 @@
 //= requite jquery.countdown
 //= require timezone
 //= require jquery.geocomplete
+//= require bootstrap-datetimepicker
 
 $(document).on('ready page:load', function(){
   navigationAction();

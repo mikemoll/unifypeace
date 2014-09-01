@@ -30,6 +30,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+    error
     @event = Event.new(event_params)
     @event.affiliated_organization_id = params[:affiliated_organization_id]
     @event.category_ids = params[:category_ids]
@@ -38,6 +39,7 @@ class EventsController < ApplicationController
     @event.country = params[:country]
     @event.region = params[:administrative_area_level_1]
     @event.postal_code = params[:postal_code]
+    @event.estimated_attendees = params[:estimated_attendees]
     respond_to do |format|
       if @event.save
         EventCreatedMailer.event_created_infirmation(@event.slug, @event.organizer_email).deliver

@@ -71,6 +71,16 @@ class EventsController < ApplicationController
     end
   end
 
+  def approved_event
+    event = Event.where(id: params[:id]).first.update(status: "approved")
+    EventApprovedMailer.event_approved_infirmation(event.title, event.slug, event.organizer_email).deliver
+    redirect_to :back
+  end
+
+  def approved_all_events
+    EventApprovedMailer.event_approved_infirmation(event.title, event.slug, event.organizer_email).deliver
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
@@ -79,6 +89,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :category_id, :website_link, :date_and_time, :description, :location, :organizer_name, :organizer_email, :affiliated_organization_id, :lat, :long, :status)
+      params.require(:event).permit(:title, :category_id, :website_link, :start_date, :description, :location, :organizer_name, :organizer_email, :affiliated_organization_id, :lat, :long, :status)
     end
 end

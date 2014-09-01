@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
-  resources :events
+  resources :events do
+    collection do
+      get "approved_event/:id", :to => 'events#approved_event', :as => "approved_event"
+    end
+  end
   root 'home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

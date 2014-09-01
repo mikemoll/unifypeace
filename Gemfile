@@ -45,3 +45,4 @@ gem 'carrierwave'
 gem 'slim'
 gem 'devise'
 gem "binding_of_caller"
+gem "rails_12factor"

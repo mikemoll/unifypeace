@@ -32,7 +32,7 @@
   .field
     = f.label :location
     br
-      = f.text_field :location
+      = f.text_field :location, id: "geocomplete"
   .field
     = f.label :organizer_name
     br
@@ -46,12 +46,19 @@
     br
       = f.number_field :affiliated_organization_id
   .field
-    = f.label :latitude
-    br
-      = f.text_field :latitude
+    = f.hidden_field :latitude, name: "lat"
   .field
-    = f.label :longitude
-    br
-      = f.text_field :longitude
+    = f.hidden_field :longitude, name: "lng"
   .actions
     = f.submit
+javascript:
+  $(function(){
+    $("#geocomplete").geocomplete({
+      details: "form",
+      types: ["geocode", "establishment"]
+    });
+
+    $("#geocomplete").click(function(){
+      $("#geocomplete").trigger("geocode");
+    });
+  });

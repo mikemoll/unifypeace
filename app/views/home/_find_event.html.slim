@@ -1,0 +1,31 @@
+.modal-dialog.modal-sm
+  .modal-content
+    h4.text-center Find an Event near me
+    .container
+      = form_tag(find_event_path, method: :post, id: "find_event") do
+        .small-9
+          .small-9.large-9.columns
+            label class="left inline" for="city" Location
+            br
+          .small-9.large-9.columns
+            = text_field_tag "location", (@location[:address] if @location), class: "small-9 find-location", id: "city", autofocus: "true", placeholder: "Search for place, and things"
+            div.notif-modal-change-new.new-location-change
+            .loader-assign.loader-set-location style="right: 3% !important;"
+              i.fa.fa-map-marker
+
+        .small-9
+          .small-9.large-9.columns
+            label class="left inline" for="location_distance" Show Result Within
+
+        .small-9
+          .small-9.large-5.columns
+            = select_tag "distance", options_for_select(DISTANCES, ["20 KM", 20]), {class: "margin-0 small-9", style: "margin-bottom: 10px !important;"}
+          .small-9.large-7.columns
+            = submit_tag "Set Location", class: "btn_change_location btn pull-left large-9", disable_with: "Search Location ..."
+            .loader-ajax-set-location.pull-left style="margin:7px 15px;"
+
+javascript:
+  $(".new-location").focus()
+  $(function(){
+    $("#city").geocomplete();
+  });

@@ -1,3 +1,6 @@
+button.btn.btn-primary data-toggle="modal" data-target=".bs-example-modal-sm"
+  | Find an Event near me
+
 h1 Listing events
 
 table
@@ -37,3 +40,5 @@ table
 br
 
  = link_to 'New Event', new_event_path()
+.modal.fade.bs-example-modal-sm tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+  = render "home/find_event"

@@ -15,7 +15,7 @@ html
     link href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" rel="stylesheet" data-turbolinks-track="true"
     = stylesheet_link_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", "navigation", "plugins/popover", "jquery.countdown", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "navigation", "plugins/popover", "jquery.downCount", "data-turbolinks-track" => true
     = javascript_include_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
     = csrf_meta_tags
     body data-location-scope="#{(@location ? @location['area'] : "")}" data-action="#{action_name}" data-content-type="#{controller_name.singularize.titleize}" data-test="#{apikey(request.url)}" data-user-id="#{(@user ? @user.id : "")}" data-parent-id="#{(@parent_project ? @parent_project.id : "")}"
@@ -106,8 +106,16 @@ html
               span.pst-count World Peach Moment
     .maps
       = yield
-    / = render "shared/countdown"
-    / = link_to "Create An Event", new_event_path
+    .footer
+        = image_tag "logo/WorldPeacePrayer.png", height: "100px"
+        = image_tag "logo/we.jpg", height: "100px"
+        = image_tag "logo/oneworldstilllogo.png", height: "100px"
+        = image_tag "logo/1 Giant Mind.png", height: "100px"
+        = image_tag "logo/URI.jpg", height: "100px"
+        = image_tag "logo/ArtOfLiving.jpg", height: "100px"
+        = image_tag "logo/cgames.png", height: "100px"
+        = image_tag "logo/BeThePeace_Logo.jpg", height: "100px"
+        = image_tag "logo/InternationalDayofPeace.jpg", height: "100px"
     .modal.fade.bs-example-modal-sm tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
       = render "home/find_event"
 
@@ -119,7 +127,7 @@ javascript:
     $("#show").show();
   })
 
-  countdown( new Date(2014, 9 - 1, 21));
-  $('.days').html(countdown.DAYS);
-  $('.hours').html(countdown.HOURS);
-  $('.minutes').html(countdown.MINUTES);
+  $('.countdown').downCount({
+            date: '09/21/2014 00:00:00',
+            offset: +7
+        });

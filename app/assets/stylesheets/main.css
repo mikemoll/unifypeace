@@ -316,7 +316,11 @@ label.control-label span {
 }
 .footer {
   height: auto;
-  margin-top: 295px;
+  padding: 20px;
+  /*margin-top: 295px;*/
+}
+.footer img{
+  margin-left: 10px;
 }
 .list-footer-logo {
   list-style: none;
@@ -334,6 +338,7 @@ label.control-label span {
 .list-event-legend li {
   display: inline-block;
   margin-right: 5px;
+  color: #fff;
 }
 .list-event-legend li a {
   color: #fff;

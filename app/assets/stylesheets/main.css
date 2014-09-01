@@ -100,6 +100,9 @@
 .btn-location {
   width: 100%;
 }
+.find-event{
+  margin-right: 10px;
+}
 .navbar-wpc {
   background: url('bg-nav.png') repeat;
   width: 100%;

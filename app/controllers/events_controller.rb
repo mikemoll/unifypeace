@@ -37,9 +37,10 @@ class EventsController < ApplicationController
     @event.country = params[:country]
     @event.region = params[:administrative_area_level_1]
     @event.postal_code = params[:postal_code]
+    @event.estimated_attendees = params[:estimated_attendees]
     respond_to do |format|
       if @event.save
-        EventCreatedMailer.event_created_infirmation(@event.slug, @event.organizer_email).deliver
+        EventCreatedMailer.event_created_information(@event.slug, @event.organizer_email).deliver
         format.html { redirect_to @event, notice: 'Thank you for creating an event for World Peace Day, we will confirm your event within 48 hours, and contact you once it has been approved.' }
         format.json { render :show, status: :created, location: @event }
       else
@@ -84,7 +85,7 @@ class EventsController < ApplicationController
   end
 
   def approved_all_events
-    EventApprovedMailer.event_approved_infirmation(event.title, event.slug, event.organizer_email).deliver
+    EventApprovedMailer.event_approved_information(event.title, event.slug, event.organizer_email).deliver
   end
 
   def categories

@@ -40,9 +40,9 @@
     br
       = f.text_field :location, id: "geocomplete"
   .field
-    = f.text_field :country, name: "country"
-    = f.text_field :region, name: "administrative_area_level_1"
-    = f.text_field :postal_code, name: "postal_code"
+    = f.hidden_field :country, name: "country"
+    = f.hidden_field :region, name: "administrative_area_level_1"
+    = f.hidden_field :postal_code, name: "postal_code"
   .field
     = f.label :organizer_name
     br

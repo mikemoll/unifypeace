@@ -1,0 +1,53 @@
+p id="notice"
+  = notice
+
+p
+  strong Title
+  = @event.title
+
+p
+  strong Category:
+  ul
+  - @categories_event.each do |category|
+    li
+      = category.name
+
+p
+  strong Website link:
+  = @event.website_link
+
+p
+  strong Date and time:
+  = @event.date_and_time
+
+p
+  strong Description:
+  = @event.description
+
+p
+  strong Location:
+  = @event.location
+
+p
+  strong Organizer name:
+  = @event.organizer_name
+
+p
+  strong Organizer email:
+  = @event.organizer_email
+
+p
+  strong Affiliated organization:
+  = @affiliated.name
+
+p
+  strong Latitude:
+  = @event.lat
+
+p
+  strong Longitude:
+  = @event.long
+
+= link_to 'Edit', edit_event_path(@event)
+| &nbsp;|&nbsp;
+= link_to 'Back', events_path

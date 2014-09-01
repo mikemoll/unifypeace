@@ -48,9 +48,9 @@
     br
       = select_tag :affiliated_organization_id, options_for_select(AffiliatedOrganization.all.map{|a_o| [a_o.name, a_o.id]})
   .field
-    = f.hidden_field :latitude, name: "lat"
+    = f.hidden_field :lat, name: "lat"
   .field
-    = f.hidden_field :longitude, name: "lng"
+    = f.hidden_field :long, name: "lng"
   .actions
     = f.submit
 javascript:

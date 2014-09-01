@@ -2,7 +2,7 @@
 
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
-Rails.application.config.assets.precompile += %w( maps.js navigation.js maps-leaflet.js jquery.countdown.js jquery.plugin.js jquery.countdown.css)
+Rails.application.config.assets.precompile += %w( maps.js navigation.js maps-leaflet.js jquery.countdown.js jquery.plugin.js jquery.countdown.css )
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.

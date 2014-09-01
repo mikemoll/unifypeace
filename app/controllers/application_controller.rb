@@ -8,7 +8,11 @@ class ApplicationController < ActionController::Base
       markers = contents.map do |content|
         tmp_content = [content.lat, content.long]
 
-        tmp_content << (content.class.to_s)
+        if content.categories.count == 1
+          tmp_content << (content.categories.first.name)
+        else
+          tmp_content << ("multi")
+        end
 
         tmp_content << (render_to_string "layouts/_tooltip", locals: { content: content }, layout: false)
         tmp_content

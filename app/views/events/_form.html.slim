@@ -24,13 +24,10 @@
     br
       = f.text_field :website_link, placeholder: "https://www.facebook.com/event"
   .field
-    / div class="input-group date" id="datetimepicker1"
-    /   input type="text" class="form-control"
-    /   span class="input-group-addon"
-    /     span class="glyphicon-calendar glyphicon"
-    = f.label "Event Date & Time"
-    br
-      = f.date_field :start_date, placeholder: "Select a date & time"
+    div class="input-group date" id="datetimepicker1"
+      = f.text_field :start_date, class: "form-control"
+      span class="input-group-addon"
+        span class="glyphicon-calendar glyphicon"
   .field
     = f.label "Event Description"
     br
@@ -40,10 +37,16 @@
     br
       = select_tag :estimated_attendees, options_for_attendees, class: "form-control",  prompt: "Select One"
   .field
-    = radio_button_tag :enter, nil
+    = radio_button_tag :enter, nil, true
     = f.label "Enter an address"
     = radio_button_tag :drag, nil
     = f.label "Drag marker to location"
+  #show_map style="display:none"
+    .field
+      p
+        | Drag this
+        = image_tag "markers/multi-icon.png", id: "content-type", class: "drag show", type: "red", value: "project", style: "margin: 0 2px;"
+
   #hidden_field
     .field
       = f.label "Address"
@@ -77,14 +80,21 @@ javascript:
   $(document).ready(function() {
     $('#enter_').click(function(){
       if ($(this).is(':checked')){
-        alert();
-      } else {
-        alert();
-        //$("#hidden_field").hide();
+        $("#hidden_field").show();
+        $("#show_map").hide();
+        $("#drag_").prop("checked", false);
+      }
+    });
+    $('#drag_').click(function(){
+      if ($(this).is(':checked')){
+        $("#show_map").show();
+        $("#enter_").prop("checked", false);
       }
     });
   });
-  $('#event_start_date').datetimepicker();
+  $('#datetimepicker1').datetimepicker({
+    format: "DD-MM-YYYY hh:mm:ss"
+  });
 
   $(function(){
     $("#geocomplete").geocomplete({

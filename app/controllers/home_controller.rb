@@ -15,7 +15,8 @@ class HomeController < ApplicationController
       @all = @all.flatten
       @markers = get_marker_and_location(@all) if @all rescue nil
     end
-
+    @event = Event.new
+    @categories = Category.all
     set_title_location(@location)
   end
 

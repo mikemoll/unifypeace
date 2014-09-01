@@ -13,6 +13,7 @@ class EventsController < ApplicationController
   # GET /events/1.json
   def show
     @categories_event = @event.categories
+    @categories = Category.all
     @affiliated = AffiliatedOrganization.find(@event.affiliated_organization_id)
   end
 
@@ -90,6 +91,15 @@ class EventsController < ApplicationController
   def categories
     @category = params[:category]
     set_project_by_category(@category)
+  end
+
+  def get_location_by_lat_lng
+    location = Geocoder.search([params[:location][:lat], params[:location][:lng]]).first
+    parsed_location = { country_name: location.country, region: location.state, city_name: location.city,
+                        latitude: location.latitude, longitude: location.longitude, address: location.address,
+                        postal_code: location.postal_code } if location
+
+    render json: parsed_location
   end
 
   private

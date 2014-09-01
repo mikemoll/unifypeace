@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery-ui
 //= require maps-leaflet
 //= require plugins/leaflet.markercluster-src
 //= require jstz-1.0.4.min
@@ -20,8 +21,9 @@
 //= requite jquery.countdown
 //= require timezone
 //= require jquery.geocomplete
+//= require moment
 //= require bootstrap-datetimepicker
-
+//= require new_content
 $(document).on('ready page:load', function(){
   navigationAction();
 });

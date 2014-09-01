@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root 'home#index'
   post 'contact_organizer' => 'home#contact_organizer', as: :contact_organizer
   get 'set_timezone' => 'home#set_timezone', as: :set_timezone
+  post "get_location_by_lat_lng" => "events#get_location_by_lat_lng", as: :get_location_by_lat_lng
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

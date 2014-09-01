@@ -24,6 +24,15 @@ ge             = null,
 map            = null,
 redIcon        = null;
 
+
+var guid = function(){
+  return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+}
+
+var S4 = function(){
+  return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+}
+
 if(dataMidContent.length > 0){
   dataContent = JSON.parse(dataMidContent);
 }else{
@@ -207,4 +216,81 @@ if(mapType == "earth"){
   $(mapNavigation[1]).removeClass("active");
   $(mapNavigation[0]).addClass("active");
   // $.get("/switch/2D/map");
+}
+
+
+
+setTimeout(function() {
+  $(".drag").draggable({
+    helper: 'clone',
+    containment: 'map',
+    start: function(evt, ui) {
+      var redIcon = L.icon({iconUrl: ui.helper.attr("src"), iconAnchor: [13, 33], popupAnchor: [0, -30]});
+    },
+    stop: function(evt, ui) {
+      var redIcon = L.icon({iconUrl: ui.helper.attr("src"), iconAnchor: [13, 33], popupAnchor: [0, -30]});
+
+      var options = {
+        pid: guid(),
+        type: ui.helper.attr('type'),
+        icon: redIcon,
+        draggable: true
+      };
+
+      // if(model == 'community' || model == 'place' || model == 'resource'){
+      //   var leftTop = [ui.offset.left - 213, ui.offset.top -479]
+      // }else if(model == 'social'){
+      //   var leftTop = [ui.offset.left - 213, ui.offset.top -499]
+      // }else if(model == 'discussion'){
+      var leftTop = [ui.offset.left + 100, ui.offset.top -499]
+      // }
+
+      console.log(map.containerPointToLatLng(leftTop))
+      putMarker(map.containerPointToLatLng(leftTop), options);
+    }
+  });
+}, 2000);
+
+
+var newAddedMarker = null;
+var putMarker = function(position, options){
+  if(newAddedMarker && map.hasLayer(newAddedMarker)){
+    redIcon = L.icon({iconUrl: $('.drag').attr("src")});
+    newAddedMarker.setLatLng([position.lat, position.lng]).setIcon(redIcon);
+  }else{
+    newAddedMarker = L.marker([position.lat, position.lng], options).addTo(map);
+    newAddedMarker.on('dragend', function(event){
+      putMarker(newAddedMarker.getLatLng(), options);
+    });
+  }
+  var jqxhr = {abort: function () {}};
+  jqxhr.abort();
+  jqxhr = $.ajax({
+    url: "/get_location_by_lat_lng",
+    data: { location: { lat: position.lat, lng: position.lng } },
+    method: "POST",
+    timeout: 30000,
+    beforeSend: function(){
+      $(".loader-assign").html("<i class=\"fa fa-refresh fa-spin\"></i>");
+    },
+    success: function(data){
+      if(data){
+        $("#event_lat").val(data.latitude);
+        $("#event_long").val(data.longitude);
+        $("#geocomplete").val(data.address);
+        $("#address").val(data.address);
+        $("#event_country").val(data.region);
+        $("#event_postal_code").val(data.postal_code)
+      }else{
+        map.removeLayer(newAddedMarker);
+        $("#event_lat").val(data.latitude);
+        $("#event_long").val(data.longitude);
+        $("#geocomplete").val(data.address);
+        var alertNotice = $('.notif-modal-change-new').html("<p>Failed to add marker. Please try again.</p>");
+        alertNotice.show("drop", { direction: "up"}, 200).delay(1000).hide("drop", { direction: "up"}, 300);
+      }
+
+      $(".loader-assign").html("");
+    }
+  });
 }

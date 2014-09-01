@@ -7,6 +7,7 @@ dataMidContent = $("#content-for-map").attr("data-contents"),
 latLong        = JSON.parse($("#location-for-map").attr("data-contents")),
 latLongContent = $("#content-location-for-map").attr("data-content-information"),
 parentType     = $("#content-location-for-map").attr("data-content-type"),
+eventType      = $("#event-type").attr("data-event-type"),
 mapNavigation  = $("#switch-map").children("li"),
 mapLocation    = $("body").attr("data-location-scope"),
 currentPage    = $("body").attr("data-action"),
@@ -194,8 +195,8 @@ var loadGoogleEarth = function(){
   )
 }
 
-if((currentPage == "show" || currentPage == "index") && ($("body").attr("data-parent-id"))){
-  leafletMapsViewContent(parentType, latLongContent);
+if((currentPage == "show")){
+  leafletMapsViewContent(eventType, latLongContent);
 }
 
 if(mapType == "earth"){

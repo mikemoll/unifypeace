@@ -19,6 +19,8 @@ class EventsController < ApplicationController
   def show
     @categories_event = @event.categories
     @affiliated = AffiliatedOrganization.find(@event.affiliated_organization_id)
+
+    @markers = get_marker_and_location([@event])
   end
 
   # GET /events/new

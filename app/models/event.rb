@@ -12,4 +12,12 @@ class Event < ActiveRecord::Base
     timezone.present? ? self.date_and_time.in_time_zone(timezone) : self.date_and_time
   end
 
+  def event_type
+    if self.categories.count == 1
+      self.categories.first.name
+    elsif self.categories.count >= 1
+      "multi"
+    end
+  end
+
 end

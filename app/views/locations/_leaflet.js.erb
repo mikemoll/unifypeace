@@ -1,0 +1,47 @@
+latlngbounds = new L.LatLngBounds();
+if(markers){
+  markers.clearLayers();
+}
+
+latLong = <%= raw [@location["latitude"], @location["longitude"]] %>;
+
+console.log("all")
+
+dataLocation = <%= raw @markers.nil? ? [] : @markers %>;
+if(dataLocation.length > 0){
+  for(var i=0; i<dataLocation.length; i++){
+
+    if(dataLocation[i][2] === "multi"){
+      redIcon = L.icon({ iconUrl: '/assets/markers/multi-icon.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
+    }else if(dataLocation[i][2] === "meditation/prayer"){
+      redIcon = L.icon({ iconUrl: '/assets/markers/medi-icon.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
+    }else if(dataLocation[i][2] === "music/celebration"){
+      redIcon = L.icon({ iconUrl: '/assets/markers/musi-icon.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
+    }else if(dataLocation[i][2] === "march/action"){
+      redIcon = L.icon({ iconUrl: '/assets/markers/march-icon.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
+    }
+
+    var marker = L.marker([parseFloat(dataLocation[i][0]), parseFloat(dataLocation[i][1])], {icon: redIcon})
+      .bindPopup(dataLocation[i][3]).openPopup();
+
+    if(dataLocation.length === 1){
+      latlngbounds.extend([parseFloat(dataLocation[i][0]) + 0.1, parseFloat(dataLocation[i][1]) + 0.1]);
+      latlngbounds.extend([parseFloat(dataLocation[i][0]) - 0.1, parseFloat(dataLocation[i][1]) - 0.1]);
+    }else{
+      latlngbounds.extend([parseFloat(dataLocation[i][0]), parseFloat(dataLocation[i][1])]);
+    }
+
+    markers.addLayer(marker);
+  }
+
+  map.addLayer(markers);
+  map.fitBounds(latlngbounds);
+}else{
+  latlngbounds.extend(latLong.map(function(el){ return el + 0.1; }));
+  latlngbounds.extend(latLong.map(function(el){ return el - 0.1; }));
+  map.fitBounds(latlngbounds);
+}
+
+<%- if @location["area"] == "worldwide" %>
+  map.setView(new L.LatLng(51.3, 0.7),2);
+<%- end %>

@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_location, only: [:index, :show, :categories]
 
   # GET /events
   # GET /events.json
@@ -85,14 +86,54 @@ class EventsController < ApplicationController
     EventApprovedMailer.event_approved_infirmation(event.title, event.slug, event.organizer_email).deliver
   end
 
+  def categories
+    @category = params[:category]
+    set_project_by_category(@category)
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.friendly.find(params[:id])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.friendly.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.require(:event).permit(:title, :category_id, :website_link, :start_date, :description, :location, :organizer_name, :organizer_email, :affiliated_organization_id, :lat, :long, :status, :country, :region, :city, :postal_code, :estimated_attendees)
+  end
+
+  def set_project_by_category(category)
+    if category == "meditation"
+      category = "meditation/prayer"
+    elsif category == "music"
+      category = "music/celebration"
+    elsif category == "march"
+      category = "march/action"
+    elsif category == "multi"
+      category = "multi"
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      params.require(:event).permit(:title, :category_id, :website_link, :start_date, :description, :location, :organizer_name, :organizer_email, :affiliated_organization_id, :lat, :long, :status, :country, :region, :city, :postal_code, :estimated_attendees)
+    events = Event.all
+    @all = []
+    events.each do |event|
+      if event.categories.count == 1
+        if event.categories.first.name == category
+          @all << event
+        end
+      elsif event.categories.count >= 1
+        @all << event
+      end
     end
+
+    # set_title_location(@location)
+    @markers = get_marker_and_location(@all) if @all
+
+    respond_to do |format|
+      if request.xhr?
+        format.js
+      else
+        format.html {render "projects/index"}
+      end
+    end
+  end
 end

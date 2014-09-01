@@ -13,9 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require plugins/leaflet.markercluster-src
 //= require maps-leaflet
+//= require plugins/leaflet.markercluster-src
 //= require jstz-1.0.4.min
 //= require jquery.plugin
 //= requite jquery.countdown
-//= require jquery/jquery.geocomplete
+//= require jquery.geocomplete
+
+$(document).on('ready page:load', function(){
+  navigationAction();
+});

@@ -16,47 +16,25 @@ var navigationAction = function(){
     previousActive = parentElement.children(".subcategory.active"),
     defaultText = thisSelf.text();
 
-    if(thisSelf.hasClass("project-category")){
-      controller = "communities";
-    }else if(thisSelf.hasClass("media-category")){
-      controller = "media";
-    }else if(thisSelf.hasClass("discussion-category")){
-      controller = "discussions";
-    }
-
-    if(user_id.length == 0 && parent_id.length == 0)
-    {
-      url = "/" + controller + "/c/" + filter
-    }
-    else if(user_id.length >= 1 && parent_id.length == 0)
-    {
-      url = "/users/" + user_id + "/" + controller + "/c/" + filter
-    }
-    else if(parent_id.length >= 1 && user_id.length == 0)
-    {
-      url = "/communities/" + parent_id + "/" + controller + "/c/" + filter
-    }
+    url = "/events" + "/c/" + filter
 
     jqxhr = $.ajax({
       url: url,
       type: "GET",
       beforeSend: function(){
-        NProgress.set(0.8);
-        parentElement.children(".subcategory").removeClass("active");
-        thisSelf.html("<i class=\"fa fa-refresh fa-spin\"></i>").addClass("active");
+        // parentElement.children(".subcategory").removeClass("active");
+        // thisSelf.html("<i class=\"fa fa-refresh fa-spin\"></i>").addClass("active");
       },
       success: function(data){
-        NProgress.done();
         console.log("success");
         previousActive.removeClass("active");
         thisSelf.text(replace).addClass("active");
         thisSelf.text(replace);
       },
       error: function(data){
-        NProgress.done();
-        thisSelf.text(replace);
-        thisSelf.text(replace).removeClass("active");
-        alertNotice("Something went wrong, Please try again.");
+        // thisSelf.text(replace);
+        // thisSelf.text(replace).removeClass("active");
+        console.log("Something went wrong, Please try again.");
       }
     });
   });
@@ -117,64 +95,6 @@ var navigationAction = function(){
 
     e.preventDefault();
   });
-
-  if($(window).width() > 1024){
-    $(window).on("scroll",function(){
-      console.log("aaaaaaaaaaaaa");
-
-      var mapContainer = $("#beta-container"),
-      contentContainer = $("#project-contents"),
-      contentHeadBox = $(".content-box-head");
-
-      if (!mapContainer.hasClass("child-content")){
-        if(mapContainer.hasClass("fixed-on-top") && (!mapContainer.hasClass("hidden-map") && !mapContainer.hasClass("single-head"))){
-          console.log("------------------------------------------------");
-          if($(window).scrollTop() > 510 && mapContainer.hasClass("fixed-on-top") ){
-            mapContainer.addClass("fix").addClass("header-scroll");
-            console.log("////////////////////////////////////////////////////////");
-
-            $("#container-projects").css("margin-top", "565px");
-            $("#switch-map-box").animate({marginRight: '-146px'}, 200);
-            $("#toggle-map").addClass("disable");
-            $(".subcategories").fadeOut();
-          }else if(mapContainer.hasClass("header-scroll")){
-            mapContainer.removeClass("fix").removeClass("header-scroll");
-            console.log("*********************************************");
-
-            $("#container-projects").css("margin-top", "0");
-            $("#switch-map-box").animate({marginRight: '0'}, 100);
-            $(".subcategories").show("slide", {direction: "up"});
-            $("#toggle-map").removeClass("disable");
-          }
-        }
-      }
-
-      if (!mapContainer.hasClass("child-content")){
-        // if(contentContainer){
-        //   if($(window).scrollTop() > (contentHeadBox.height() + 36)){
-        //     console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
-        //     $("#container-content-left.stay-on-page").removeClass("stay");
-        //   }
-        //   else{
-        //     console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-        //     $("#container-content-left.stay-on-page").addClass("stay");
-        //   }
-        // }
-        if(contentContainer){
-          if($(window).scrollTop() > (contentHeadBox.height() + 36)){
-            console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
-            $("#container-content-left.stay-on-page").removeClass("stay");
-          }else{
-            console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
-            $("#container-content-left.stay-on-page").addClass("stay");
-          }
-        }
-      }
-    });
-  }else{
-    $("#container-projects").css("margin-top", "0");
-    $("#beta-container").removeClass("fix");
-  }
 
   $("#toggle-map").on("click", function(){
     var button = $(this);

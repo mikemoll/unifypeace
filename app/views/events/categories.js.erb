@@ -1,0 +1,23 @@
+<%- if @location %>
+  <%- if @type.eql? "Worldwide" %>
+  <%- else %>
+    $("a.location_address").html("<%=j truncate(@location[:address], length: 40) %>");
+    $("div.location-nav-right").html("<%=j truncate(@location[:address], length: 40) %>");
+    $(".entered-location").val("<%=j truncate(@location[:address], length: 40) %>");
+    $(".find-entered-location").val("<%=j truncate(@location[:address], length: 40) %>");
+    $(".off-canvas-wrap").removeClass("move-left");
+  <% end -%>
+  $(".location-status").children("h5").children("span.status-nearby").html("<%=j @nearby %>");
+  $(".location-status").children("h5").children("span.status-address").html("<%=j @type %>");
+
+  <%- if @location[:map_type].eql? "earth" %>
+    <%= render "locations/google_earth" %>
+  <%- else %>
+    <%= render "locations/leaflet_categories" %>
+  <% end -%>
+<%- else %>
+  var notif = $('.new-location-change').html("<p>Unable to change location. It might be caused by slow internet connection or the server is down, please try again.</p>");
+  notif.show("drop", { direction: "up"}, 200).delay(2000).hide("drop", { direction: "up"}, 300);
+<% end -%>
+
+$('#container-projects').css("min-height", 500);

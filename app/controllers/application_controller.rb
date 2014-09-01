@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_title_location(location)
-    if location[:area].eql? "worldwide"
+    if location[:area].eql?("worldwide")
       @type = "Worldwide"
       @nearby = " "
     else

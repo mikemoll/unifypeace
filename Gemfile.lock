@@ -253,6 +253,7 @@ DEPENDENCIES
   html5_validators
   jbuilder (~> 2.0)
   jquery-rails
+  jquery-ui-rails
   pg
   rails (= 4.1.2)
   rails_12factor

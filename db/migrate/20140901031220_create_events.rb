@@ -10,8 +10,8 @@ class CreateEvents < ActiveRecord::Migration
       t.string :organizer_name
       t.string :organizer_email
       t.integer :affiliated_organization_id
-      t.float :latitude
-      t.float :longitude
+      t.float :lat
+      t.float :long
       t.string :status, default: "pending"
 
       t.timestamps

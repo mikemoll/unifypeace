@@ -11,6 +11,8 @@
 p id="notice"
   = notice
 
+= image_tag("affiliated/#{@affiliated.picture_organization}", style: "width: 200px;")
+
 p
   strong Title
   = @event.title

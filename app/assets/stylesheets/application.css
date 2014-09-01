@@ -10,6 +10,599 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
- *= require_self
+
  */
+
+html, body, #container-content, #container-bar, #container-content-right { height: 100%; }
+#map { width: 100%; height: 400px; min-height: 400px; }
+* html #map { height: 35%; }
+#box { position: absolute;  top: 46%;background-color: white; padding: 10px; z-index: 0; }
+#box img { margin-left: 20px; margin-right: 5px; cursor: pointer; }
+
+body {
+  background: #F0F1F4 !important;
+}
+
+.page-not-found {
+  margin: 15% 20%;
+  position: relative;
+  z-index: 10;
+  left:0;
+  right: 0;
+  padding: 50px 0;
+  text-align: center;
+  border: solid 1px #000;
+  border-radius: 1px;
+
+  .cocomaps-logo {
+    margin-top: 20px;
+    padding: 10px 25px;
+    background: #000;
+    border-radius: 2px;
+  }
+}
+
+.padding-0 {
+  padding: 0 !important;
+}
+
+.margin-0 {
+  margin: 0 !important;
+}
+
+.padding-side-5 {
+  padding: 0 5px !important;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.pull-left {
+  float: left !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.leaflet-top, .leaflet-bottom {
+  z-index: 20 !important;
+}
+
+.blue {
+  color: #09f !important;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 3px !important;
+  padding: 1px;
+  text-align: left;
+}
+
+a.link {
+  color: #fff !important;
+}
+
+#box-question div a {
+  margin-left: 8px;
+}
+
+.fixed {
+  height: 44px !important;
+}
+
+.location_address:before {
+  margin-top: 13px;
+  content: "> ";
+  font-size: 14px;
+}
+
+.location_address {
+  margin-top: 13px;
+  margin-bottom: 0;
+  color: #fff !important;
+  font-size: 14px;
+}
+
+.location-status {
+  border-bottom: 1px dashed #CCCCCC;
+  float: left;
+  margin-bottom: 10px;
+  padding: 0 5px;
+  width: 100%;
+}
+
+a.change_location {
+  color: #fff !important;
+}
+
+div.link {
+  margin-left: 10px;
+  float: left;
+
+  a.change_location_on_page {
+    // border: 1px solid transparent;
+    // border-radius: 2px;
+    // color: #0099FF !important;
+    // float: left;
+    // margin: 3px 4px !important;
+    // opacity: 0.6;
+    // padding: 4px 12px;
+    // transition: all 0.2s ease 0s;
+
+    &:hover {
+      opacity: 1;
+      box-shadow: 0 1px 1px #eee;
+    }
+
+    &:active, &.active {
+      opacity: 1;
+      border: 1px solid #DDDDDD;
+      border: 1px solid #ccc;
+      box-shadow: 0 1px 3px #ddd inset;
+    }
+  }
+}
+
+a.change_location:hover {
+  color: #000 !important;
+}
+
+.masonry-container {
+  // margin-top: 45px;
+}
+
+.globe-icon {
+  margin: 8px 6px 0 0;
+  width: 30px;
+}
+
+.globe-icon-nav {
+  margin: 0 0 8px 0;
+  width: 30px;
+}
+
+.border-left-white {
+  border-left: solid 1px #C7C8EA;
+}
+
+.border-right-white {
+  border-right: solid 1px #C7C8EA;
+}
+.close-modal:hover {
+  opacity: 1;
+}
+
+.margin-10 {
+  margin: 20px;
+}
+
+.button-action-new {
+  position: fixed;
+  margin: 10px;
+  right: 0px;
+  z-index: 60;
+  bottom: 0;
+
+  p {
+    margin-bottom: 0;
+
+    .button {
+      margin: 5px 0px 0 5px;
+      cursor: pointer;
+      float: right;
+    }
+  }
+}
+
+.text-error {
+  color: red;
+}
+
+.text-success {
+  color: green;
+}
+
+.datetimepicker {
+  z-index: 50 !important;
+}
+
+.leaflet-container {
+  background: #f2f2f2;
+  outline: 0 none;
+}
+
+
+/*------------------------------- leaflet cluster ------------------------------*/
+
+.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
+  -webkit-transition: -webkit-transform 0.3s ease-out, opacity 0.3s ease-in !important;
+  -moz-transition: -moz-transform 0.3s ease-out, opacity 0.3s ease-in !important;
+  -o-transition: -o-transform 0.3s ease-out, opacity 0.3s ease-in !important;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-in !important;
+}
+
+.marker-cluster-small {
+  background-color: rgba(181, 226, 140, 0.6);
+
+  div {
+    background-color: rgba(110, 204, 57, 0.6);
+  }
+}
+
+.marker-cluster-medium {
+  background-color: rgba(241, 211, 87, 0.6);
+
+  div {
+    background-color: rgba(240, 194, 12, 0.6);
+  }
+}
+
+.marker-cluster-large {
+  background-color: rgba(253, 156, 115, 0.6);
+
+  div {
+    background-color: rgba(241, 128, 23, 0.6);
+  }
+}
+
+/* IE 6-8 fallback colors */
+.leaflet-oldie .marker-cluster-small {
+  background-color: rgb(181, 226, 140);
+
+  div {
+    background-color: rgb(110, 204, 57);
+  }
+}
+
+.leaflet-oldie .marker-cluster-medium {
+  background-color: rgb(241, 211, 87);
+
+  div {
+    background-color: rgb(240, 194, 12);
+  }
+}
+
+.leaflet-oldie .marker-cluster-large {
+  background-color: rgb(253, 156, 115);
+
+  div {
+    background-color: rgb(241, 128, 23);
+  }
+}
+
+.marker-cluster {
+  background-clip: padding-box;
+  border-radius: 20px;
+
+  div {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    margin-top: 5px;
+
+    text-align: center;
+    border-radius: 15px;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  }
+
+  span {
+    line-height: 30px;
+  }
+}
+
+/*------------------------------- popover ------------------------------*/
+
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1010 !important;
+  display: none;
+  width: 450px;
+  max-width: 450px;
+  padding: 1px;
+  text-align: left;
+  white-space: normal;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+}
+
+.popover.top {
+  margin-top: -10px;
+}
+
+.popover.right {
+  margin-left: 10px;
+}
+
+.popover.bottom {
+  margin-top: 10px;
+}
+
+.popover.left {
+  margin-left: -10px;
+}
+
+.popover-title {
+  padding: 8px 14px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 18px;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ebebeb;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+}
+
+.popover-title:empty {
+  display: none;
+}
+
+.popover-content {
+  padding: 9px 10px;
+}
+
+.popover .arrow,
+.popover .arrow:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.popover .arrow {
+  border-width: 11px;
+}
+
+.popover .arrow:after {
+  border-width: 10px;
+  content: "";
+}
+
+.popover.top .arrow {
+  bottom: -11px;
+  left: 50%;
+  margin-left: -11px;
+  border-top-color: #999;
+  border-top-color: rgba(0, 0, 0, 0.25);
+  border-bottom-width: 0;
+}
+
+.popover.top .arrow:after {
+  bottom: 1px;
+  margin-left: -10px;
+  border-top-color: #ffffff;
+  border-bottom-width: 0;
+}
+
+.popover.right .arrow {
+  top: 50%;
+  left: -11px;
+  margin-top: -11px;
+  border-right-color: #999;
+  border-right-color: rgba(0, 0, 0, 0.25);
+  border-left-width: 0;
+}
+
+.popover.right .arrow:after {
+  bottom: -10px;
+  left: 1px;
+  border-right-color: #ffffff;
+  border-left-width: 0;
+}
+
+.popover.bottom .arrow {
+  top: -11px;
+  left: 50%;
+  margin-left: -11px;
+  border-bottom-color: #999;
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+  border-top-width: 0;
+}
+
+.popover.bottom .arrow:after {
+  top: 1px;
+  margin-left: -10px;
+  border-bottom-color: #ffffff;
+  border-top-width: 0;
+}
+
+.popover.left .arrow {
+  top: 50%;
+  right: -11px;
+  margin-top: -11px;
+  border-left-color: #999;
+  border-left-color: rgba(0, 0, 0, 0.25);
+  border-right-width: 0;
+}
+
+.popover.left .arrow:after {
+  right: 1px;
+  bottom: -10px;
+  border-left-color: #ffffff;
+  border-right-width: 0;
+}
+
+.popover .popover-content img {
+  display: inline-block;
+  float: left;
+  margin-bottom: 10px;
+  position: relative;
+  width: 140px;
+  border-radius: 3px;
+}
+
+.popover .popover-content .description {
+  display: inline-block;
+  margin-left: 10px;
+  max-width: 260px;
+  width: 260px;
+  word-wrap: break-word;
+}
+
+.popover .popover-content .description div h5{
+  margin: 0;
+}
+
+.popover .popover-content .description .event-desc{
+  max-height:80px;
+  height:80px;
+}
+
+.email-message {
+  width: 100%;
+  // max-width: 380px;
+  height: 180px;
+  max-height: 180px;
+}
+
+.image-show {
+  min-height: 100px;
+  min-width: 100px;
+  width: 250px;
+  border-radius: 3px;
+}
+
+.image-show img {
+  border-radius: 3px;
+}
+
+.leaflet-popup-content {
+  margin: 8px !important;
+}
+
+.alert-global {
+  position: fixed !important;
+  right: 5px;
+  top: 50px;
+  width: 20%;
+  z-index: 2000;
+}
+
+#alerts {
+  background-color: rgba(255, 255, 255, 0.96) !important;
+  border: medium none !important;
+  box-shadow: 0 1px 1px #ccc !important;
+  color: #444 !important;
+  float: right;
+  margin: 0;
+  padding: 10px 19px;
+  width: 100%;
+
+  // #flash_notice {
+  //   padding: 15px;
+  // }
+
+  .close {
+    opacity: 0.8 !important;
+    color: #333 !important;
+  }
+}
+
+.pac-container {
+  z-index: 3000 !important;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.25) !important;
+
+  &:after {
+    background-image: none !important;
+    height: 0 !important;
+  }
+}
+
+// ------------------------------------ #error_explanation -------------------------------------
+
+#error_explanation {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid #8D0000 !important;
+  border-radius: 3px;
+  margin-bottom: 0;
+  padding: 7px 7px 0;
+  position: fixed;
+  right: 10px;
+  width: 450px;
+  z-index: 100;
+  top: 55px !important;
+  transition: all 0.3s ease;
+}
+
+#error_explanation:hover {
+  opacity: 1;
+}
+
+#error_explanation h2 {
+  background-color: #CC0000;
+  border-bottom: 1px solid #AF0000 !important;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: bold;
+  margin: -7px -7px 0;
+  padding: 5px 5px 5px 15px;
+  text-align: center !important;
+}
+
+#error_explanation ul {
+  margin: 10px 10px 10px 20px !important;
+}
+
+#error_explanation ul li {
+  list-style: decimal outside none !important;
+}
+
+.young-blue {
+  color: #09f;
+}
+
+
+
+
+.cke_top {
+  background: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  padding: 6px 6px 2px !important;
+  white-space: normal;
+}
+
+.cke_bottom {
+  background: none !important;
+  border-top: none !important;
+  padding: 6px 6px 2px !important;
+}
+
+.cke_chrome {
+  border: solid 1px #d1d1d1 !important;
+  box-shadow: none !important;
+}
+
+.cke_chrome, .cke_inner {
+  border-radius: 3px !important;
+}
+
+.cke_toolgroup, .cke_combo_button {
+  background: none !important;
+  border-color: #CCCCCC #CCCCCC #BBBBBB !important;
+}
+
+.cke_resizer_ltr {
+  margin-right: 0 !important;
+}
+
+body.cke_editable {
+  margin: 0 8px !important;
+}

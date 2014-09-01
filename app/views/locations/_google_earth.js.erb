@@ -1,0 +1,36 @@
+var lat = <%= raw (@location[:latitude] ? @location[:latitude] : nil) %>,
+long = <%= raw (@location[:longitude] ? @location[:longitude] : nil) %>,
+kmlObjectList = ge.getFeatures().getChildNodes(),
+lookAt = ge.getView().copyAsLookAt(ge.ALTITUDE_RELATIVE_TO_GROUND);
+
+dataContent = <%= raw @markers.nil? ? [] : @markers %>;
+
+if(kmlObjectList){
+  for(var i = 0; i<kmlObjectList.getLength(); i++){
+    var item = kmlObjectList.item(i);
+    if(item.getType() == 'KmlPlacemark' && item.getGeometry().getType() != 'KmlModel'){
+      ge.getFeatures().removeChild(item);
+    }
+  }
+}
+
+if(dataContent.length > 0){
+  for (var i = 0; i < dataContent.length; i++){
+    create_marker(dataContent[i][0],dataContent[i][1], dataContent[i][2], dataContent[i][3]);
+  }
+
+  create_lookat(ge,lat,lng);
+}else{
+  create_lookat(ge,lat,lng);
+}
+
+lookAt.setLatitude(lat);
+lookAt.setLongitude(long);
+
+<%- if @location[:area].eql? "worldwide" %>
+  lookAt.setRange(25000000.0);
+<%- else %>
+  lookAt.setRange(40000.0);
+<%- end %>
+
+ge.getView().setAbstractView(lookAt);

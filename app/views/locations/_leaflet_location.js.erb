@@ -1,0 +1,7 @@
+if($("#map").length > 0){
+  <%= render "locations/leaflet" %>
+
+  $("#changeLocation").foundation('reveal', 'close');
+}else{
+  $("#changeLocation").foundation('reveal', 'close');
+}

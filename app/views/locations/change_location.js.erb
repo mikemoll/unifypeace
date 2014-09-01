@@ -1,0 +1,49 @@
+<%- if @location %>
+  <%- if @type.eql? "Worldwide" %>
+    $("a.location_address").html("<%=j truncate(@type, length: 40) %>");
+  <%- else %>
+    $("a.location_address").html("<%=j truncate(@type, length: 40) %>");
+    $("div.location-nav-right").html("<%=j truncate(@type, length: 40) %>");
+    $(".entered-location").val("<%=j truncate(@type, length: 40) %>");
+    $(".find-entered-location").val("<%=j truncate(@type, length: 40) %>");
+    $(".off-canvas-wrap").removeClass("move-left");
+  <% end -%>
+  $(".location-status").children("h5").children("span.status-nearby").html("<%=j @nearby %>");
+  $(".location-status").children("h5").children("span.status-address").html(" <%=j @type %>");
+
+  <%- if @location_map.eql? "earth" %>
+    <%= render "locations/google_earth_location" %>
+  <%- else %>
+    <%= render "locations/leaflet_location" %>
+  <% end -%>
+<%- else %>
+  errorChangeLocation();
+<% end -%>
+
+<%- if @all %>
+  $("#container-projects").html("<%=j render 'projects/all_location'%>");
+<%- elsif @socials %>
+  $('#container-projects').html("<%=j render 'socials/location'%>");
+<%- elsif @projects %>
+  $("#container-projects").html("<%=j render 'projects/location'%>");
+
+  $(".subcategory").removeClass("active");
+  $(".all-communities").addClass("active");
+<%- elsif @ideas %>
+  $('#container-projects').html("<%=j render 'ideas/location'%>");
+<%- elsif @resources %>
+  $('#container-projects').html("<%=j render 'resources/location'%>");
+<%- elsif @needs %>
+  $('#container-projects').html("<%=j render 'needs/location'%>");
+<%- elsif @places %>
+  $('#container-projects').html("<%=j render 'places/location'%>");
+<%- elsif @events %>
+  $('#container-projects').html("<%=j render 'events/location'%>");
+<%-end %>
+
+$('#container-projects').css("min-height", 500);
+$(".subcategory-resource").removeClass("active");
+$(".list-5.all-communities").addClass("active");
+$(".subsubcategory.both").addClass("active");
+
+masonryContent();

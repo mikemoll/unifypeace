@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.where(status: "approved")
+    @categories = Category.all
   end
 
   # GET /events/1

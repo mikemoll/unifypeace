@@ -6,9 +6,10 @@ class Event < ActiveRecord::Base
     relation.has_many :affiliated_organizations
   end
 
-  validates :title, :presence => true
+  validates_presence_of :title, :category_ids, :start_date, :description, :organizer_name, :organizer_email, :location
 
   def date_event(timezone)
     timezone.present? ? self.date_and_time.in_time_zone(timezone) : self.date_and_time
   end
+
 end

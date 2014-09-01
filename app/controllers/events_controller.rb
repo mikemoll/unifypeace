@@ -30,7 +30,6 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    error
     @event = Event.new(event_params)
     @event.affiliated_organization_id = params[:affiliated_organization_id]
     @event.category_ids = params[:category_ids]

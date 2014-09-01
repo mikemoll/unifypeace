@@ -31,3 +31,4 @@ gem 'sass-rails', '~> 4.0.3'
 gem "geoip"
 gem "fog"
 gem "truncate_html"
+gem 'html5_validators'

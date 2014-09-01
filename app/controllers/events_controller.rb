@@ -76,8 +76,10 @@ class EventsController < ApplicationController
   end
 
   def approved_event
-    event = Event.where(id: params[:id]).first.update(status: "approved")
+    event = Event.where(id: params[:id]).first
+    event.update(status: "approved")
     EventApprovedMailer.event_approved_infirmation(event.title, event.slug, event.organizer_email).deliver
+
     redirect_to :back
   end
 

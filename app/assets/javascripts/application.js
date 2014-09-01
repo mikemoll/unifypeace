@@ -18,6 +18,7 @@
 //= require jstz-1.0.4.min
 //= require jquery.plugin
 //= requite jquery.countdown
+//= require timezone
 //= require jquery.geocomplete
 
 $(document).on('ready page:load', function(){

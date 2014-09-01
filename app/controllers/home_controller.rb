@@ -7,7 +7,7 @@ class HomeController < ApplicationController
       @all = []
 
       @all << if @location["area"].eql? "worldwide"
-        Event.all
+        Event.where(status: "approved")
       else
         Event.where('(city = ? OR country = ?)', @location[:city_name], @location[:country_name]).near([@location[:latitude], @location[:longitude]], 20, units: :km) rescue nil
       end

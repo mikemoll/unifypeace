@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_filter :set_event_count
 
   def get_marker_and_location(contents)
     if !contents.blank?
@@ -22,6 +23,9 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def set_event_count
+    @event_count = Event.where(status: "approved").count
+  end
   def set_location
     if session[:location]
       @location = session[:location]

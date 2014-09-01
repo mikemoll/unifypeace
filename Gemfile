@@ -46,3 +46,5 @@ gem 'slim'
 gem 'devise'
 gem "binding_of_caller"
 gem "rails_12factor"
+gem 'friendly_id', '~> 5.0.0'
+gem 'activeadmin', github: 'activeadmin'

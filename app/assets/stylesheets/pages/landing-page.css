@@ -1,5 +1,5 @@
 .banner-wpc {
-  background-image: url('../images/banner.png');
+  background-image: url('banner.png');
   background-repeat: no-repeat;
   background-size: 100%;
   z-index: -4;
@@ -75,7 +75,7 @@ label.control-label span {
 }
 .footer-form-event {
   font-family: 'bebas-neue';
-  background: url('../images/bg-nav.png') repeat;
+  background: url('bg-nav.png') repeat;
   padding: 5px;
 }
 .event-legend {

@@ -31,3 +31,4 @@ gem 'activeadmin', github: 'activeadmin'
 gem 'sass-rails', '~> 4.0.3'
 gem "geoip"
 gem "fog"
+gem "truncate_html"

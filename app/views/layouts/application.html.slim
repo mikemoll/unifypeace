@@ -1,10 +1,24 @@
 doctype html
 html
   head
-    title Unify
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    script src="//maps.googleapis.com/maps/api/js?sensor=false&libraries=places" type="text/javascript"
+    title
+      = content_for?(:title) ? yield(:title) : "Unify"
+    = yield :metatags
+    meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    - if request.url.include? "localhost"
+      script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places&sensor=false" type="text/javascript"
+    - else
+      script src="https://maps.googleapis.com/maps/api/js?v=3&key=#{apikey(request.url)}&libraries=places&sensor=false" type="text/javascript"
+    script type="text/javascript" src="https://www.google.com/jsapi"
+    script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js" data-turbolinks-track="true"
+    link href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" rel="stylesheet" data-turbolinks-track="true"
+    = stylesheet_link_tag    "application", "nprogress" , media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "navigation", "plugins/popover", "data-turbolinks-track" => true
     = csrf_meta_tags
   body
+    = link_to "Create An Event", new_event_path
     = yield
+
+    - if session[:location]
+      #map-used data-map="#{session[:location][:map_type]}"
+    = yield :javascript

@@ -7,75 +7,97 @@
       ul
         - @event.errors.full_messages.each do |message|
           li= message
-  .field
-    = f.label "Title Of Your Event"
-    br
-      = f.text_field :title , placeholder: "e.g Global Peace Meditation"
-  .field
-    = f.label "Event Type"
-    br
-    ul
-    - @categories.each do |category|
-      li
-        = check_box_tag "category_ids[]", category.id, @event.category_ids.include?(category.id)
-        = f.label category.name
-  .field
-    = f.label "Website/Facebook Link"
-    br
-      = f.text_field :website_link, placeholder: "https://www.facebook.com/event"
-  .field
-    div class="input-group date" id="datetimepicker1"
-      = f.text_field :start_date, class: "form-control"
-      span class="input-group-addon"
-        span class="glyphicon-calendar glyphicon"
-  .field
-    = f.label "Event Description"
-    br
-      = f.text_area :description, placeholder: "Please write a brief description of your event"
-  .field
-    = f.label :estimated_attendees
-    br
-      = select_tag :estimated_attendees, options_for_attendees, class: "form-control",  prompt: "Select One"
-  .field
-    = radio_button_tag :enter, nil, true
-    = f.label "Enter an address"
-    = radio_button_tag :drag, nil
-    = f.label "Drag marker to location"
-  #show_map style="display:none"
-    .field
-      p
-        | Drag this
-        = image_tag "markers/multi-icon.png", id: "content-type", class: "drag show", type: "red", value: "project", style: "margin: 0 2px;"
+  .wrap-create-event style="z-index: 999;"
+    .header-form-event
+      h1.text-center Create An Event
+    .body-form-event
+      .form-group style=("display: block;overflow: hidden;") 
+        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+          | Tittle of your event
+        .col-md-7
+          = f.text_field :title, class: "form-control", placeholder: "e.g Global Peace Meditation" 
+      .clear
+      .form-group style=("display: block;overflow: hidden;") 
+        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+          | Event Type
+        .col-md-7
+          - @categories.each do |category|
+            .checkbox
+              = check_box_tag "category_ids[]", category.id, @event.category_ids.include?(category.id)
+              label style=("font-size: 12px;") 
+                = f.label category.name
+              
+      .form-group style=("display: block;overflow: hidden;") 
+        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+          | Website/Facebook Link
+        .col-md-7
+          = f.text_field :website_link, class: "form-control", placeholder: "https://faceebook.com"
+      .form-group style=("display: block;overflow: hidden;") 
+        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+          | Event Date & Time
+        .col-md-7
+          .controls
+            div class="input-group date" id="datetimepicker1"
+              = f.text_field :start_date, class: "form-control"
+              span class="input-group-addon"
+                span class="glyphicon-calendar glyphicon"
+      .form-group style=("display: block;overflow: hidden;") 
+        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+          | Event Description
+        .col-md-7
+          = f.text_area :description, class: "form-control", placeholder: ("Please write a brief description of your event."), rows: "3" 
+      .form-group style=("display: block;overflow: hidden;") 
+        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+          | Estimated Attendees
+        .col-md-7
+          = select_tag :estimated_attendees, options_for_attendees, class: "form-control",  prompt: "Select One"
+          #hidden_field
+            .radio
+              label
+                = radio_button_tag :enter, nil, true 
+                = f.label "Enter an address"
+            .radio
+              label
+                = radio_button_tag :drag, nil
+                = f.label "Drag marker to location"
+          #show_map style="display:none"
+            | Drag this
+            = image_tag "markers/multi-icon.png", id: "content-type", class: "drag show", type: "red", value: "project", style: "margin: 0 2px;"
+      .form-group style=("display: block;overflow: hidden;") 
+        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+          | Address
+        .col-md-7
+          = f.text_field :location, class: "form-control", placeholder: ("Street Address"), id: "geocomplete"
+          br
+          = text_field_tag :address, nil, name: "formatted_address", class: "form-control", placeholder: "City,State / Province, Country" 
+          .field
+            = f.hidden_field :country, name: "locality"
+            = f.hidden_field :region, name: "administrative_area_level_1"
+            = f.hidden_field :postal_code, name: "postal_code"
+          .field
+            = f.hidden_field :lat, name: "lat"
+          .field
+            = f.hidden_field :long, name: "lng"
+      .form-group style=("display: block;overflow: hidden;") 
+        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+          | Organizer Name
+        .col-md-7
+          = f.text_field :organizer_name, class: "form-control", placeholder: "Michelle Paix"
+      .form-group style=("display: block;overflow: hidden;") 
+        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+          | Email Address
+        .col-md-7
+          = f.text_field :organizer_email, class: "form-control", placeholder: "michelle@unify.org"
+      .form-group style=("display: block;overflow: hidden;") 
+        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+          | Affiliated Organizer
+        .col-md-7
+          = select_tag :affiliated_organization_id, options_for_select(AffiliatedOrganization.all.map{|a_o| [a_o.name, a_o.id]}), prompt: "Select One", class: "form-control"
+    .footer-form-event
+      button.btn.btn-find.col-md-offset-5 Submit
 
-  #hidden_field
-    .field
-      = f.label "Address"
-      br
-        = f.text_field :location, id: "geocomplete"
-      br
-        = text_field_tag :address, nil, name: "formatted_address"
-    .field
-      = f.hidden_field :country, name: "locality"
-      = f.hidden_field :region, name: "administrative_area_level_1"
-      = f.hidden_field :postal_code, name: "postal_code"
-  .field
-    = f.label :organizer_name
-    br
-      = f.text_field :organizer_name, placeholder: "Michelle Paix"
-  .field
-    = f.label :organizer_email
-    br
-      = f.text_field :organizer_email, placeholder: "michelle@unify.org"
-  .field
-    = f.label "Affiliated Organization"
-    br
-      = select_tag :affiliated_organization_id, options_for_select(AffiliatedOrganization.all.map{|a_o| [a_o.name, a_o.id]}),  prompt: "Select One"
-  .field
-    = f.hidden_field :lat, name: "lat"
-  .field
-    = f.hidden_field :long, name: "lng"
-  .actions
-    = f.submit
+          
+
 javascript:
   $(document).ready(function() {
     $('#enter_').click(function(){
@@ -100,6 +122,11 @@ javascript:
     $("#geocomplete").geocomplete({
       details: "form",
       types: ["geocode", "establishment"]
+    }).bind("geocode:result", function(event, result){
+      console.log(r = result);
+      var lat = result["geometry"]["location"]["k"]
+      var lng = result["geometry"]["location"]["B"]
+      map.setView(new L.LatLng(lat, lng), 8);
     });
 
     $("#geocomplete").click(function(){

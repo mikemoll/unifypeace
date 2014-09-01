@@ -33,6 +33,9 @@ class EventsController < ApplicationController
     @event.category_ids = params[:category_ids]
     @event.lat = params[:lat]
     @event.long = params[:lng]
+    @event.country = params[:country]
+    @event.region = params[:administrative_area_level_1]
+    @event.postal_code = params[:postal_code]
     respond_to do |format|
       if @event.save
         EventCraetedMailer.event_created_infirmation(@event.slug, @event.organizer_email).deliver

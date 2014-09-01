@@ -31,6 +31,8 @@
     = f.label "Event Description"
     br
       = f.text_area :description, placeholder: "Please write a brief description of your event"
+  / .field
+  /   = f.radio_
   .field
     = f.label :estimated_attendees
     br
@@ -40,7 +42,7 @@
     br
       = f.text_field :location, id: "geocomplete"
   .field
-    = f.hidden_field :country, name: "country"
+    = f.hidden_field :country, name: "locality"
     = f.hidden_field :region, name: "administrative_area_level_1"
     = f.hidden_field :postal_code, name: "postal_code"
   .field

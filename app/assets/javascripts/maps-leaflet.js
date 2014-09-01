@@ -5,32 +5,15 @@ var leafletMapsView = function(dataContent, latLong, mapLocation){
 
   if(dataContent.length > 0){
     for (var i = 0; i < dataContent.length; i++) {
-      if(dataContent[i][2] === "Project"){
-        redIcon = L.icon({ iconUrl: '/assets/markers/tree.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
-      }else if(dataContent[i][2] === "Idea"){
-        redIcon = L.icon({ iconUrl: '/assets/markers/idea.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
-      }else if(dataContent[i][2] === "Picture"){
-        redIcon = L.icon({ iconUrl: '/assets/media-image-marker.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
-      }else if(dataContent[i][2] === "Video"){
-        redIcon = L.icon({ iconUrl: '/assets/markers/video.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
-      }else if(dataContent[i][2] === "Music"){
-        redIcon = L.icon({ iconUrl: '/assets/media-music-marker.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
-      }else if(dataContent[i][2] === "Text"){
-        redIcon = L.icon({ iconUrl: '/assets/media-texts-marker.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
-      }else if(dataContent[i][2] === "Web"){
-        redIcon = L.icon({ iconUrl: '/assets/media-link-marker.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
-      }else if(dataContent[i][2] === "Need"){
-        redIcon = L.icon({ iconUrl: '/assets/markers/pie.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
-      }else if(dataContent[i][2] === "Offer"){
-        redIcon = L.icon({ iconUrl: '/assets/markers/gift.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
-      }else if(dataContent[i][2] === "Place"){
-        redIcon = L.icon({ iconUrl: '/assets/markers/place.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
-      }else if(dataContent[i][2] === "Event"){
-        redIcon = L.icon({ iconUrl: '/assets/markers/medi-icon-2.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
-      }else if(dataContent[i][2] === "Question"){
-        redIcon = L.icon({ iconUrl: '/assets/markers/question.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
-      }else{
-        redIcon = L.icon({ iconUrl: '/assets/media-texts-marker.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
+      console.log(dataContent[i][2])
+      if(dataContent[i][2] === "multi"){
+        redIcon = L.icon({ iconUrl: '/assets/markers/multi-icon.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
+      }else if(dataContent[i][2] === "meditation/prayer"){
+        redIcon = L.icon({ iconUrl: '/assets/markers/medi-icon.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
+      }else if(dataContent[i][2] === "music/celebration"){
+        redIcon = L.icon({ iconUrl: '/assets/markers/musi-icon.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
+      }else if(dataContent[i][2] === "march/action"){
+        redIcon = L.icon({ iconUrl: '/assets/march-icon.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
       }
 
       var marker = L.marker([parseFloat(dataContent[i][0]), parseFloat(dataContent[i][1])], {icon: redIcon})

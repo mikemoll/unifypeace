@@ -13,8 +13,10 @@ html
     script type="text/javascript" src="https://www.google.com/jsapi"
     script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js" data-turbolinks-track="true"
     link href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" rel="stylesheet" data-turbolinks-track="true"
+    = stylesheet_link_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
     = stylesheet_link_tag    "application", "nprogress" , media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "navigation", "plugins/popover", "data-turbolinks-track" => true
+    = javascript_include_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
     = csrf_meta_tags
   body
     = render "shared/countdown"

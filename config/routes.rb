@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :events
   root 'home#index'
+  post 'contact_organizer' => 'home#contact_organizer', as: :contact_organizer
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

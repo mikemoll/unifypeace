@@ -1,0 +1,10 @@
+h3 Contact Organizer
+
+= form_tag contact_organizer_path, method: :post, class: "form" do 
+	= hidden_field_tag :event_id
+	p Subject
+	= text_field_tag "subject", "", class: "field"
+	p Message
+	= text_field_tag "message", "", class: "field"
+	br
+	= submit_tag "Send", class: "btn btn-primary"

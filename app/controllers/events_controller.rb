@@ -35,7 +35,7 @@ class EventsController < ApplicationController
     @event.long = params[:lng]
     respond_to do |format|
       if @event.save
-        EventCraetedMailer.event_created_infirmation(@event.slug, @event.organizer_email).deliver
+        EventCreatedMailer.event_created_infirmation(@event.slug, @event.organizer_email).deliver
         format.html { redirect_to @event, notice: 'Thank you for creating an event for World Peace Day, we will confirm your event within 48 hours, and contact you once it has been approved.' }
         format.json { render :show, status: :created, location: @event }
       else

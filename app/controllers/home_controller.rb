@@ -62,5 +62,14 @@ class HomeController < ApplicationController
     end
   end
 
+  def contact_organizer
+    if params[:event_id] && params[:subject]
+      event = Event.find params[:event_id]
+      EventCreatedMailer.contact_organizer(params[:subject], params[:message], event.organizer_name, event.organizer_email).deliver
+    end
+    
+    redirect_to root_url
+  end
+
   def page_not_found; end
 end

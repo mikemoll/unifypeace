@@ -7,4 +7,8 @@ class Event < ActiveRecord::Base
   end
 
   validates :title, :presence => true
+
+  def date_event(timezone)
+    timezone.present? ? self.date_and_time.in_time_zone(timezone) : self.date_and_time
+  end
 end

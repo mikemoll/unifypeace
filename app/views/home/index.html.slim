@@ -1,0 +1,10 @@
+- content_for :title do
+  = "Unify"
+- content_for :javascript do
+  = javascript_include_tag :maps
+
+#beta-container.fixed-on-top
+  #map
+
+div#content-for-map data-contents="#{@markers}"
+div#location-for-map data-contents="#{[@location["latitude"], @location["longitude"]]}"

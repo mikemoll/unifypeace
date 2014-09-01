@@ -12,6 +12,8 @@
  *= require bootstrap-datetimepicker.min
  *= require vendors/bootstrap
  *= require main
+ *= require fonts
+ *= require images
 
  */
 

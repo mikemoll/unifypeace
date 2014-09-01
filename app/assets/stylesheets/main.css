@@ -18,11 +18,7 @@
     column-count: 3;
   }
 }
-.social-icon-set {
-  width: 25px;
-  height: 25px;
-  background: url('social-sprite2.png') no-repeat left top;
-}
+
 .social-icon-set.icons-fb {
   background-position: 0px 0px;
 }
@@ -100,14 +96,7 @@
 .btn-location {
   width: 100%;
 }
-.navbar-wpc {
-  background: url('bg-nav.png') repeat;
-  width: 100%;
-  border-radius: 0px;
-  border: none;
-  padding-bottom: 2px;
-  margin-bottom: 0px;
-}
+
 .form-wpc {
   font-family: 'droid-bold';
   margin-top: 37px;
@@ -212,28 +201,8 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#64838c', endColorstr='#222e31', GradientType=0);
   /* IE6-8 */
 }
-@font-face {
-  font-family: 'bebas-neue';
-  src: url('bebasneue-webfont.eot');
-  src: url('bebasneue-webfont.eot?#iefix') format('embedded-opentype'), url('bebasneue-webfont.woff') format('woff'), url('bebasneue-webfont.ttf') format('truetype'), url('bebasneue-webfont.svg') format('svg');
-}
-@font-face {
-  font-family: 'droid-reguler';
-  src: url('droidsans-webfont.eot');
-  src: url('droidsans-webfont.eot?#iefix') format('embedded-opentype'), url('droidsans-webfont.woff') format('woff'), url('droidsans-webfont.ttf') format('truetype'), url('droidsans-webfont.svg') format('svg');
-}
-@font-face {
-  font-family: 'droid-bold';
-  src: url('droidsans-bold-webfont.eot');
-  src: url('droidsans-bold-webfont.eot?#iefix') format('embedded-opentype'), url('droidsans-bold-webfont.woff') format('woff'), url('droidsans-bold-webfont.ttf') format('truetype'), url('droidsans-bold-webfont.svg') format('svg');
-}
-.banner-wpc {
-  background-image: url('banner.png');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  z-index: -4;
-  text-transform: uppercase;
-}
+
+
 .banner-wpc h1 {
   font-family: 'bebas-neue';
   font-size: 86px;
@@ -302,18 +271,7 @@
 label.control-label span {
   cursor: pointer;
 }
-.footer-form-event {
-  font-family: 'bebas-neue';
-  background: url('bg-nav.png') repeat;
-  padding: 5px;
-}
-.event-legend {
-  position: absolute;
-  background: url('bg-nav.png') repeat;
-  bottom: 0px;
-  border: 2px solid #2aaacb;
-  padding: 5px;
-}
+
 .footer {
   height: auto;
   padding: 20px;

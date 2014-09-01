@@ -9,19 +9,18 @@
 div#content-for-map data-contents="#{@markers}"
 div#location-for-map data-contents="#{[@location["latitude"], @location["longitude"]]}"
 
-= link_to image_tag("markers/medi-icon.png"), "#", class: "subcategory", data: {filter: "meditation"}
-= link_to image_tag("markers/musi-icon.png"), "#", class: "subcategory", data: {filter: "music"}
-= link_to image_tag("markers/march-icon.png"), "#", class: "subcategory", data: {filter: "march"}
-= link_to image_tag("markers/multi-icon.png"), "#", class: "subcategory", data: {filter: "multi"}
-
 .event-legend
   ul.list-event-legend
     li.compass Event Legend
     li
-      a href="#"  Meditation
+      = link_to image_tag("markers/medi-icon.png"), "#", class: "subcategory", data: {filter: "meditation"}
+      | Meditation
     li
-      a href="#"  Music
+      = link_to image_tag("markers/musi-icon.png"), "#", class: "subcategory", data: {filter: "music"}
+      | Music
     li
-      a href="#"  March
+      = link_to image_tag("markers/march-icon.png"), "#", class: "subcategory", data: {filter: "march"}
+      | March
     li
-      a href="#"  Multiple
+      = link_to image_tag("markers/multi-icon.png"), "#", class: "subcategory", data: {filter: "multi"}
+      | Multiple

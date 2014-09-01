@@ -18,13 +18,6 @@ p
   = @event.title
 
 p
-  strong Category:
-  ul
-  - @categories_event.each do |category|
-    li
-      = category.name
-
-p
   strong Website link:
   = @event.website_link
 
@@ -54,13 +47,6 @@ p
   = image_tag(@affiliated.picture_organization)
 
 p
-  strong Latitude:
-  = @event.lat
-
-p
-  strong Longitude:
-  = @event.long
-p
   strong Country:
   = @event.country
 p
@@ -69,11 +55,9 @@ p
 p
   strong Postal Code:
   = @event.postal_code
-p
-  strong Status:
-  = @event.status
 
-= link_to 'Edit', edit_event_path(@event)
-| &nbsp;|&nbsp;
-= link_to 'Back', events_path
+
+/ = link_to 'Edit', edit_event_path(@event)
+/ | &nbsp;|&nbsp;
+/ = link_to 'Back', events_path
 

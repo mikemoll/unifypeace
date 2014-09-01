@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/doabit/bootstrap-sass-extras.git
-  revision: 4437d76a420e163265dcacfa79f92d0c4f534b80
-  branch: bootstrap-3.0.0
-  specs:
-    bootstrap-sass-extras (0.0.6)
-      rails (>= 3.1.0)
-
   remote: git://github.com/activeadmin/activeadmin.git
   revision: 4a4401b5b390ae7e4fce42d7fa0fb6be038496fd
   specs:
@@ -21,6 +14,14 @@ GIT
       rails (>= 3.2, < 4.2)
       ransack (~> 1.3)
       sass-rails
+
+GIT
+  remote: git://github.com/doabit/bootstrap-sass-extras.git
+  revision: 4437d76a420e163265dcacfa79f92d0c4f534b80
+  branch: bootstrap-3.0.0
+  specs:
+    bootstrap-sass-extras (0.0.6)
+      rails (>= 3.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -114,13 +115,6 @@ GEM
       fog-core
       fog-json
     formatador (0.2.5)
-<<<<<<< HEAD
-    geocoder (1.2.4)
-    geoip (1.4.0)
-    hike (1.2.3)
-    i18n (0.6.11)
-    inflecto (0.0.2)
-=======
     formtastic (2.3.0)
       actionpack (>= 3.0)
     friendly_id (5.0.4)
@@ -136,7 +130,6 @@ GEM
     inherited_resources (1.4.1)
       has_scope (~> 0.6.0.rc)
       responders (~> 1.0.0.rc)
->>>>>>> 2ea6f24ca4103ac82b6e4dc09f2b2449584914ee
     ipaddress (0.8.0)
     jbuilder (2.1.3)
       activesupport (>= 3.0.0, < 5)
@@ -261,10 +254,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   fog
-<<<<<<< HEAD
-=======
   friendly_id (~> 5.0.0)
->>>>>>> 2ea6f24ca4103ac82b6e4dc09f2b2449584914ee
   geocoder
   geoip
   jbuilder (~> 2.0)

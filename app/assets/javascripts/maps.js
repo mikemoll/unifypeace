@@ -281,12 +281,15 @@ var putMarker = function(position, options){
         $("#geocomplete").val(data.address);
         $("#address").val(data.address);
         $("#event_country").val(data.region);
-        $("#event_postal_code").val(data.postal_code)
+        $("#event_postal_code").val(data.postal_code);
       }else{
         map.removeLayer(newAddedMarker);
-        $("#event_lat").val(data.latitude);
-        $("#event_long").val(data.longitude);
-        $("#geocomplete").val(data.address);
+        $("#event_lat").val("");
+        $("#event_long").val("");
+        $("#geocomplete").val("");
+        $("#address").val("");
+        $("#event_country").val("");
+        $("#event_postal_code").val("");
         var alertNotice = $('.notif-modal-change-new').html("<p>Failed to add marker. Please try again.</p>");
         alertNotice.show("drop", { direction: "up"}, 200).delay(1000).hide("drop", { direction: "up"}, 300);
       }

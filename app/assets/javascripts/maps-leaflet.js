@@ -41,36 +41,18 @@ var leafletMapsView = function(dataContent, latLong, mapLocation){
   }
 }
 
-var leafletMapsViewContent = function(contentType, latLongContent){
+var leafletMapsViewContent = function(eventType, latLongContent){
   var iconUrl = null;
   generateMapContent(latLongContent);
 
-  if(contentType === "Project"){
-    iconUrl = '/assets/markers/tree.png';
-  }else if(contentType === "Idea"){
-    iconUrl = '/assets/markers/idea.png';
-  }else if(contentType === "Picture"){
-    iconUrl = '/assets/media-image-marker.png';
-  }else if(contentType === "Video"){
-    iconUrl = '/assets/markers/video.png';
-  }else if(contentType === "Music"){
-    iconUrl = '/assets/media-music-marker.png';
-  }else if(contentType === "Text"){
-    iconUrl = '/assets/media-texts-marker.png';
-  }else if(contentType === "Web"){
-    iconUrl = '/assets/media-link-marker.png';
-  }else if(contentType === "Need"){
-    iconUrl = '/assets/markers/pie.png';
-  }else if(contentType === "Offer"){
-    iconUrl = '/assets/markers/gift.png';
-  }else if(contentType === "Place"){
-    iconUrl = '/assets/markers/place.png';
-  }else if(contentType === "Event"){
-    iconUrl = '/assets/markers/calendar.png';
-  }else if(contentType === "Question"){
-    iconUrl = '/assets/markers/question.png';
-  }else{
-    iconUrl = '/assets/media-texts-marker.png';
+  if(eventType === "multi"){
+    iconUrl = '/assets/markers/multi-icon.png';
+  }else if(eventType === "meditation/prayer"){
+    iconUrl = '/assets/markers/medi-icon.png';
+  }else if(eventType === "music/celebration"){
+    iconUrl = '/assets/markers/musi-icon.png';
+  }else if(eventType === "march/action"){
+    iconUrl = '/assets/markers/march-icon.png';
   }
 
   redIcon = L.icon({ iconUrl: iconUrl, iconAnchor: [13, 33], popupAnchor: [0, -30] });

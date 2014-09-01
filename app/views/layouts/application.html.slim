@@ -18,11 +18,14 @@ html
     = javascript_include_tag "application", "navigation", "plugins/popover", "data-turbolinks-track" => true
     = javascript_include_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
     = csrf_meta_tags
+    body data-location-scope="#{(@location ? @location['area'] : "")}" data-action="#{action_name}" data-content-type="#{controller_name.singularize.titleize}" data-test="#{apikey(request.url)}" data-user-id="#{(@user ? @user.id : "")}" data-parent-id="#{(@parent_project ? @parent_project.id : "")}"
   body
     = render "shared/countdown"
+
     = link_to "Create An Event", "javascript:void()", class: "show_create_event"
     #show style="display:none"
       = render "events/form"
+
     = yield
 
     - if session[:location]

@@ -22,6 +22,7 @@ var navigationAction = function(){
       url: url,
       type: "GET",
       beforeSend: function(){
+        // console.log("success")
         // parentElement.children(".subcategory").removeClass("active");
         // thisSelf.html("<i class=\"fa fa-refresh fa-spin\"></i>").addClass("active");
       },
@@ -34,7 +35,7 @@ var navigationAction = function(){
       error: function(data){
         // thisSelf.text(replace);
         // thisSelf.text(replace).removeClass("active");
-        console.log("Something went wrong, Please try again.");
+        // console.log("Something went wrong, Please try again.");
       }
     });
   });

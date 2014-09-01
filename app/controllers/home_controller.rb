@@ -78,5 +78,17 @@ class HomeController < ApplicationController
     render nothing: true
   end
 
+  def find_event
+    @events = if params[:location]
+      Event.near(params[:location], params[:distance], units: :km) rescue []
+    else
+      Event.where(status: "approved")
+    end
+
+    @categories = Category.all
+
+    render template: "events/index"
+  end
+
   def page_not_found; end
 end

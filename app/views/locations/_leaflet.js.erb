@@ -5,8 +5,6 @@ if(markers){
 
 latLong = <%= raw [@location["latitude"], @location["longitude"]] %>;
 
-console.log("all")
-
 dataLocation = <%= raw @markers.nil? ? [] : @markers %>;
 if(dataLocation.length > 0){
   for(var i=0; i<dataLocation.length; i++){

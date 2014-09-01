@@ -1,3 +1,13 @@
+#map-content.content-info-map style=""
+
+#content-for-map data-contents="#{@markers}"
+#event-type data-event-type="#{@event.event_type}"
+#location-for-map data-contents="#{[@location['latitude'], @location['longitude']]}"
+#content-location-for-map data-content-information="#{[@event.lat, @event.long]}" data-content-type="#{@event.class.to_s.titleize}"
+
+- content_for :javascript do
+  = javascript_include_tag :maps
+
 p id="notice"
   = notice
 
@@ -64,3 +74,4 @@ p
 = link_to 'Edit', edit_event_path(@event)
 | &nbsp;|&nbsp;
 = link_to 'Back', events_path
+

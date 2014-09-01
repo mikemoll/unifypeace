@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.where(status: "approved")
+
     @categories = Category.all
   end
 
@@ -15,6 +16,8 @@ class EventsController < ApplicationController
     @categories_event = @event.categories
     @categories = Category.all
     @affiliated = AffiliatedOrganization.find(@event.affiliated_organization_id)
+
+    @markers = get_marker_and_location([@event])
   end
 
   # GET /events/new
@@ -79,8 +82,10 @@ class EventsController < ApplicationController
   end
 
   def approved_event
-    event = Event.where(id: params[:id]).first.update(status: "approved")
-    EventApprovedMailer.event_approved_information(event.title, event.slug, event.organizer_email).deliver
+    event = Event.where(id: params[:id]).first
+    event.update(status: "approved")
+    EventApprovedMailer.event_approved_infirmation(event.title, event.slug, event.organizer_email).deliver
+
     redirect_to :back
   end
 

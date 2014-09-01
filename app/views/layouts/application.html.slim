@@ -18,6 +18,7 @@ html
     = javascript_include_tag "application", "navigation", "plugins/popover", "data-turbolinks-track" => true
     = csrf_meta_tags
   body
+    = render "shared/countdown"
     = link_to "Create An Event", new_event_path
     = yield
 

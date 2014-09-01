@@ -10,6 +10,8 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    @categories_event = @event.categories
+    @affiliated = AffiliatedOrganization.find(@event.affiliated_organization_id)
   end
 
   # GET /events/new
@@ -29,6 +31,8 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.affiliated_organization_id = params[:affiliated_organization_id]
     @event.category_ids = params[:category_ids]
+    @event.lat = params[:lat]
+    @event.long = params[:lng]
     respond_to do |format|
       if @event.save
         EventCraetedMailer.event_created_infirmation(@event.slug, @event.organizer_email).deliver
@@ -75,6 +79,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:title, :category_id, :website_link, :date_and_time, :description, :location, :organizer_name, :organizer_email, :affiliated_organization_id, :latitude, :longitude, :status)
+      params.require(:event).permit(:title, :category_id, :website_link, :date_and_time, :description, :location, :organizer_name, :organizer_email, :affiliated_organization_id, :lat, :long, :status)
     end
 end

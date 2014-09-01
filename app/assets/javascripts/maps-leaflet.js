@@ -15,8 +15,7 @@ var leafletMapsView = function(dataContent, latLong, mapLocation){
         redIcon = L.icon({ iconUrl: '/assets/markers/march-icon.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
       }
 
-      var marker = L.marker([parseFloat(dataContent[i][0]), parseFloat(dataContent[i][1])], {icon: redIcon})
-        .bindPopup(dataContent[i][3]).openPopup();
+      var marker = L.marker([parseFloat(dataContent[i][0]), parseFloat(dataContent[i][1])], {icon: redIcon}).bindPopup(dataContent[i][3]).openPopup();
 
       if(dataContent.length === 1){
         latlngbounds.extend([parseFloat(dataContent[i][0]) + 0.1, parseFloat(dataContent[i][1]) + 0.1]);

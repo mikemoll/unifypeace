@@ -15,7 +15,7 @@
     = f.label :category_id
     br
     - @categories.each do |category|
-      = f.label :category.name
+      = f.label :category, category.name
       = f.check_box :category_id
   .field
     = f.label :website_link
@@ -46,9 +46,9 @@
     br
       = f.number_field :affiliated_organization_id
   .field
-    = f.hidden_field :latitude, name: "lat"
+    = f.hidden_field :lat, name: "lat"
   .field
-    = f.hidden_field :longitude, name: "lng"
+    = f.hidden_field :long, name: "lng"
   .actions
     = f.submit
 javascript:

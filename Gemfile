@@ -25,6 +25,7 @@ gem "slim-rails"
 gem "devise"
 gem "binding_of_caller"
 gem "rails_12factor"
+gem 'bootstrap-sass-extras', github: "doabit/bootstrap-sass-extras", :branch => "bootstrap-3.0.0"
 
 gem "geoip"
 gem "fog"

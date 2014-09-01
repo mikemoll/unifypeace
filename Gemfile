@@ -25,7 +25,6 @@ gem "slim-rails"
 gem "devise"
 gem "binding_of_caller"
 gem "rails_12factor"
-gem 'bootstrap-sass-extras', github: "doabit/bootstrap-sass-extras", :branch => "bootstrap-3.0.0"
 gem 'friendly_id', '~> 5.0.0'
 gem 'activeadmin', github: 'activeadmin'
 gem 'sass-rails', '~> 4.0.3'

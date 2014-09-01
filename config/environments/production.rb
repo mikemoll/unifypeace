@@ -79,4 +79,15 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.action_mailer.default_url_options = { host: 'http://unify-dev-test.herokuapp.com/'}
+
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => '41studio.com',
+    :user_name            => 'test-do-not-reply@41studio.com',
+    :password             => 'Fd5(q"T,Q-Ov4[C',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true
+  }
 end

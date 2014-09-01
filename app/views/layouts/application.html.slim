@@ -21,8 +21,187 @@ html
     = csrf_meta_tags
     body data-location-scope="#{(@location ? @location['area'] : "")}" data-action="#{action_name}" data-content-type="#{controller_name.singularize.titleize}" data-test="#{apikey(request.url)}" data-user-id="#{(@user ? @user.id : "")}" data-parent-id="#{(@parent_project ? @parent_project.id : "")}"
   body
-    = render "shared/countdown"
-    = link_to "Create An Event", new_event_path
+    .banner-wpc
+      .container
+        .row
+          .col-md-offset-2
+            .col-md-3
+              .logo-title
+                h1.text-right World
+                h2.text-right September 21, 2014
+                h3.text-right INT'L DAY OF PEACE
+            .col-md-3
+              h1.text-center
+                = image_tag"log (11).png"
+            .logo-title
+              .col-md-4
+                h1.text-left Peach
+                h2.text-left Global Events Map
+                h3.text-left Peach Day Coalition
+    nav.navbar.navbar-default.navbar-wpc role="navigation"
+      .container
+        /! Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle.collapsed data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        /! Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          form.navbar-form.navbar-left.form-wpc role="search"
+            button.btn.btn-default.btn-find data-target="#myModal" data-toggle="modal" type="submit"  Find an Event near me
+            button.btn.btn-default.btn-find type="submit"  Create an Events
+          #myModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  button.close data-dismiss="modal" type="button"
+                    span aria-hidden="true"  &times;
+                    span.sr-only Close
+                  h4#myModalLabel.modal-title Change Location
+                .modal-body.modal-body-wpc
+                  .col-md-12
+                    .form-group
+                      label for="exampleInputEmail1"  New Location
+                      input#exampleInputEmail1.form-control placeholder=("Enter email") type="text"
+                    .form-group
+                      label for="exampleInputEmail1"  Show Result Within
+                      .row
+                        .col-md-6
+                          select.form-control
+                            option 1
+                            option 2
+                            option 3
+                            option 4
+                            option 5
+                        .col-md-6
+                          button.btn.btn-default.btn-location Set Location
+                .modal-footer
+                  button.btn.btn-default.btn-location data-dismiss="modal" type="button"  Close
+          ul.nav.navbar-nav.countdown
+            li
+              span.days 00
+              p.days_ref days
+            li.seperator
+              = ":"
+            li
+              span.hours 00
+              p.hours_ref hours
+            li.seperator
+              = ":"
+            li
+              span.minutes 00
+              p.minutes_ref mins
+          ul.nav.navbar-nav.countdown-result
+            li
+              span.seperator-result 908
+              span.event-count Events
+            li
+              span.seperator-result
+                | 12PM
+                b PST
+              span.pst-count World Peach Moment
+    .maps
+      .wrap-create-event
+        .header-form-event
+          h1.text-center Create An Event
+        .body-form-event
+          .form-group style=("display: block;overflow: hidden;")
+            .col-md-5.text-right style="font-size:12px;line-height:35px;"
+              | Tittle of your event
+            .col-md-7
+              input.form-control placeholder=("e.g Global Peace Meditation") type="text"
+          .clear
+          .form-group style=("display: block;overflow: hidden;")
+            .col-md-5.text-right style="font-size:12px;line-height:35px;"
+              | Event Type
+            .col-md-7
+              .checkbox
+                label style=("font-size: 12px;")
+                  input type="checkbox" value=""
+                    | Meditation / Ceremony / Prayer
+              .checkbox
+                label style=("font-size: 12px;")
+                  input type="checkbox" value=""
+                    | Music / Dance / Celebration
+              .checkbox
+                label style=("font-size: 12px;")
+                  input type="checkbox" value=""
+                    | March / Action
+              .checkbox
+                label style=("font-size: 12px;")
+                  input type="checkbox" value=""
+                    | Other
+          .form-group style=("display: block;overflow: hidden;")
+            .col-md-5.text-right style="font-size:12px;line-height:35px;"
+              | Website/Facebook Link
+            .col-md-7
+              input.form-control placeholder="https://faceebook.com" type="text"
+          .form-group style=("display: block;overflow: hidden;")
+            .col-md-5.text-right style="font-size:12px;line-height:35px;"
+              | Event Date & Time
+            .col-md-7
+              .controls
+                .input-group
+                  input#date-picker-2.date-picker.form-control type="text" /
+                  label.input-group-addon.btn for="date-picker-2"
+                    span.glyphicon.glyphicon-calendar
+          .form-group style=("display: block;overflow: hidden;")
+            .col-md-5.text-right style="font-size:12px;line-height:35px;"
+              | Event Description
+            .col-md-7
+              textarea.form-control placeholder=("Please write a brief description of your event.") rows="3"
+          .form-group style=("display: block;overflow: hidden;")
+            .col-md-5.text-right style="font-size:12px;line-height:35px;"
+              | Estimated Attendees
+            .col-md-7
+              select.form-control
+                option 1
+                option 2
+                option 3
+                option 4
+                option 5
+              .radio
+                label
+                  input#optionsRadios1 checked="" name="optionsRadios" type="radio" value="option1"
+                    | Enter an address
+              .radio
+                label
+                  input#optionsRadios1 checked="" name="optionsRadios" type="radio" value="option1"
+                    | Drag maker to location
+          .form-group style=("display: block;overflow: hidden;")
+            .col-md-5.text-right style="font-size:12px;line-height:35px;"
+              | Address
+            .col-md-7
+              input.form-control placeholder=("Street Address") type="text"
+                br
+                  input.form-control placeholder="City,State / Province, Country" type="text"
+          .form-group style=("display: block;overflow: hidden;")
+            .col-md-5.text-right style="font-size:12px;line-height:35px;"
+              | Organizer Name
+            .col-md-7
+              input.form-control placeholder="Jhone" type="text"
+          .form-group style=("display: block;overflow: hidden;")
+            .col-md-5.text-right style="font-size:12px;line-height:35px;"
+              | Email Address
+            .col-md-7
+              input.form-control placeholder="Email" type="text"
+          .form-group style=("display: block;overflow: hidden;")
+            .col-md-5.text-right style="font-size:12px;line-height:35px;"
+              | Affiliated Organizer
+            .col-md-7
+              select.form-control
+                option 1
+                option 2
+                option 3
+                option 4
+                option 5
+        .footer-form-event
+          button.btn.btn-find.col-md-offset-5 Submit
+
+    / = render "shared/countdown"
+    / = link_to "Create An Event", new_event_path
     = yield
 
     - if session[:location]

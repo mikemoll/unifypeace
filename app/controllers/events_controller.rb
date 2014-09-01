@@ -5,7 +5,12 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.where(status: "approved")
+    @events = if params[:location]
+      Event.near(params[:location], params[:distance], units: :km) rescue nil
+    else
+      Event.where(status: "approved")
+    end
+
     @categories = Category.all
   end
 

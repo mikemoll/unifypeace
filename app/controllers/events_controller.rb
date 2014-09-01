@@ -15,6 +15,7 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    @categories = Category.all
   end
 
   # GET /events/1/edit

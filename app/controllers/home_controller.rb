@@ -52,12 +52,13 @@ class HomeController < ApplicationController
     @events = if params[:location]
       Event.near(params[:location], params[:distance], units: :km) rescue []
     else
-      Event.where(status: "approved")
+      Event.where(status: "approved") rescue []
     end
 
     @categories = Category.all
 
-    render template: "events/index"
+    # render template: "events/index"
+    redirect_to :back
   end
 
   def page_not_found; end

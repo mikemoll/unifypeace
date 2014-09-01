@@ -6,5 +6,5 @@ class Event < ActiveRecord::Base
     relation.has_many :affiliated_organizations
   end
 
-  validates :title, :presence => true
+  validates_presence_of :title, :category_ids, :start_date, :description, :organizer_name, :organizer_email, :location
 end

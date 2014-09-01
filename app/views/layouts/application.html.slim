@@ -21,9 +21,15 @@ html
     = csrf_meta_tags
   body
     = render "shared/countdown"
-    = link_to "Create An Event", new_event_path
+    = link_to "Create An Event", "javascript:void()", class: "show_create_event"
+    #show style="display:none"
+      p hello
     = yield
 
     - if session[:location]
       #map-used data-map="#{session[:location][:map_type]}"
     = yield :javascript
+javascript:
+  $(".show_create_event").click(function(){
+    $("#show").show();
+  })

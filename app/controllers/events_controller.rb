@@ -67,7 +67,9 @@ class EventsController < ApplicationController
     @event.estimated_attendees = params[:estimated_attendees]
     respond_to do |format|
       if @event.save
-        user = User.invite!(email: @event.organizer_email, name: @event.organizer_name)
+        user = User.invite!(email: @event.organizer_email, name: @event.organizer_name) do |u|
+          u.skip_invitation = true
+        end
         @event.update_attribute('user_id', user.id)
         EventCreatedMailer.event_created_information(@event.slug, @event.organizer_email, user.raw_invitation_token).deliver
         format.html { redirect_to root_url, notice: 'Thank you for creating an event for World Peace Day, we will confirm your event within 48 hours, and contact you once it has been approved.' }

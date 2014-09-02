@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.where(status: "approved")
-
+    @event = Event.new
     @categories = Category.all
   end
 
@@ -58,6 +58,8 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    @event = Event.new
+    @categories = Category.all
     @event.categories.destroy
     @event.category_ids = params[:category_ids]
     respond_to do |format|

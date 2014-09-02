@@ -276,16 +276,16 @@ var putMarker = function(position, options){
     },
     success: function(data){
       if(data){
-        $("#event_lat").val(data.latitude);
-        $("#event_long").val(data.longitude);
+        $("#event_latitude").val(data.latitude);
+        $("#event_longitude").val(data.longitude);
         $("#geocomplete").val(data.address);
         $("#address").val(data.formatted_address);
         $("#event_country").val(data.region);
         $("#event_postal_code").val(data.postal_code);
       }else{
         map.removeLayer(newAddedMarker);
-        $("#event_lat").val("");
-        $("#event_long").val("");
+        $("#event_latitude").val("");
+        $("#event_longitude").val("");
         $("#geocomplete").val("");
         $("#address").val("");
         $("#event_country").val("");

@@ -126,16 +126,17 @@ html
     = yield :javascript
 
 javascript:
-  i = 0;
+  var i = 0;
   $(".show_create_event").click(function(){
     $("#show").slideToggle();
-    i+=1
+    console.log(i+=1)
     if (i % 2 === 0) {
       $("#map").attr("style", "width:100%; float: right;margin-right: 3px;min-height: 551px;position: relative;");
     } else {
       $("#map").attr("style", "width:68%; float: right;margin-right: 3px;min-height: 551px;position: relative;");
     }
   })
+
   timezone = jstz.determine()
   date = new Date("09/21/2014 19:00:00")
   $('.countdown').countdown({until: date, format: 'dHM'});

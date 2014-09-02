@@ -83,12 +83,12 @@
         .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Organizer Name
         .col-md-7
-          = f.text_field :organizer_name, class: "form-control", placeholder: "Jhon Doe"
+          = f.text_field :organizer_name, class: "form-control", placeholder: "John Doe"
       .form-group style=("display: block;overflow: hidden;")
         .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Email Address
         .col-md-7
-          = f.text_field :organizer_email, class: "form-control", placeholder: "michelle@unify.org"
+          = f.text_field :organizer_email, class: "form-control", placeholder: "johndoe@unify.org"
       .form-group style=("display: block;overflow: hidden;")
         .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Affiliated Organizer
@@ -131,7 +131,7 @@ javascript:
     });
   });
   $('#datetimepicker1').datetimepicker({
-    format: "DD-MM-YYYY hh:mm:ss"
+    format: "DD-MM-YYYY hh:mm:ss A"
   });
 
 

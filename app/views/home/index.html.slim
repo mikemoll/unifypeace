@@ -2,10 +2,11 @@
   = "Unify"
 - content_for :javascript do
   = javascript_include_tag :maps
+
 - if notice
   p class="alert alert-success alert-dismissible" role="alert"
     button type="button" class="close" data-dismiss="alert"
-      span aria-hidden="true" 
+      span aria-hidden="true"
         | &times;
       span class="sr-only"
         | Close
@@ -19,6 +20,8 @@ div#location-for-map data-contents="#{[@location[:latitude], @location[:longitud
 .event-legend
   ul.list-event-legend
     li.compass Event Legend
+    li
+      = link_to "Show All", "#", class: "subcategory", data: {filter: "all"}
     li
       = link_to image_tag("markers/medi-icon.png"), "#", class: "subcategory", data: {filter: "meditation"}
       | Meditation

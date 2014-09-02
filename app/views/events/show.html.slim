@@ -11,48 +11,14 @@
 p id="notice"
   = notice
 
-p
-  strong Title
-  = @event.title
-
-p
-  strong Website link:
-  = @event.website_link
-
-p
-  strong Date and time:
-  = @event.start_date
-
-p
-  strong Description:
-  = @event.description
-
-p
-  strong Location:
-  = @event.location
-
-p
-  strong Organizer name:
-  = @event.organizer_name
-
-p
-  strong Organizer email:
-  = @event.organizer_email
-
-p
-  strong Affiliated organization:
-  = @affiliated.name
-  = image_tag(@affiliated.picture_organization)
-
-p
-  strong Country:
-  = @event.country
-p
-  strong Region:
-  = @event.region
-p
-  strong Postal Code:
-  = @event.postal_code
+#event-container
+  .header-event-show
+    h1 = @event.title
+    h3 = @event.event_type
+    h3 = @event.start_date
+    h3 = @event.location
+    h3 = @event.description
+    = image_tag("affiliated/#{@affiliated.picture_organization}", style: "width: 100px;")
 
 = link_to 'Edit', edit_event_path(@event)
 / | &nbsp;|&nbsp;

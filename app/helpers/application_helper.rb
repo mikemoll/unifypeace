@@ -8,4 +8,9 @@ module ApplicationHelper
       "AIzaSyCsBVl3kzAa3dCinBclDdYzJDFarrH5uNE"
     end
   end
+
+  def picture(content)
+    affiliated = AffiliatedOrganization.find(content.affiliated_organization_id)
+    image_tag("affiliated/#{affiliated.picture_organization}", style: "width: 100px;")
+  end
 end

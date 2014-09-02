@@ -129,7 +129,9 @@ class EventsController < ApplicationController
   end
 
   def set_project_by_category(category)
-    if category == "meditation"
+    if category == "all"
+      category = "all"
+    elsif category == "meditation"
       category = "meditation/prayer"
     elsif category == "music"
       category = "music/celebration"
@@ -142,7 +144,9 @@ class EventsController < ApplicationController
     events = Event.where(status: "approved")
     @all = []
     events.each do |event|
-      if category == "multi"
+      if category == "all"
+        @all << event
+      elsif category == "multi"
         if event.categories.count > 1
           @all << event
         end

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   def get_marker_and_location(contents)
     if !contents.blank?
       markers = contents.map do |content|
-        tmp_content = [content.lat, content.long]
+        tmp_content = [content.latitude, content.longitude]
 
         if content.categories.count == 1
           tmp_content << (content.categories.first.name)

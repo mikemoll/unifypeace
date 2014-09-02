@@ -16,6 +16,21 @@
 
  */
 
+
+#map {
+ width: 100%;
+ height: 400px;
+ min-height: 551px;
+}
+
+#map-content{
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  height: 350px;
+  margin-right: 3px;
+  min-height: 551px;
+  width: 100%;
+}
+
 .alert {
   margin-bottom: 0 !important;
 }

@@ -63,6 +63,7 @@ var generateMap = function(latLong){
   });
 }
 
+
 var generateMapContent = function(latLong){
   var mapquestContent = new L.TileLayer(mapBox.tile, {
     maxZoom: 18,

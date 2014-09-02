@@ -34,7 +34,7 @@ html
               h1.text-center
                 = link_to image_tag("log (11).png"), root_path
             .logo-title
-              .col-md-4
+              .col-md-3
                 h1.text-left Peace
                 h2.text-left Global Events Map
                 h3.text-left Peace Day Coalition
@@ -47,12 +47,12 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          .navbar-brand.navbar-brand-wpc.hidden-lg Menu
+          .navbar-brand.navbar-brand-wpc.hidden-lg.hidden-md Menu
         /! Collect the nav links, forms, and other content for toggling
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
           .navbar-form.navbar-left.form-wpc role="search"
             button.btn.btn-default.btn-find.find-event data-toggle="modal" data-target=".bs-example-modal-sm" Find an Event near me
-            button.btn.btn-default.btn-find.show_create_event type="submit"  Create an Event
+            button.btn.btn-default.btn-find.show_create_event.btn-find-md type="submit"  Create an Event
           #myModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
             .modal-dialog
               .modal-content
@@ -102,6 +102,8 @@ html
                 = link_to "Login", new_user_session_path
 
           .clear
+
+
     .maps
       #show style="display:none"
         = render "events/form"

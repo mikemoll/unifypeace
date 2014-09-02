@@ -75,5 +75,18 @@ class HomeController < ApplicationController
     render template: "home/index"
   end
 
+  def embed
+    @location = {area: "worldwide", longitude: 0.0, latitude: 0.0}
+    @events = Event.where(status: "approved")
+
+    @markers = get_marker_and_location(@events) if @events rescue nil
+    @event = Event.new
+    @categories = Category.all
+
+    set_title_location(@location)
+
+    render layout: "embed"
+  end
+
   def page_not_found; end
 end

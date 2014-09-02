@@ -20,12 +20,16 @@ group :development do
   gem "thin"
 end
 
+group :production do 
+	gem 'unicorn'
+	gem "rails_12factor"	
+end
+
 gem "geocoder"
 gem "carrierwave"
 gem "slim-rails"
 gem "devise"
 gem "binding_of_caller"
-gem "rails_12factor"
 gem "friendly_id", "~> 5.0.0"
 gem "activeadmin", github: "gregbell/active_admin"
 gem "geoip"

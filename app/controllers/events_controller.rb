@@ -5,9 +5,16 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
+    @location = {area: "worldwide", longitude: 0.0, latitude: 0.0}
     @events = Event.where(status: "approved")
+
+    @markers = get_marker_and_location(@events) if @events rescue nil
     @event = Event.new
     @categories = Category.all
+
+    set_title_location(@location)
+
+    render template: "home/index"
   end
 
   # GET /events/1
@@ -139,7 +146,9 @@ class EventsController < ApplicationController
   end
 
   def set_project_by_category(category)
-    if category == "meditation"
+    if category == "all"
+      category = "all"
+    elsif category == "meditation"
       category = "meditation/prayer"
     elsif category == "music"
       category = "music/celebration"
@@ -152,7 +161,9 @@ class EventsController < ApplicationController
     events = Event.where(status: "approved")
     @all = []
     events.each do |event|
-      if category == "multi"
+      if category == "all"
+        @all << event
+      elsif category == "multi"
         if event.categories.count > 1
           @all << event
         end

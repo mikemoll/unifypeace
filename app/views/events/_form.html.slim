@@ -14,29 +14,29 @@
       - else
         h1.text-center Create An Event
     .body-form-event
-      .form-group style=("display: block;overflow: hidden;") 
-        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+      .form-group style=("display: block;overflow: hidden;")
+        .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Tittle of your event
         .col-md-7
-          = f.text_field :title, class: "form-control", placeholder: "e.g Global Peace Meditation" 
+          = f.text_field :title, class: "form-control", placeholder: "e.g Global Peace Meditation"
       .clear
-      .form-group style=("display: block;overflow: hidden;") 
-        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+      .form-group style=("display: block;overflow: hidden;")
+        .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Event Type
         .col-md-7
           - @categories.each do |category|
             .checkbox
-              label style=("font-size: 12px;") 
+              label style=("font-size: 12px;")
                 = check_box_tag "category_ids[]", category.id, @event.category_ids.include?(category.id), class: "check_show_marker", id_cat: "#{category.id}"
                 = f.label category.name
-              
-      .form-group style=("display: block;overflow: hidden;") 
-        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+
+      .form-group style=("display: block;overflow: hidden;")
+        .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Website/Facebook Link
         .col-md-7
           = f.text_field :website_link, class: "form-control", placeholder: "https://faceebook.com"
-      .form-group style=("display: block;overflow: hidden;") 
-        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+      .form-group style=("display: block;overflow: hidden;")
+        .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Event Date & Time
         .col-md-7
           .controls
@@ -44,20 +44,20 @@
               = f.text_field :start_date, class: "form-control"
               span class="input-group-addon"
                 span class="glyphicon-calendar glyphicon"
-      .form-group style=("display: block;overflow: hidden;") 
-        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+      .form-group style=("display: block;overflow: hidden;")
+        .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Event Description
         .col-md-7
-          = f.text_area :description, class: "form-control", placeholder: ("Please write a brief description of your event."), rows: "3" 
-      .form-group style=("display: block;overflow: hidden;") 
-        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+          = f.text_area :description, class: "form-control", placeholder: ("Please write a brief description of your event."), rows: "3"
+      .form-group style=("display: block;overflow: hidden;")
+        .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Estimated Attendees
         .col-md-7
           = select_tag :estimated_attendees, options_for_attendees, class: "form-control",  prompt: "Select One"
           #hidden_field
             .radio
               label
-                = radio_button_tag :enter, nil, true 
+                = radio_button_tag :enter, nil, true
                 = f.label "Enter an address"
             .radio
               label
@@ -66,8 +66,8 @@
           #show_map style="display:none"
             | Drag this
             = image_tag "marker.png", id: "content-type", class: "drag show", type: "red", value: "project", style: "margin: 0 2px;"
-      .form-group style=("display: block;overflow: hidden;") 
-        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+      .form-group style=("display: block;overflow: hidden;")
+        .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Address
         .col-md-7
           = f.text_field :location, class: "form-control", placeholder: ("Street Address"), id: "geocomplete"
@@ -76,26 +76,26 @@
             = f.hidden_field :region, name: "administrative_area_level_1"
             = f.hidden_field :postal_code, name: "postal_code"
           .field
-            = f.hidden_field :lat, name: "lat"
+            = f.hidden_field :latitude, name: "lat"
           .field
-            = f.hidden_field :long, name: "lng"
-      .form-group style=("display: block;overflow: hidden;") 
-        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+            = f.hidden_field :longitude, name: "lng"
+      .form-group style=("display: block;overflow: hidden;")
+        .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Organizer Name
         .col-md-7
           = f.text_field :organizer_name, class: "form-control", placeholder: "Michelle Paix"
-      .form-group style=("display: block;overflow: hidden;") 
-        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+      .form-group style=("display: block;overflow: hidden;")
+        .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Email Address
         .col-md-7
           = f.text_field :organizer_email, class: "form-control", placeholder: "michelle@unify.org"
-      .form-group style=("display: block;overflow: hidden;") 
-        .col-md-5.text-right style="font-size:12px;line-height:35px;" 
+      .form-group style=("display: block;overflow: hidden;")
+        .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Affiliated Organizer
         .col-md-7
           = select_tag :affiliated_organization_id, options_for_select(AffiliatedOrganization.all.map{|a_o| [a_o.name, a_o.id]}), prompt: "Select One", class: "form-control"
     .footer-form-event
-      button.btn.btn-find.col-md-offset-5 Submit          
+      button.btn.btn-find.col-md-offset-5 Submit
 
 javascript:
   var newAddedMarker = null;

@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :title, :category_ids, :start_date, :description, :organizer_name, :organizer_email, :location
 
   def date_event(timezone)
-    timezone.present? ? self.date_and_time.in_time_zone(timezone) : self.date_and_time
+    timezone.present? ? self.start_date.in_time_zone(timezone) : self.start_date
   end
 
   def event_type
@@ -26,4 +26,7 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def link
+    self.website_link.present? ? self.website_link : "#"
+  end
 end

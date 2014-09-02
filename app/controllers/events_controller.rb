@@ -56,7 +56,8 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save
         user = User.invite!(email: @event.organizer_email, name: @event.organizer_name)
-        EventCreatedMailer.event_created_information(@event.slug, @event.organizer_email, user.invitation_token).deliver
+        @event.update_attribute('user_id', user.id)
+        EventCreatedMailer.event_created_information(@event.slug, @event.organizer_email, user.raw_invitation_token).deliver
         format.html { redirect_to root_url, notice: 'Thank you for creating an event for World Peace Day, we will confirm your event within 48 hours, and contact you once it has been approved.' }
         format.json { render :index, status: :created, location: @event }
       else
@@ -130,7 +131,7 @@ class EventsController < ApplicationController
   def my_events
     @event = Event.new
     @categories = Category.all
-    @events = Event.where(organizer_email: params[:email])
+    @events = Event.where(organizer_email: params[:email]).page(params[:page]).per(3)
   end
 
   private
@@ -149,11 +150,11 @@ class EventsController < ApplicationController
     if category == "all"
       category = "all"
     elsif category == "meditation"
-      category = "meditation/prayer"
+      category = "Meditation / Ceremony / Prayer"
     elsif category == "music"
-      category = "music/celebration"
+      category = "Music / Dance / Celebration"
     elsif category == "march"
-      category = "march/action"
+      category = "March / Action"
     elsif category == "multi"
       category = "multi"
     end

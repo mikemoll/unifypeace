@@ -39,49 +39,9 @@ html
                 h2.text-left Global Events Map
                 h3.text-left Peace Day Coalition
     nav.navbar.navbar-default.navbar-wpc role="navigation"
-      .container
-        /! Brand and toggle get grouped for better mobile display
-        .navbar-header
-          button.navbar-toggle.collapsed data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          .navbar-brand.navbar-brand-wpc.hidden-lg Menu
-        /! Collect the nav links, forms, and other content for toggling
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          .navbar-form.navbar-left.form-wpc role="search"
-            button.btn.btn-default.btn-find.find-event data-toggle="modal" data-target=".bs-example-modal-sm" Find an Event near me
-            button.btn.btn-default.btn-find.show_create_event type="submit"  Create an Event
-          #myModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
-            .modal-dialog
-              .modal-content
-                .modal-header
-                  button.close data-dismiss="modal" type="button"
-                    span aria-hidden="true"  &times;
-                    span.sr-only Close
-                  h4#myModalLabel.modal-title Change Location
-                .modal-body.modal-body-wpc
-                  .col-md-12
-                    .form-group
-                      label for="exampleInputEmail1"  New Location
-                      input#exampleInputEmail1.form-control placeholder=("Enter email") type="text"
-                    .form-group
-                      label for="exampleInputEmail1"  Show Result Within
-                      .row
-                        .col-md-6
-                          select.form-control
-                            option 1
-                            option 2
-                            option 3
-                            option 4
-                            option 5
-                        .col-md-6
-                          button.btn.btn-default.btn-location Set Location
-                .modal-footer
-                  button.btn.btn-default.btn-location data-dismiss="modal" type="button"  Close
-          .countdown
-          ul.nav.navbar-nav.countdown-result
+      .container style="width: 800px !important;"
+        .countdown
+        ul.nav.navbar-nav.countdown-result
             li
               span.seperator-result
                 = @event_count
@@ -91,22 +51,8 @@ html
                 | 12PM
                 b PST
               span.pst-count World Peace Moment
-          ul
-            - if user_signed_in?
-              li
-                = link_to "logout", destroy_user_session_path(), method: "delete"
-              li
-                = link_to "my events", my_events_events_path(email: current_user.email)
-            - else
-              li
-                = link_to "Login", new_user_session_path
-
-          .clear
     .maps
-      #show style="display:none"
-        = render "events/form"
       = yield
-
     .footer
       ul.list-footer-logo
         li = image_tag "log (6).png"
@@ -119,25 +65,10 @@ html
         li = image_tag "log (8).png"
         li = image_tag "log (13).png"
         li = image_tag "log (10).jpg"
-    .modal.fade.bs-example-modal-sm tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
-      = render "home/find_event"
-
     - if session[:location]
       #map-used data-map="#{session[:location][:map_type]}"
     = yield :javascript
-
 javascript:
-  var i = 0;
-  $(".show_create_event").click(function(){
-    $("#show").slideToggle();
-    console.log(i+=1)
-    if (i % 2 === 0) {
-      $("#map").attr("style", "width:100%; float: right;margin-right: 3px;min-height: 551px;position: relative;");
-    } else {
-      $("#map").attr("style", "width:78%; float: right;margin-right: 3px;min-height: 551px;position: relative;");
-    }
-  })
-
   timezone = jstz.determine()
   date = new Date("09/21/2014 19:00:00")
   $('.countdown').countdown({until: date, format: 'dHM'});

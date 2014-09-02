@@ -36,12 +36,16 @@ class HomeController < ApplicationController
   end
 
   def contact_organizer
+    @event_id = params[:id]
+  end
+
+  def create_contact_organizer
     if params[:event_id] && params[:subject]
       event = Event.find params[:event_id]
       EventCreatedMailer.contact_organizer(params[:subject], params[:message], event.organizer_name, event.organizer_email).deliver
     end
 
-    redirect_to root_url
+    redirect_to root_url, notice: "Sent message to organizer successfully!!"
   end
 
   def set_timezone
@@ -69,6 +73,17 @@ class HomeController < ApplicationController
     set_title_location(@location)
 
     render template: "home/index"
+  end
+
+  def embed
+    @location = {area: "worldwide", longitude: 0.0, latitude: 0.0}
+    @events = Event.where(status: "approved")
+
+    @markers = get_marker_and_location(@events) if @events rescue nil
+    @event = Event.new
+    @categories = Category.all
+
+    set_title_location(@location)
   end
 
   def page_not_found; end

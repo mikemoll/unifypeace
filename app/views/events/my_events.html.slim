@@ -14,6 +14,7 @@ table.table
       th Affiliated organization
       th Latitude
       th Longitude
+      th Status
       th colspan="3"
 
   tbody
@@ -30,9 +31,11 @@ table.table
         td = event.affiliated_organization_id
         td = event.lat
         td = event.long
+        td = event.status
         td = link_to 'Show', event
-        td = link_to 'Edit', edit_event_path(event)
-        td = link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
+        - if event.status.eql?("approved")
+          td = link_to 'Edit', edit_event_path(event)
+          td = link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
 
 br
 = paginate @events 

@@ -113,7 +113,7 @@ class EventsController < ApplicationController
   def my_events
     @event = Event.new
     @categories = Category.all
-    @events = Event.find_by_email(params[:email])
+    @events = Event.where(organizer_email: params[:email])
   end
 
   private

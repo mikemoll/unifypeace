@@ -1,15 +1,14 @@
 .show_maker_map style="display:none"
-	#map style="width:60%; float:right; position:relative;"
+  #map style="width:68%; float:right; position:relative;"
 .text_show style="display:none; margin-top:0px !important;"
-	h1.text-center Loading map...
+  h1.text-center Loading map...
 .hidden_maker_map
-	#map-content.content-info-map style=""
+  #map-content.content-info-map style=""
 
-
-	#content-for-map data-contents="#{@markers}"
-	#event-type data-event-type="#{@event.event_type}"
-	#location-for-map data-contents="#{[@location[:latitude], @location[:longitude]]}"
-	#content-location-for-map data-content-information="#{[@event.lat, @event.long]}" data-content-type="#{@event.class.to_s.titleize}"
+#content-for-map data-contents="#{@markers}"
+#event-type data-event-type="#{@event.event_type}"
+#location-for-map data-contents="#{[@location[:latitude], @location[:longitude]]}"
+#content-location-for-map data-content-information="#{[@event.lat, @event.long]}" data-content-type="#{@event.class.to_s.titleize}"
 
 - content_for :javascript do
   = javascript_include_tag :maps

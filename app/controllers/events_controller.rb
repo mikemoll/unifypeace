@@ -138,7 +138,7 @@ class EventsController < ApplicationController
       postal_code: location.postal_code } if location
 
       render json: parsed_location
-    end
+  end
 
   def my_events
     @event = Event.new

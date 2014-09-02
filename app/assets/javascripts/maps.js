@@ -243,7 +243,7 @@ setTimeout(function() {
       // }else if(model == 'social'){
       //   var leftTop = [ui.offset.left - 213, ui.offset.top -499]
       // }else if(model == 'discussion'){
-      var leftTop = [ui.offset.left + 10, ui.offset.top - 300]
+      var leftTop = [ui.offset.left - 410, ui.offset.top - 270]
       // }
 
       console.log(map.containerPointToLatLng(leftTop))

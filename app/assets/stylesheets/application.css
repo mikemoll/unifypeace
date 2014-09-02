@@ -52,7 +52,7 @@
   height: 350px;
   margin-right: 3px;
   min-height: 551px;
-  width: 50%;
+  width: 60%;
 }
 
 .page-not-found {
@@ -108,9 +108,33 @@
 
 .leaflet-popup-content-wrapper {
   border-radius: 3px !important;
-  height: 300px;
+  height: 530px;
   padding: 1px;
   text-align: left;
+  width: 500px;
+}
+
+.leaflet-popup-tip {
+  display: none !important;
+}
+
+/*.leaflet-container a {
+  color: #fff !important;
+}
+*/
+.leaflet-container a.leaflet-popup-close-button {
+  background: none repeat scroll 0 0 transparent;
+  color: black;
+  font: bold 16px/14px Tahoma,Verdana,sans-serif;
+  height: 14px;
+  padding: 4px 4px 0 0;
+  position: absolute;
+  right: 6px;
+  text-align: center;
+  text-decoration: none;
+  top: 2px;
+  width: 18px;
+  z-index: 9999;
 }
 
 a.link {

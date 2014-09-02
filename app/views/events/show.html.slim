@@ -11,18 +11,32 @@
 p id="notice"
   = notice
 
-#event-container
-  .header-event-show
-    h1 = @event_show.title
-    h3 = @event_show.event_type
-    h3 = @event_show.start_date
-    h3 = @event_show.location
-    h3 = @event_show.description
-    = image_tag("#{@affiliated.picture_organization}", style: "width: 100px;")
+.col-md-5.body-see-event
+  h1 = @event_show.title
+  h2 = @event_show.event_type
+  h2 = @event_show.start_date.strftime("%B %d, %l:%M %p")
+  h2 = @event_show.location
+  .see-event
+    p = raw truncate_html(strip_tags(@event_show.description), length: 1000)
+
+  .pull-left
+    = link_to contact_organizer_path(id: @event_show.id), remote: true, class: "btn btn-default btn-detail", :"data-toggle" => "modal", :"data-target" => "#contact-organizer" do
+      | Contact Organizer
+      span
+        = image_tag "user.png", height: "30px"
+
+    br
+    a.btn.btn-default.btn-fb href="#{@event_show.website_link}" target="_blank"
+      | Official Event Page
+      span = image_tag "fb.png", height: "30px", style: "padding-left: 4px;"
+  .pull-right style="margin-top: 10px;"
+    p = image_tag("logo/#{@affiliated.picture_organization}", style: "width: 200px;")
+  br
+  br
+  br
 
 - if user_signed_in?
   - if current_user.email.eql?(@event_show.organizer_email)
     = link_to 'Edit', edit_event_path(@event_show)
-/ | &nbsp;|&nbsp;
-/ = link_to 'Back', events_path
 
+.modal.fade#contact-organizer tabindex="-1" role="dialog" aria-labelledby="ContactOrganizer" aria-hidden="true"

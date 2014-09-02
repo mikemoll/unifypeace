@@ -1,9 +1,9 @@
 #map-content.content-info-map style=""
 
 #content-for-map data-contents="#{@markers}"
-#event-type data-event-type="#{@event.event_type}"
+#event-type data-event-type="#{@event_show.event_type}"
 #location-for-map data-contents="#{[@location[:latitude], @location[:longitude]]}"
-#content-location-for-map data-content-information="#{[@event.lat, @event.long]}" data-content-type="#{@event.class.to_s.titleize}"
+#content-location-for-map data-content-information="#{[@event_show.lat, @event_show.long]}" data-content-type="#{@event_show.class.to_s.titleize}"
 
 - content_for :javascript do
   = javascript_include_tag :maps
@@ -13,14 +13,16 @@ p id="notice"
 
 #event-container
   .header-event-show
-    h1 = @event.title
-    h3 = @event.event_type
-    h3 = @event.start_date
-    h3 = @event.location
-    h3 = @event.description
-    = image_tag("affiliated/#{@affiliated.picture_organization}", style: "width: 100px;")
+    h1 = @event_show.title
+    h3 = @event_show.event_type
+    h3 = @event_show.start_date
+    h3 = @event_show.location
+    h3 = @event_show.description
+    = image_tag("#{@affiliated.picture_organization}", style: "width: 100px;")
 
-= link_to 'Edit', edit_event_path(@event)
+- if user_signed_in?
+  - if current_user.email.eql?(@event_show.organizer_email)
+    = link_to 'Edit', edit_event_path(@event_show)
 / | &nbsp;|&nbsp;
 / = link_to 'Back', events_path
 

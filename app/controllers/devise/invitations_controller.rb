@@ -1,6 +1,6 @@
 class Devise::InvitationsController < DeviseController
   before_action :set_user_location
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  # before_action :configure_permitted_parameters, if: :devise_controller?
   # prepend_before_filter :authenticate_inviter!, :only => [:new, :create]
   # prepend_before_filter :has_invitations_left?, :only => [:create]
   prepend_before_filter :require_no_authentication, :only => [:edit, :update, :destroy]
@@ -41,13 +41,17 @@ class Devise::InvitationsController < DeviseController
   # PUT /resource/invitation
   def update
     self.resource = accept_resource
-
+    update = self.resource.update_attributes(name: params[:user][:name], username: params[:user][:username])
+    if update
+      AfterRegister.after_register(self.resource.email).deliver
+    end
     if resource.errors.empty?
       yield resource if block_given?
       flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
       set_flash_message :notice, flash_message if is_flashing_format?
       sign_in(resource_name, resource)
-      respond_with resource, :location => after_accept_path_for(resource)
+      redirect_to root_url
+      # respond_with resource, :location => root_url
     else
       respond_with_navigational(resource){ render :edit }
     end
@@ -61,6 +65,27 @@ class Devise::InvitationsController < DeviseController
   end
 
   protected
+
+  def invite_resource(&block)
+    resource_class.invite!(invite_params, current_inviter, &block)
+  end
+
+  def accept_resource
+    resource_class.accept_invitation!(update_resource_params)
+  end
+
+  def current_inviter
+    authenticate_inviter!
+  end
+
+  def has_invitations_left?
+    unless current_inviter.nil? || current_inviter.has_invitations_left?
+      self.resource = resource_class.new
+      set_flash_message :alert, :no_invitations_remaining if is_flashing_format?
+      respond_with_navigational(resource) { render :new }
+    end
+  end
+
   def resource_from_invitation_token
     unless params[:invitation_token] && self.resource = resource_class.find_by_invitation_token(params[:invitation_token], true)
       set_flash_message(:alert, :invitation_token_invalid) if is_flashing_format?
@@ -68,18 +93,33 @@ class Devise::InvitationsController < DeviseController
     end
   end
 
-  def accept_resource
-    resource_class.accept_invitation!(update_resource_params)
-  end
-
   def invite_params
     devise_parameter_sanitizer.sanitize(:invite)
   end
 
   def update_resource_params
-    devise_parameter_sanitizer.for(:accept_invitation) do |u|
-      u.permit(:name, :username, :password, :password_confirmation, :invitation_token, :image)
-    end
+    devise_parameter_sanitizer.sanitize(:accept_invitation)
   end
+
+  # def resource_from_invitation_token
+  #   unless params[:invitation_token] && self.resource = resource_class.find_by_invitation_token(params[:invitation_token], true)
+  #     set_flash_message(:alert, :invitation_token_invalid) if is_flashing_format?
+  #     redirect_to after_sign_out_path_for(resource_name)
+  #   end
+  # end
+
+  # def accept_resource
+  #   resource_class.accept_invitation!(update_resource_params)
+  # end
+
+  # def invite_params
+  #   devise_parameter_sanitizer.sanitize(:invite)
+  # end
+
+  # def update_resource_params
+  #   devise_parameter_sanitizer.for(:accept_invitation) do |u|
+  #     u.permit(:name, :username, :password, :password_confirmation, :invitation_token)
+  #   end
+  # end
 
 end

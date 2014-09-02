@@ -1,6 +1,6 @@
 h1 My events
 
-table
+table.table
   thead
     tr
       th Title
@@ -35,5 +35,6 @@ table
         td = link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
 
 br
-
- = link_to 'New Event', new_event_path()
+= paginate @events 
+= link_to 'New Event', new_event_path()
+.clearfix

@@ -1,6 +1,11 @@
 class Event < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: :slugged
+  geocoded_by :location
+
+  alias_attribute :lat, :latitude
+  alias_attribute :long, :longitude
+
   has_and_belongs_to_many :categories
   with_options dependent: :destroy do |relation|
     relation.has_many :affiliated_organizations

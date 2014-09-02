@@ -51,16 +51,24 @@ class HomeController < ApplicationController
   end
 
   def find_event
-    @events = if params[:location]
-      Event.near(params[:location], params[:distance], units: :km) rescue []
+    @location = params[:location]
+    @all = []
+
+    @all << if @location[:address]
+      Event.where(status: "approved").near([@location[:latitude], @location[:longitude]], @location[:nearby].to_i, units: :km) rescue nil
     else
-      Event.where(status: "approved") rescue []
+      Event.where(status: "approved")
     end
 
+    @all = @all.flatten
+    @markers = get_marker_and_location(@all) if @all
+
+    @event = Event.new
     @categories = Category.all
 
-    # render template: "events/index"
-    redirect_to :back
+    set_title_location(@location)
+
+    render template: "home/index"
   end
 
   def page_not_found; end

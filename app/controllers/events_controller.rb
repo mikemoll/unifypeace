@@ -1,13 +1,20 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :set_location, only: [:index, :show, :categories]
+  before_action :set_location, only: [:show, :categories]
 
   # GET /events
   # GET /events.json
   def index
+    @location = {area: "worldwide", longitude: 0.0, latitude: 0.0}
     @events = Event.where(status: "approved")
+
+    @markers = get_marker_and_location(@events) if @events rescue nil
     @event = Event.new
     @categories = Category.all
+
+    set_title_location(@location)
+
+    render template: "home/index"
   end
 
   # GET /events/1

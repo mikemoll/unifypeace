@@ -53,7 +53,7 @@
         .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Estimated Attendees
         .col-md-7
-          = select_tag :estimated_attendees, options_for_attendees, class: "form-control",  prompt: "Select One"
+          = select_tag :estimated_attendees, options_for_attendees(@event) , class: "form-control",  prompt: "Select One"
           #hidden_field
             .radio
               label
@@ -93,9 +93,11 @@
         .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Affiliated Organizer
         .col-md-7
-          = select_tag :affiliated_organization_id, options_for_select(AffiliatedOrganization.all.map{|a_o| [a_o.name, a_o.id]}), prompt: "Select One", class: "form-control"
+          = select_tag :affiliated_organization_id, options_for_select(AffiliatedOrganization.all.map{|a_o| [a_o.name, a_o.id]}, @event.affiliated_organization_id ), prompt: "Select One", class: "form-control"
     .footer-form-event
-      button.btn.btn-find.col-md-offset-5 Submit
+      button.btn.btn-find.col-md-offset-5 style="margin-right: 3%;margin-left: 33%;" Submit
+      | &nbsp;
+      button.btn.btn-danger.close-form-create type="reset" Exit
 
 javascript:
   var newAddedMarker = null;

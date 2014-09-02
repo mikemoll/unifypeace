@@ -104,11 +104,11 @@ class EventsController < ApplicationController
   def get_location_by_lat_lng
     location = Geocoder.search([params[:location][:lat], params[:location][:lng]]).first
     parsed_location = { country_name: location.country, region: location.state, city_name: location.city,
-                        latitude: location.latitude, longitude: location.longitude, address: location.address,
-                        postal_code: location.postal_code } if location
+      latitude: location.latitude, longitude: location.longitude, address: location.address,
+      postal_code: location.postal_code } if location
 
-    render json: parsed_location
-  end
+      render json: parsed_location
+    end
 
   def my_events
     @event = Event.new
@@ -117,6 +117,7 @@ class EventsController < ApplicationController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_event
     @event = Event.friendly.find(params[:id])
@@ -141,12 +142,16 @@ class EventsController < ApplicationController
     events = Event.where(status: "approved")
     @all = []
     events.each do |event|
-      if event.categories.count == 1
-        if event.categories.first.name == category
+      if category == "multi"
+        if event.categories.count > 1
           @all << event
         end
-      elsif event.categories.count >= 1
-        @all << event
+      else
+        if event.categories.count == 1
+          if event.categories.first.name == category
+            @all << event
+          end
+        end
       end
     end
 

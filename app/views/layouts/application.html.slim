@@ -89,6 +89,7 @@ html
                 | 12PM
                 b PST
               span.pst-count World Peace Moment
+          ul
             - if user_signed_in?
               li
                 = link_to "logout", destroy_user_session_path(), method: "delete"
@@ -124,6 +125,7 @@ html
 javascript:
   $(".show_create_event").click(function(){
     $("#show").slideToggle();
+    $("#map").attr("style", "width:70%; float: right;margin-right: 3px;min-height: 551px;position: relative;");
   })
 
   timezone = jstz.determine()

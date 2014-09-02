@@ -9,7 +9,10 @@
           li= message
   .wrap-create-event style="z-index: 999;"
     .header-form-event
-      h1.text-center Create An Event
+      - if request.filtered_parameters["action"].eql?("edit")
+        h1.text-center Edit An Event
+      - else
+        h1.text-center Create An Event
     .body-form-event
       .form-group style=("display: block;overflow: hidden;") 
         .col-md-5.text-right style="font-size:12px;line-height:35px;" 
@@ -131,23 +134,4 @@ javascript:
     format: "DD-MM-YYYY hh:mm:ss"
   });
 
-  $(function(){
-    $("#geocomplete").geocomplete({
-      details: "form",
-      types: ["geocode", "establishment"]
-    }).bind("geocode:result", function(event, result){
-      console.log(r = result);
-      var lat = result["geometry"]["location"]["k"]
-      var lng = result["geometry"]["location"]["B"]
-      map.setView(new L.LatLng(lat, lng), 15);
-      if(newAddedMarker){
-        newAddedMarker.setLatLng([lat, lng]);
-      }else{
-        newAddedMarker = L.marker([lat, lng], {}).addTo(map);
-      }
-    });
-
-    $("#geocomplete").click(function(){
-      $("#geocomplete").trigger("geocode");
-    });
-  });
+ 

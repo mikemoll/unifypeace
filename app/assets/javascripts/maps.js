@@ -204,7 +204,7 @@ var loadGoogleEarth = function(){
   )
 }
 
-if((currentPage == "show")){
+if((currentPage == "show") || (currentPage == "edit")){
   leafletMapsViewContent(eventType, latLongContent);
 }
 

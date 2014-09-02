@@ -1,9 +1,9 @@
 #map-content.content-info-map style=""
 
 #content-for-map data-contents="#{@markers}"
-#event-type data-event-type="#{@event.event_type}"
+#event-type data-event-type="#{@event_show.event_type}"
 #location-for-map data-contents="#{[@location[:latitude], @location[:longitude]]}"
-#content-location-for-map data-content-information="#{[@event.lat, @event.long]}" data-content-type="#{@event.class.to_s.titleize}"
+#content-location-for-map data-content-information="#{[@event_show.lat, @event_show.long]}" data-content-type="#{@event_show.class.to_s.titleize}"
 
 - content_for :javascript do
   = javascript_include_tag :maps
@@ -13,31 +13,31 @@ p id="notice"
 
 p
   strong Title
-  = @event.title
+  = @event_show.title
 
 p
   strong Website link:
-  = @event.website_link
+  = link_to @event_show.website_link, "http://"+@event_show.website_link
 
 p
   strong Date and time:
-  = @event.start_date
+  = @event_show.start_date
 
 p
   strong Description:
-  = @event.description
+  = @event_show.description
 
 p
   strong Location:
-  = @event.location
+  = @event_show.location
 
 p
   strong Organizer name:
-  = @event.organizer_name
+  = @event_show.organizer_name
 
 p
   strong Organizer email:
-  = @event.organizer_email
+  = @event_show.organizer_email
 
 p
   strong Affiliated organization:
@@ -46,15 +46,17 @@ p
 
 p
   strong Country:
-  = @event.country
+  = @event_show.country
 p
   strong Region:
-  = @event.region
+  = @event_show.region
 p
   strong Postal Code:
-  = @event.postal_code
+  = @event_show.postal_code
 
-= link_to 'Edit', edit_event_path(@event)
+- if user_signed_in?
+  - if current_user.email.eql?(@event_show.organizer_email)
+    = link_to 'Edit', edit_event_path(@event_show)
 / | &nbsp;|&nbsp;
 / = link_to 'Back', events_path
 

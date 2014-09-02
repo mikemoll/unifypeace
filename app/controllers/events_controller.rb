@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :set_location, only: [:index, :show, :categories]
+  before_action :set_event, only: [ :edit, :update, :destroy]
+  before_action :set_location, only: [:index, :show, :categories, :edit]
 
   # GET /events
   # GET /events.json
@@ -13,11 +13,13 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    @categories_event = @event.categories
+    @event = Event.new
+    @event_show = Event.friendly.find(params[:id])
+    @categories_event = @event_show.categories
     @categories = Category.all
-    @affiliated = AffiliatedOrganization.find(@event.affiliated_organization_id)
+    @affiliated = AffiliatedOrganization.find(@event_show.affiliated_organization_id)
 
-    @markers = get_marker_and_location([@event])
+    @markers = get_marker_and_location([@event_show])
   end
 
   # GET /events/new
@@ -29,6 +31,7 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @categories = Category.all
+    @markers = get_marker_and_location([@event])
   end
 
   # POST /events
@@ -45,8 +48,8 @@ class EventsController < ApplicationController
     @event.estimated_attendees = params[:estimated_attendees]
     respond_to do |format|
       if @event.save
-        User.invite!(email: @event.organizer_email, name: @event.organizer_name)
-        EventCreatedMailer.event_created_information(@event.slug, @event.organizer_email).deliver
+        user = User.invite!(email: @event.organizer_email, name: @event.organizer_name)
+        EventCreatedMailer.event_created_information(@event.slug, @event.organizer_email, user.invitation_token).deliver
         format.html { redirect_to root_url, notice: 'Thank you for creating an event for World Peace Day, we will confirm your event within 48 hours, and contact you once it has been approved.' }
         format.json { render :index, status: :created, location: @event }
       else
@@ -62,7 +65,14 @@ class EventsController < ApplicationController
     @event = Event.new
     @categories = Category.all
     @event.categories.destroy
+    @event.affiliated_organization_id = params[:affiliated_organization_id]
     @event.category_ids = params[:category_ids]
+    @event.lat = params[:lat]
+    @event.long = params[:lng]
+    @event.country = params[:country]
+    @event.region = params[:administrative_area_level_1]
+    @event.postal_code = params[:postal_code]
+    @event.estimated_attendees = params[:estimated_attendees]
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event has been updated.' }

@@ -25,16 +25,16 @@ html
       .container
         .row
           .col-md-offset-2
-            .col-md-3
+            .col-md-3.col-xs-4
               .logo-title
                 h1.text-right World
                 h2.text-right September 21, 2014
                 h3.text-right INT'L DAY OF PEACE
-            .col-md-3
+            .col-md-3.col-xs-4
               h1.text-center
                 = link_to image_tag("log (11).png"), root_path
             .logo-title
-              .col-md-3
+              .col-md-3.col-xs-4
                 h1.text-left Peace
                 h2.text-left Global Events Map
                 h3.text-left Peace Day Coalition
@@ -128,6 +128,7 @@ html
         li = image_tag "log (13).png"
         li = image_tag "log (10).jpg"
     .modal.fade.bs-example-modal-sm tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+    .modal.fade.bs-example-modal-sm#contact-organizer tabindex="-1" role="dialog" aria-labelledby="contactOrganizer" 
       = render "home/find_event"
 
     - if session[:location]

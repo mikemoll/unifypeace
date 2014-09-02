@@ -1,3 +1,17 @@
+.show_maker_map style="display:none"
+  #map style="width:60%; float:right; position:relative;"
+.text_show style="display:none; margin-top:0px !important;"
+  h1.text-center Loading map...
+.hidden_maker_map
+  #map-content.content-info-map style=""
+
+#content-for-map data-contents="#{@markers}"
+#event-type data-event-type="#{@event_show.event_type}"
+#location-for-map data-contents="#{[@location[:latitude], @location[:longitude]]}"
+#content-location-for-map data-content-information="#{[@event_show.lat, @event_show.long]}" data-content-type="#{@event_show.class.to_s.titleize}"
+
+- content_for :javascript do
+  = javascript_include_tag :maps
 
 p id="notice"
   = notice
@@ -25,7 +39,7 @@ p id="notice"
       - if current_user.email.eql?(@event_show.organizer_email)
         = link_to 'Edit', edit_event_path(@event_show), class: "btn btn-default", style: "margin-top:10px;"
   .pull-right style="margin-top: 10px;"
-    p = image_tag("logo/#{@affiliated.picture_organization}", style: "width: 200px;")
+    p = image_tag("#{@affiliated.picture_organization}", style: "width: 200px;")
 
   br
   br

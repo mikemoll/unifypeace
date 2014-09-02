@@ -24,10 +24,6 @@
 //= require new_content
 $(document).on('ready page:load', function(){
   navigationAction();
-	$(".show_create_event").click(function(){
-		$("#show").slideToggle();
-		$("#map").attr("style", "width:70%; float: right;margin-right: 3px;min-height: 551px;position: relative;");
-	})
 });
 $(function(){
 	$("#geocomplete").geocomplete({

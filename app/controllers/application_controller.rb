@@ -26,12 +26,13 @@ class ApplicationController < ActionController::Base
   def set_event_count
     @event_count = Event.where(status: "approved").count
   end
+
   def set_location
     if session[:location]
-      @location = session[:location]
+      @location = session[:location].symbolize_keys!
     else
       set_user_location
-      session[:location] = @location
+      session[:location] = @location.symbolize_keys!
     end
   end
 
@@ -40,13 +41,17 @@ class ApplicationController < ActionController::Base
 
     location = Geocoder.search(ip_address).first rescue nil
 
-    @location = { country_name: location.country, region: location.state, city_name: location.city, latitude: location.latitude, longitude: location.longitude, address: location.address, postal_code: location.postal_code, area: "worldwide", map_type: "earth" } if location
+    @location = { country_name: location.country, region: location.state, city_name: location.city, latitude: location.latitude, longitude: location.longitude, address: location.address, postal_code: location.postal_code, area: "worldwide", map_type: "leaflet" } if location
 
-    unless @location
+    if @location.blank?
       location = GeoIP.new('lib/GeoLiteCity.dat').city(ip_address)
 
-      @location = { country_name: location.country_name, region: location.real_region_name, city_name: location.city_name, latitude: location.latitude, longitude: location.longitude, address: [location.city_name, location.region_name, location.country_name].join(", "), postal_code: location.postal_code, area: "worldwide", map_type: "earth" } if location
+      @location = { country_name: location.country_name, region: location.real_region_name, city_name: location.city_name, latitude: location.latitude, longitude: location.longitude, address: [location.city_name, location.region_name, location.country_name].join(", "), postal_code: location.postal_code, area: "worldwide", map_type: "leaflet" } if location
     end
+
+    @location.symbolize_keys!
+
+    return @location
   end
 
   def set_title_location(location)

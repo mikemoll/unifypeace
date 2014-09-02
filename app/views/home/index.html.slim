@@ -17,20 +17,23 @@
 div#content-for-map data-contents="#{@markers}"
 div#location-for-map data-contents="#{[@location[:latitude], @location[:longitude]]}"
 
-.event-legend
+.event-legend.col-md-5.hidden-xs
   ul.list-event-legend
     li.compass Event Legend
     li
       = link_to "Show All", "#", class: "subcategory", data: {filter: "all"}
     li
-      = link_to image_tag("markers/medi-icon.png"), "#", class: "subcategory", data: {filter: "meditation"}
+      = link_to image_tag("markers/medi-icon.png", class: "meditation"), "#", class: "subcategory", data: {filter: "meditation"}
       | Meditation
     li
-      = link_to image_tag("markers/musi-icon.png"), "#", class: "subcategory", data: {filter: "music"}
+      = link_to image_tag("markers/musi-icon.png", class: "music"), "#", class: "subcategory", data: {filter: "music"}
       | Music
     li
-      = link_to image_tag("markers/march-icon.png"), "#", class: "subcategory", data: {filter: "march"}
+      = link_to image_tag("markers/march-icon.png", class: "march"), "#", class: "subcategory", data: {filter: "march"}
       | March
     li
-      = link_to image_tag("markers/multi-icon.png"), "#", class: "subcategory", data: {filter: "multi"}
+      = link_to image_tag("markers/multi-icon.png", class: "multiple"), "#", class: "subcategory", data: {filter: "multi"}
       | Multiple
+
+.powered-logo = image_tag "powered.png"
+.powered-name Powerd By

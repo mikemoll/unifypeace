@@ -253,7 +253,6 @@
 }
 .maps {
   height: 551px;
-  /*background-color: aquamarine;*/
   position: relative;
 }
 .wrap-create-event {
@@ -298,10 +297,11 @@ label.control-label span {
   position: absolute;
   background: image-url('bg-nav.png') repeat;
   bottom: 0px;
-  border: 2px solid #2aaacb;
+  bottom: 27px;
+  border: 2px solid #2aaacb; 
   padding: 5px;
-  width: 35%;
-	height: 65px;
+  left: 27px;
+
 }
 .footer {
   height: auto;
@@ -376,4 +376,40 @@ label.control-label span {
   color: #fff;
   margin-top: 0px;
   padding: 5px;
+}
+
+.navbar-brand-wpc {
+  color: #fff !important;
+}
+
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+  .logo-title {
+    h1,
+    h2,
+    h3 {
+      text-align: center !important;
+    }
+  }
+  .banner-wpc {
+    background-size: cover !important;
+  }
+  .btn-find {
+    width: 100% !important;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-left: 0px !important;
+  }
+  .wrap-create-event {
+    width: 100%;
+  }
+  .body-form-event {
+    height: auto !important;
+  }
+
+  nav .navbar-nav .countdown-result{ 
+    margin-top: 20px;
+  }
 }

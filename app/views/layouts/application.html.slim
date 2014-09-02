@@ -124,10 +124,17 @@ html
     - if session[:location]
       #map-used data-map="#{session[:location][:map_type]}"
     = yield :javascript
+
 javascript:
+  i = 0;
   $(".show_create_event").click(function(){
     $("#show").slideToggle();
-    $("#map").attr("style", "width:70%; float: right;margin-right: 3px;min-height: 551px;position: relative;");
+    i+=1
+    if (i % 2 === 0) {
+      $("#map").attr("style", "width:100%; float: right;margin-right: 3px;min-height: 551px;position: relative;");
+    } else {
+      $("#map").attr("style", "width:78%; float: right;margin-right: 3px;min-height: 551px;position: relative;");
+    }
   })
 
   timezone = jstz.determine()

@@ -10,7 +10,8 @@ Rails.application.routes.draw do
     end
   end
   root 'home#index'
-  post 'contact_organizer' => 'home#contact_organizer', as: :contact_organizer
+  post 'create_contact_organizer' => 'home#create_contact_organizer', as: :create_contact_organizer
+  get 'contact_organizer/:id' => 'home#contact_organizer', as: :contact_organizer
   post 'find_event' => 'home#find_event', as: :find_event
   get 'set_timezone' => 'home#set_timezone', as: :set_timezone
   post "get_location_by_lat_lng" => "events#get_location_by_lat_lng", as: :get_location_by_lat_lng

@@ -25,6 +25,7 @@ div style="width: 300px;"
     div style="height: 50px;margin: 5px 0;"
       = raw truncate_html(strip_tags(content.description), length: 200){ link_to "See more", content }
       = picture(content)
+      h5 = link_to "Contact Organizer", contact_organizer_path(id: content.id), remote: true, class: "btn btn-danger", :"data-toggle" => "modal", :"data-target" => "#contact-organizer"
       h5
         = link_to "Official Event Page", content.website_link, target: "_blank"
 

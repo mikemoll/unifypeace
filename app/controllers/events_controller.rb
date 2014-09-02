@@ -26,16 +26,7 @@ class EventsController < ApplicationController
     @categories = Category.all
     @affiliated = AffiliatedOrganization.find(@event_show.affiliated_organization_id)
     if @location
-      @all = []
-
-      @all << if @location[:area].eql? "worldwide"
-        Event.where(status: "approved")
-      else
-        Event.where('(city = ? OR country = ?)', @location[:city_name], @location[:country_name]).near([@location[:latitude], @location[:longitude]], 20, units: :km) rescue nil
-      end
-
-      @all = @all.flatten
-      @markers = get_marker_and_location(@all) if @all rescue nil
+      @markers = get_marker_and_location([@event_show]) if @all rescue nil
     end
     set_title_location(@location)
   end
@@ -67,10 +58,17 @@ class EventsController < ApplicationController
     @event.estimated_attendees = params[:estimated_attendees]
     respond_to do |format|
       if @event.save
-        user = User.invite!(email: @event.organizer_email, name: @event.organizer_name) do |u|
-          u.skip_invitation = true
+        check_user = User.find_by_email("@event.organizer_email") rescue nil
+        if check_user.blank?
+          user = User.invite!(email: @event.organizer_email, name: @event.organizer_name) do |u|
+            u.skip_invitation = true
+          end
+
+          @event.update_attribute('user_id', user.id)
+        else
+          @event.update_attribute('user_id', check_user.id)
         end
-        @event.update_attribute('user_id', user.id)
+
         EventCreatedMailer.event_created_information(@event.slug, @event.organizer_email, user.raw_invitation_token).deliver
         format.html { redirect_to root_url, notice: 'Thank you for creating an event for World Peace Day, we will confirm your event within 48 hours, and contact you once it has been approved.' }
         format.json { render :index, status: :created, location: @event }

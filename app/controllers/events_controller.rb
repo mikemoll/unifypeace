@@ -45,6 +45,7 @@ class EventsController < ApplicationController
     @event.estimated_attendees = params[:estimated_attendees]
     respond_to do |format|
       if @event.save
+        User.invite!(email: @event.organizer_email, name: @event.organizer_name)
         EventCreatedMailer.event_created_information(@event.slug, @event.organizer_email).deliver
         format.html { redirect_to root_url, notice: 'Thank you for creating an event for World Peace Day, we will confirm your event within 48 hours, and contact you once it has been approved.' }
         format.json { render :index, status: :created, location: @event }
@@ -107,6 +108,12 @@ class EventsController < ApplicationController
                         postal_code: location.postal_code } if location
 
     render json: parsed_location
+  end
+
+  def my_events
+    @event = Event.new
+    @categories = Category.all
+    @events = Event.find_by_email(params[:email])
   end
 
   private

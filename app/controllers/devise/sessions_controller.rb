@@ -14,34 +14,19 @@ class Devise::SessionsController < DeviseController
 
   # POST /resource/sign_in
   def create
-    # @user = User.find_for_social_oauth_update(request.env["omniauth.auth"], current_user, 'facebook')
-    # dauidiaojh
-    # @user.update_attributes(uid_social: request.env["omniauth.auth"].uid, access_token_social: request.env["omniauth.auth"].credentials.token, link_social: request.env["omniauth.auth"].info.urls.Facebook) rescue nil
     self.resource = warden.authenticate!(auth_options)
     set_flash_message(:notice, :signed_in) if is_flashing_format?
     sign_in(resource_name, resource)
-    if user_signed_in? && current_user.check_terms_for_first_sign_in.eql?(false)
-      redirect_to terms_users_path(current_user)
-    else
-      respond_with resource, :location => after_sign_in_path_for(resource)
-    end
-    # yield resource if block_given?
-    # respond_with resource, :location => after_sign_in_path_for(resource)
+    yield resource if block_given?
+    respond_with resource, location: after_sign_in_path_for(resource)
   end
 
   # DELETE /resource/sign_out
   def destroy
-    redirect_path = after_sign_out_path_for(resource_name)
     signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
     set_flash_message :notice, :signed_out if signed_out && is_flashing_format?
-    yield resource if block_given?
-
-    # We actually need to hardcode this as Rails default responder doesn't
-    # support returning empty response on GET request
-    respond_to do |format|
-      format.all { head :no_content }
-      format.any(*navigational_formats) { redirect_to redirect_path }
-    end
+    yield if block_given?
+    respond_to_on_destroy
   end
 
   protected
@@ -50,23 +35,43 @@ class Devise::SessionsController < DeviseController
     devise_parameter_sanitizer.sanitize(:sign_in)
   end
 
-  def after_sign_in_path_for(resource)
-    previous_url = stored_location_for(resource)
-    if stored_location_for(resource) == "/"
-      redirect_to user_url(current_user.id)
-    else
-      previous_url
-    end
-  end
-
   def serialize_options(resource)
     methods = resource_class.authentication_keys.dup
     methods = methods.keys if methods.is_a?(Hash)
     methods << :password if resource.respond_to?(:password)
-    { :methods => methods, :only => [:password] }
+    { methods: methods, only: [:password] }
   end
 
   def auth_options
-    { :scope => resource_name, :recall => "#{controller_path}#new" }
+    { scope: resource_name, recall: "#{controller_path}#new" }
+  end
+
+  private
+
+  # Check if there is no signed in user before doing the sign out.
+  #
+  # If there is no signed in user, it will set the flash message and redirect
+  # to the after_sign_out path.
+  def verify_signed_out_user
+    if all_signed_out?
+      set_flash_message :notice, :already_signed_out if is_flashing_format?
+
+      respond_to_on_destroy
+    end
+  end
+
+  def all_signed_out?
+    users = Devise.mappings.keys.map { |s| warden.user(scope: s, run_callbacks: false) }
+
+    users.all?(&:blank?)
+  end
+
+  def respond_to_on_destroy
+    # We actually need to hardcode this as Rails default responder doesn't
+    # support returning empty response on GET request
+    respond_to do |format|
+      format.all { head :no_content }
+      format.any(*navigational_formats) { redirect_to after_sign_out_path_for(resource_name) }
+    end
   end
 end

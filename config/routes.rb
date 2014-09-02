@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users
+  devise_for :users, :controllers => { :invitations => 'devise/invitations' }
   resources :events do
     collection do
+      get "my_events", to: "events#my_events", as: "my_events"
       get "approved_event/:id", :to => 'events#approved_event', :as => "approved_event"
       get "/c/:category", to: "events#categories", as: :category
     end

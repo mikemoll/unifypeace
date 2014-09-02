@@ -1,0 +1,37 @@
+h3.text-center Sign in
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .row
+    .small-12
+      .row
+        .small-12.columns
+          = f.label :login, class: "left inline"
+          br/
+        .small-12.columns
+          = f.text_field :login, autofocus: true, placeholder: "your email address or username", class: "margin-0"
+      .row
+        .small-12.large-12.columns
+          = f.label :password, class: "left inline"
+          br/
+        .small-12.large-8.columns
+          = f.password_field :password, placeholder: "your password", class: "small-9"
+        .small-12.large-4.columns
+          = f.submit "Sign in", class: "btn small-12", disable_with: "Sign in..", style: "padding: 8px 20px 9px;"
+      br/
+      .columns.small-12.padding-0
+        p.margin-0 Sign in with :
+      .columns.small-12.large-12.padding-0
+        - resource_class.omniauth_providers.each do |provider|
+          - if provider.to_s.eql? "facebook"
+            br/
+            .small-12.large-6.columns.padding-0
+              = link_to omniauth_authorize_path(resource_name, provider), class: "btn-soc btn-block btn-social btn-facebook" do
+                i.fa.fa-facebook
+                | #{provider.to_s.titleize}
+          - elsif provider.to_s.eql? "twitter"
+            .small-12.large-6.columns.btn-left-10
+              = link_to omniauth_authorize_path(resource_name, provider), class: "btn-soc btn-block btn-social btn-twitter" do
+                i.fa.fa-twitter
+                | #{provider.to_s.titleize}
+            br/
+= render "devise/shared/links"
+a.close-reveal-modal.close-modal ×

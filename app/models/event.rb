@@ -5,6 +5,7 @@ class Event < ActiveRecord::Base
   with_options dependent: :destroy do |relation|
     relation.has_many :affiliated_organizations
   end
+  belongs_to :user
 
   validates_presence_of :title, :category_ids, :start_date, :description, :organizer_name, :organizer_email, :location
 

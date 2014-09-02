@@ -23,8 +23,8 @@
         .col-md-7
           - @categories.each do |category|
             .checkbox
-              = check_box_tag "category_ids[]", category.id, @event.category_ids.include?(category.id)
               label style=("font-size: 12px;") 
+                = check_box_tag "category_ids[]", category.id, @event.category_ids.include?(category.id), class: "check_show_marker", id_cat: "#{category.id}"
                 = f.label category.name
               
       .form-group style=("display: block;overflow: hidden;") 
@@ -68,8 +68,6 @@
           | Address
         .col-md-7
           = f.text_field :location, class: "form-control", placeholder: ("Street Address"), id: "geocomplete"
-          br
-          = text_field_tag :address, nil, name: "formatted_address", class: "form-control", placeholder: "City,State / Province, Country" 
           .field
             = f.hidden_field :country, name: "locality"
             = f.hidden_field :region, name: "administrative_area_level_1"
@@ -111,6 +109,21 @@ javascript:
       if ($(this).is(':checked')){
         $("#show_map").show();
         $("#enter_").prop("checked", false);
+      }
+    });
+    $(".check_show_marker").click(function(){
+      if ($(".check_show_marker:checked").length == 1) {
+        if ($(".check_show_marker:checked").val() == "1"){
+          $("#content-type").attr("src", "/assets/markers/medi-icon.png")
+        }else if ($(".check_show_marker:checked").val() == "2"){
+          $("#content-type").attr("src", "/assets/markers/musi-icon.png")
+        } else if ($(".check_show_marker:checked").val() == "3"){
+          $("#content-type").attr("src", "/assets/markers/march-icon.png")
+        }else{
+          $("#content-type").attr("src", "/assets/markers/multi-icon.png")
+        }
+      }else{
+        $("#content-type").attr("src", "/assets/markers/multi-icon.png")
       }
     });
   });

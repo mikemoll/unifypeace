@@ -46,8 +46,8 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save
         EventCreatedMailer.event_created_information(@event.slug, @event.organizer_email).deliver
-        format.html { redirect_to @event, notice: 'Thank you for creating an event for World Peace Day, we will confirm your event within 48 hours, and contact you once it has been approved.' }
-        format.json { render :show, status: :created, location: @event }
+        format.html { redirect_to root_url, notice: 'Thank you for creating an event for World Peace Day, we will confirm your event within 48 hours, and contact you once it has been approved.' }
+        format.json { render :index, status: :created, location: @event }
       else
         format.html { render :new }
         format.json { render json: @event.errors, status: :unprocessable_entity }

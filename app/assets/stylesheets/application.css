@@ -16,6 +16,10 @@
 
  */
 
+.alert {
+  margin-bottom: 0 !important;
+}
+
 #beta-container {
   height: 551px;
 }

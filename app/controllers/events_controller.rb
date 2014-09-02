@@ -118,9 +118,12 @@ class EventsController < ApplicationController
 
   def approved_event
     event = Event.where(id: params[:id]).first
-    event.update(status: "approved")
-    EventApprovedMailer.event_approved_information(event.title, event.slug, event.organizer_email).deliver
-
+    if params[:unapproved].blank?
+      event.update(status: "approved")
+      EventApprovedMailer.event_approved_information(event.title, event.slug, event.organizer_email).deliver
+    else
+      event.update(status: "pending")
+    end
     redirect_to :back
   end
 

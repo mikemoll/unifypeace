@@ -33,6 +33,8 @@ ActiveAdmin.register Event do
     actions defaults: true do |event|
       if event.status.eql?("pending")
         link_to("Approve", approved_event_events_path(event.id), class: "member_link")
+      else
+        link_to("Approve", approved_event_events_path(event.id, unapproved: "true"), class: "member_link")
       end
     end
   end

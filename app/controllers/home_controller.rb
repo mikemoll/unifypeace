@@ -84,8 +84,6 @@ class HomeController < ApplicationController
     @categories = Category.all
 
     set_title_location(@location)
-
-    render layout: "embed"
   end
 
   def page_not_found; end

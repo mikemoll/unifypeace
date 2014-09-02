@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_event_count
-    @event_count = Event.where(status: "approved").count
+    @event_count = Event.where(["status = ? AND latitude IS NOT NULL AND longitude IS NOT NULL", "approved"]).count
   end
 
   def set_location

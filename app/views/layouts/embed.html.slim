@@ -1,0 +1,74 @@
+doctype html
+html
+  head
+    title
+      = content_for?(:title) ? yield(:title) : "Unify"
+    = yield :metatags
+    meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    = favicon_link_tag 'favicon.ico'
+    - if request.url.include? "localhost"
+      / script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places&sensor=false" type="text/javascript"
+      script src="//maps.googleapis.com/maps/api/js?sensor=false&libraries=places" type="text/javascript"
+    - else
+      script src="https://maps.googleapis.com/maps/api/js?v=3&key=#{apikey(request.url)}&libraries=places&sensor=false" type="text/javascript"
+    script type="text/javascript" src="https://www.google.com/jsapi"
+    script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js" data-turbolinks-track="true"
+    link href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" rel="stylesheet" data-turbolinks-track="true"
+    = stylesheet_link_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "navigation", "jquery.plugin", "jquery.countdown", "data-turbolinks-track" => true
+    = javascript_include_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
+    = csrf_meta_tags
+    body data-location-scope="#{(@location ? @location[:area] : "")}" data-action="#{action_name}" data-content-type="#{controller_name.singularize.titleize}" data-test="#{apikey(request.url)}" data-user-id="#{(@user ? @user.id : "")}" data-parent-id="#{(@parent_project ? @parent_project.id : "")}"
+  body
+    .banner-wpc
+      .container
+        .row
+          .col-md-offset-2
+            .col-md-3
+              .logo-title
+                h1.text-right World
+                h2.text-right September 21, 2014
+                h3.text-right INT'L DAY OF PEACE
+            .col-md-3
+              h1.text-center
+                = link_to image_tag("log (11).png"), root_path
+            .logo-title
+              .col-md-4
+                h1.text-left Peace
+                h2.text-left Global Events Map
+                h3.text-left Peace Day Coalition
+    nav.navbar.navbar-default.navbar-wpc role="navigation"
+      .container style="width: 800px !important;"
+        .countdown
+        ul.nav.navbar-nav.countdown-result
+            li
+              span.seperator-result
+                = @event_count
+              span.event-count Events
+            li
+              span.seperator-result
+                | 12PM
+                b PST
+              span.pst-count World Peace Moment
+    .maps
+      = yield
+    .footer
+      ul.list-footer-logo
+        li = image_tag "log (6).png"
+        li = image_tag "log (3).png"
+        li = image_tag "log (3).jpg"
+        li = image_tag "log (5).jpg"
+        li = image_tag "log (7).png"
+        li = image_tag "log (4).jpg"
+        li = image_tag "log (6).jpg"
+        li = image_tag "log (8).png"
+        li = image_tag "log (13).png"
+        li = image_tag "log (10).jpg"
+    - if session[:location]
+      #map-used data-map="#{session[:location][:map_type]}"
+    = yield :javascript
+javascript:
+  timezone = jstz.determine()
+  date = new Date("09/21/2014 19:00:00")
+  $('.countdown').countdown({until: date, format: 'dHM'});

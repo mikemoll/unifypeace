@@ -20,17 +20,17 @@ group :development do
   gem "thin"
 end
 
-gem "geocoder" 
+gem "geocoder"
 gem "carrierwave"
 gem "slim-rails"
 gem "devise"
 gem "binding_of_caller"
 gem "rails_12factor"
-gem 'friendly_id', '~> 5.0.0'
-gem 'activeadmin', github: 'activeadmin'
+gem "friendly_id", "~> 5.0.0"
+gem "activeadmin", github: "gregbell/active_admin"
 gem "geoip"
 gem "fog"
 gem "truncate_html"
-gem 'html5_validators'
+gem "html5_validators"
 gem "less-rails"
 gem "therubyracer"

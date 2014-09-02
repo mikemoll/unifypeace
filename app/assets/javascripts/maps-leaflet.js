@@ -6,13 +6,13 @@ var leafletMapsView = function(dataContent, latLong, mapLocation){
   if(dataContent.length > 0){
     for (var i = 0; i < dataContent.length; i++) {
       if(dataContent[i][2] === "multi"){
-        redIcon = L.icon({ iconUrl: '/assets/markers/multi-icon.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
+        redIcon = L.icon({ iconUrl: '/assets/markers/multi-icon.png', iconAnchor: [13, 33], popupAnchor: [-3, -20] });
       }else if(dataContent[i][2] === "meditation/prayer"){
-        redIcon = L.icon({ iconUrl: '/assets/markers/medi-icon.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
+        redIcon = L.icon({ iconUrl: '/assets/markers/medi-icon.png', iconAnchor: [13, 33], popupAnchor: [-3, -20] });
       }else if(dataContent[i][2] === "music/celebration"){
-        redIcon = L.icon({ iconUrl: '/assets/markers/musi-icon.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
+        redIcon = L.icon({ iconUrl: '/assets/markers/musi-icon.png', iconAnchor: [13, 33], popupAnchor: [-3, -20] });
       }else if(dataContent[i][2] === "march/action"){
-        redIcon = L.icon({ iconUrl: '/assets/markers/march-icon.png', iconAnchor: [13, 33], popupAnchor: [0, -30] });
+        redIcon = L.icon({ iconUrl: '/assets/markers/march-icon.png', iconAnchor: [13, 33], popupAnchor: [-3, -20] });
       }
 
       var marker = L.marker([parseFloat(dataContent[i][0]), parseFloat(dataContent[i][1])], {icon: redIcon}).bindPopup(dataContent[i][3]).openPopup();

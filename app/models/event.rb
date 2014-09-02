@@ -26,4 +26,7 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def link
+    self.website_link.present? ? self.website_link : "#"
+  end
 end

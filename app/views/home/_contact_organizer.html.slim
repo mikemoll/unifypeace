@@ -1,10 +1,19 @@
-h3 Contact Organizer
-
-= form_tag contact_organizer_path, method: :post, class: "form" do
-	= hidden_field_tag :event_id
-	p Subject
-	= text_field_tag "subject", "", class: "field"
-	p Message
-	= text_field_tag "message", "", class: "field"
-	br
-	= submit_tag "Send", class: "btn btn-primary"
+= form_tag create_contact_organizer_path, method: :post, class: "form" do
+  .modal-dialog.modal-sm
+    .modal-content.wrap-create-event
+      .header-form-event
+        h1.text-center Contact Organizer
+      .body-form-event style="height:170px;"
+        .form-group
+          .col-md-10
+            = hidden_field_tag :event_id, @event_id
+            label.left Subject
+          .col-md-10
+            = text_field_tag "subject", "", class: "form-control", style: "margin-bottom: 10px !important;"
+        .form-group
+          .col-md-10
+            label.left Message
+          .col-md-10
+      	    = text_area_tag "message", "", class: "form-control"
+      .footer-form-event
+      	= submit_tag "Send", class: "btn btn-find"

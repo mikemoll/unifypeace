@@ -36,12 +36,15 @@ ActiveAdmin.register Event do
       end
     end
   end
+
   batch_action :approve, method: :get do |event|
     events_approved = Event.where(id: params[:collection_selection]).update_all(status: "approved")
     events = Event.where(id: params[:collection_selection])
+
     events.each do |event|
-      EventApprovedMailer.event_approved_infirmation(event.title, event.slug, event.organizer_email).deliver
+      EventApprovedMailer.event_approved_information(event.title, event.slug, event.organizer_email).deliver
     end
+
     flash[:notice] = "Event has been approved"
     redirect_to :back
   end

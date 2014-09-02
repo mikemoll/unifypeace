@@ -18,7 +18,7 @@ html
     = javascript_include_tag "application", "navigation", "plugins/popover", "jquery.plugin", "jquery.countdown", "data-turbolinks-track" => true
     = javascript_include_tag "//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"
     = csrf_meta_tags
-    body data-location-scope="#{(@location ? @location['area'] : "")}" data-action="#{action_name}" data-content-type="#{controller_name.singularize.titleize}" data-test="#{apikey(request.url)}" data-user-id="#{(@user ? @user.id : "")}" data-parent-id="#{(@parent_project ? @parent_project.id : "")}"
+    body data-location-scope="#{(@location ? @location[:area] : "")}" data-action="#{action_name}" data-content-type="#{controller_name.singularize.titleize}" data-test="#{apikey(request.url)}" data-user-id="#{(@user ? @user.id : "")}" data-parent-id="#{(@parent_project ? @parent_project.id : "")}"
   body
     .banner-wpc
       .container

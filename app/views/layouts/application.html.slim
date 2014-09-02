@@ -88,12 +88,14 @@ html
             li
               span.seperator-result
                 = @event_count
-              span.event-count Events
+              span.event-count style="padding-top: 18px;"
+                = "Events"
             li
               span.seperator-result
                 | 12PM
                 b PST
-              span.pst-count World Peace Moment
+              span.pst-count style="padding-top: 18px;"
+                = "World Peace Moment"
           ul
             - if user_signed_in?
               li

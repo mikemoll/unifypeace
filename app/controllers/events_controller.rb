@@ -26,16 +26,7 @@ class EventsController < ApplicationController
     @categories = Category.all
     @affiliated = AffiliatedOrganization.find(@event_show.affiliated_organization_id)
     if @location
-      @all = []
-
-      @all << if @location[:area].eql? "worldwide"
-        Event.where(status: "approved")
-      else
-        Event.where('(city = ? OR country = ?)', @location[:city_name], @location[:country_name]).near([@location[:latitude], @location[:longitude]], 20, units: :km) rescue nil
-      end
-
-      @all = @all.flatten
-      @markers = get_marker_and_location(@all) if @all rescue nil
+      @markers = get_marker_and_location([@event_show]) if @all rescue nil
     end
     set_title_location(@location)
   end

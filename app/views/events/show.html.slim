@@ -2,7 +2,7 @@
 
 #content-for-map data-contents="#{@markers}"
 #event-type data-event-type="#{@event.event_type}"
-#location-for-map data-contents="#{[@location['latitude'], @location['longitude']]}"
+#location-for-map data-contents="#{[@location[:latitude], @location[:longitude]]}"
 #content-location-for-map data-content-information="#{[@event.lat, @event.long]}" data-content-type="#{@event.class.to_s.titleize}"
 
 - content_for :javascript do

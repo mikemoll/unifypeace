@@ -5,8 +5,8 @@ class Devise::SessionsController < DeviseController
 
   # GET /resource/sign_in
   def new
-    @event = Event.new
-    @categories = Category.all
+    @event = Event.new rescue nil
+    @categories = Category.all rescue nil
     self.resource = resource_class.new(sign_in_params)
     clean_up_passwords(resource)
     respond_with(resource, serialize_options(resource))

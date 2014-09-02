@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [ :edit, :update, :destroy]
-  before_action :set_location, only: [:index, :show, :categories, :edit]
+  before_action :set_location, only: [:index, :show, :categories, :edit, :my_events]
 
   # GET /events
   # GET /events.json
@@ -125,12 +125,26 @@ class EventsController < ApplicationController
       postal_code: location.postal_code } if location
 
       render json: parsed_location
-    end
+  end
 
   def my_events
+    if @location
+      @all = []
+
+      @all << if @location[:area].eql? "worldwide"
+        Event.where(organizer_email: params[:email])
+      else
+        Event.where(organizer_email: params[:email])
+      end
+
+      @all = @all.flatten
+      @markers = get_marker_and_location(@all) if @all rescue nil
+    end
+
     @event = Event.new
     @categories = Category.all
-    @events = Event.where(organizer_email: params[:email])
+
+    set_title_location(@location)    
   end
 
   private

@@ -124,10 +124,6 @@ html
       #map-used data-map="#{session[:location][:map_type]}"
     = yield :javascript
 javascript:
-  $(".show_create_event").click(function(){
-    $("#show").slideToggle();
-    $("#map").attr("style", "width:70%; float: right;margin-right: 3px;min-height: 551px;position: relative;");
-  })
 
   timezone = jstz.determine()
   date = new Date("09/21/2014")

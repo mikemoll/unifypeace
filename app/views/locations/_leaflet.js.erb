@@ -3,7 +3,7 @@ if(markers){
   markers.clearLayers();
 }
 
-latLong = <%= raw [@location["latitude"], @location["longitude"]] %>;
+latLong = <%= raw [@location[:latitude], @location[:longitude]] %>;
 
 dataLocation = <%= raw @markers.nil? ? [] : @markers %>;
 if(dataLocation.length > 0){
@@ -40,6 +40,6 @@ if(dataLocation.length > 0){
   map.fitBounds(latlngbounds);
 }
 
-<%- if @location["area"] == "worldwide" %>
+<%- if @location[:area] == "worldwide" %>
   map.setView(new L.LatLng(51.3, 0.7),2);
 <%- end %>

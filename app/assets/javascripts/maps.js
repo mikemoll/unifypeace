@@ -188,7 +188,7 @@ var loadGoogleEarth = function(){
             leafletMapsView(dataContent, latLong, mapLocation);
             $(mapNavigation[1]).removeClass("active");
             $(mapNavigation[0]).addClass("active");
-            mapNotice("google earth not installed, please install google earth plugin <a href=\"http://www.google.com/earth/explore/products/plugin.html\" target=\"_blank\">here</a>. <br/> If you have installed the plugin and it still has not run in your browser, check your browser add-ons are google earth plug-in available there?");
+            // mapNotice("google earth not installed, please install google earth plugin <a href=\"http://www.google.com/earth/explore/products/plugin.html\" target=\"_blank\">here</a>. <br/> If you have installed the plugin and it still has not run in your browser, check your browser add-ons are google earth plug-in available there?");
             // $.get("/switch/2D/map");
           }
         }else{

@@ -6,7 +6,7 @@ class HomeController < ApplicationController
     if @location
       @all = []
 
-      @all << if @location["area"].eql? "worldwide"
+      @all << if @location[:area].eql? "worldwide"
         Event.where(status: "approved")
       else
         Event.where('(city = ? OR country = ?)', @location[:city_name], @location[:country_name]).near([@location[:latitude], @location[:longitude]], 20, units: :km) rescue nil
@@ -15,8 +15,10 @@ class HomeController < ApplicationController
       @all = @all.flatten
       @markers = get_marker_and_location(@all) if @all rescue nil
     end
+
     @event = Event.new
     @categories = Category.all
+
     set_title_location(@location)
   end
 

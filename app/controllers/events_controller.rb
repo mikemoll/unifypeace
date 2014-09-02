@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [ :edit, :update, :destroy]
-  before_action :set_location, only: [:index, :show, :categories, :edit]
+  before_action :set_location, only: [:index, :show, :categories, :edit, :new]
 
   # GET /events
   # GET /events.json
@@ -25,14 +25,26 @@ class EventsController < ApplicationController
     @categories_event = @event_show.categories
     @categories = Category.all
     @affiliated = AffiliatedOrganization.find(@event_show.affiliated_organization_id)
+    if @location
+      @all = []
 
-    @markers = get_marker_and_location([@event_show])
+      @all << if @location[:area].eql? "worldwide"
+        Event.where(status: "approved")
+      else
+        Event.where('(city = ? OR country = ?)', @location[:city_name], @location[:country_name]).near([@location[:latitude], @location[:longitude]], 20, units: :km) rescue nil
+      end
+
+      @all = @all.flatten
+      @markers = get_marker_and_location(@all) if @all rescue nil
+    end
+    set_title_location(@location)
   end
 
   # GET /events/new
   def new
     @event = Event.new
     @categories = Category.all
+    set_title_location(@location)
   end
 
   # GET /events/1/edit

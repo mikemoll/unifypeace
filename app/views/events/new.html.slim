@@ -1,5 +1,67 @@
-h1 New event
 
-= render 'form'
+#beta-container.fixed-on-top
+  #map style="width: 68%; !important; float: right;"
+div#content-for-map data-contents="#{@markers}"
+div#location-for-map data-contents="#{[@location[:latitude], @location[:longitude]]}"
+- content_for :javascript do
+  = javascript_include_tag :maps
+#show style="display:none"
+	= render 'form'
 
 = link_to 'Back', events_path
+javascript:
+  $(document).ready(function(){
+  	$("#show").show();
+  	$('#enter_').click(function(){
+  		if ($(this).is(':checked')){
+        $("#show_map").hide();
+        $("#drag_").prop("checked", false);
+        $(".text_show").show();
+      	$(".show_maker_map").hide();
+        setTimeout(function(){
+        	$(".hidden_maker_map").show();
+        	$(".text_show").hide();
+        }, 3000);
+      }
+    });
+  	$('#drag_').click(function(){
+      if ($(this).is(':checked')){
+        $("#show_map").show();
+        $("#enter_").prop("checked", false);
+        $(".hidden_maker_map").hide();
+        $(".text_show").show();
+        setTimeout(function(){
+        	$(".show_maker_map").show();
+        	$(".text_show").hide();
+        }, 3000);
+      }
+    });
+    if ($(".check_show_marker:checked").length == 1) {
+      if ($(".check_show_marker:checked").val() == "1"){
+        $("#content-type").attr("src", "/assets/markers/medi-icon.png")
+      }else if ($(".check_show_marker:checked").val() == "2"){
+        $("#content-type").attr("src", "/assets/markers/musi-icon.png")
+      } else if ($(".check_show_marker:checked").val() == "3"){
+        $("#content-type").attr("src", "/assets/markers/march-icon.png")
+      }else{
+        $("#content-type").attr("src", "/assets/markers/multi-icon.png")
+      }
+    }else{
+      $("#content-type").attr("src", "/assets/markers/multi-icon.png")
+    }
+    $(".check_show_marker").click(function(){
+      if ($(".check_show_marker:checked").length == 1) {
+        if ($(".check_show_marker:checked").val() == "1"){
+          $("#content-type").attr("src", "/assets/markers/medi-icon.png")
+        }else if ($(".check_show_marker:checked").val() == "2"){
+          $("#content-type").attr("src", "/assets/markers/musi-icon.png")
+        } else if ($(".check_show_marker:checked").val() == "3"){
+          $("#content-type").attr("src", "/assets/markers/march-icon.png")
+        }else{
+          $("#content-type").attr("src", "/assets/markers/multi-icon.png")
+        }
+      }else{
+        $("#content-type").attr("src", "/assets/markers/multi-icon.png")
+      }
+    });
+  });

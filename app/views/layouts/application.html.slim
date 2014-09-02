@@ -39,7 +39,7 @@ html
                 h2.text-left Global Events Map
                 h3.text-left Peace Day Coalition
     nav.navbar.navbar-default.navbar-wpc role="navigation"
-      .container
+      .container-fluid
         /! Brand and toggle get grouped for better mobile display
         .navbar-header
           button.navbar-toggle.collapsed data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
@@ -49,7 +49,7 @@ html
             span.icon-bar
           .navbar-brand.navbar-brand-wpc.hidden-lg.hidden-md Menu
         /! Collect the nav links, forms, and other content for toggling
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse.navbar-collasps-wpc
           .navbar-form.navbar-left.form-wpc role="search"
             button.btn.btn-default.btn-find.find-event data-toggle="modal" data-target=".bs-example-modal-sm" Find an Event near me
             - if request.filtered_parameters["action"].eql?("index")
@@ -97,15 +97,14 @@ html
                 b PST
               span.pst-count style="padding-top: 18px;"
                 = "World Peace Moment"
-          ul
-            - if user_signed_in?
-              li
-                = link_to "logout", destroy_user_session_path(), method: "delete"
-              li
-                = link_to "my events", my_events_events_path(email: current_user.email)
-            - else
-              li
-                = link_to "Login", new_user_session_path
+
+          - if user_signed_in?
+            a.btn.btn-default.btn-find href="#{destroy_user_session_path}" style="margin-top: 10px; margin-right: 10px;" data-method="delete" Logout
+            a href="#{my_events_events_path(email: current_user.email)}"
+              button.btn.btn-default.btn-find type="submit" style="margin-top: 10px;" data-method="" My Events
+          - else
+            a href="#{new_user_session_path}"
+              button.btn.btn-default.btn-find type="submit" style="margin-top: 10px;" Login
 
           .clear
 
@@ -139,9 +138,9 @@ javascript:
   var resizeMap = function(){
     console.log(i+=1);
     if (i % 2 === 0) {
-      $("#map").attr("style", "width:100%; float: right;margin-right: 3px;min-height: 551px;position: relative;");
+      $("#map").attr("style", "width:100%; float: right;margin-right: 0;min-height: 551px;position: relative;");
     } else {
-      $("#map").attr("style", "width:68%; float: right;margin-right: 3px;min-height: 551px;position: relative;");
+      $("#map").attr("style", "width: 78.4%; float: right;margin-right: 0;min-height: 551px;position: relative;");
     }
   };
 
@@ -149,7 +148,7 @@ javascript:
     $("#show").hide();
     resizeMap();
   })
-  
+
   $(".show_create_event").click(function(){
     $("#show").slideToggle();
     resizeMap();

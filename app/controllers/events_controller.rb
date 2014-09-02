@@ -129,7 +129,7 @@ class EventsController < ApplicationController
       category = "multi"
     end
 
-    events = Event.all
+    events = Event.where(status: "approved")
     @all = []
     events.each do |event|
       if event.categories.count == 1

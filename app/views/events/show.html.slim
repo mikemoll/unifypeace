@@ -26,17 +26,18 @@ p id="notice"
         = image_tag "user.png", height: "30px"
 
     br
-    a.btn.btn-default.btn-fb href="#{@event_show.website_link}" target="_blank"
+    a.btn.btn-default.btn-fb href="http://#{@event_show.website_link}" target="_blank"
       | Official Event Page
       span = image_tag "fb.png", height: "30px", style: "padding-left: 4px;"
+    br
+    - if user_signed_in?
+      - if current_user.email.eql?(@event_show.organizer_email)
+        = link_to 'Edit', edit_event_path(@event_show), class: "btn btn-default", style: "margin-top:10px;"
   .pull-right style="margin-top: 10px;"
-    p = image_tag("logo/#{@affiliated.picture_organization}", style: "width: 200px;")
-  br
-  br
-  br
+    p = image_tag("#{@affiliated.picture_organization}", style: "width: 200px;")
 
-- if user_signed_in?
-  - if current_user.email.eql?(@event_show.organizer_email)
-    = link_to 'Edit', edit_event_path(@event_show)
+  br
+  br
+  br
 
 .modal.fade#contact-organizer tabindex="-1" role="dialog" aria-labelledby="ContactOrganizer" aria-hidden="true"

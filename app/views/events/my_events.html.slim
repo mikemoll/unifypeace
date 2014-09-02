@@ -1,12 +1,40 @@
-- content_for :javascript do
-  = javascript_include_tag :maps
+h1 My events
 
-#beta-container.fixed-on-top
-  #map style=""
-div#content-for-map data-contents="#{@markers}"
-div#location-for-map data-contents="#{[@location[:latitude], @location[:longitude]]}"
+table.table
+  thead
+    tr
+      th Title
+      th Category
+      th Website link
+      th Date and time
+      th Description
+      th Location
+      th Organizer name
+      th Organizer email
+      th Affiliated organization
+      th Latitude
+      th Longitude
+      th colspan="3"
 
+  tbody
+    - @events.each do |event|
+      tr
+        td = event.title
+        td = event.category_id
+        td = event.website_link
+        td = event.start_date
+        td = event.description
+        td = event.location
+        td = event.organizer_name
+        td = event.organizer_email
+        td = event.affiliated_organization_id
+        td = event.lat
+        td = event.long
+        td = link_to 'Show', event
+        td = link_to 'Edit', edit_event_path(event)
+        td = link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
 
-
-
- = link_to 'New Event', new_event_path()
+br
+= paginate @events 
+= link_to 'New Event', new_event_path()
+.clearfix

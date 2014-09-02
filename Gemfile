@@ -39,3 +39,4 @@ gem "html5_validators"
 gem "less-rails"
 gem "therubyracer"
 gem "devise_invitable"
+gem 'kaminari'

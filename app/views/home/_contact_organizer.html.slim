@@ -1,9 +1,9 @@
-= form_tag create_contact_organizer_path, method: :post, class: "form" do
-  .modal-dialog.modal-sm
-    .modal-content.wrap-create-event style="height: 277px;"
-      .header-form-event
-        h1.text-center Contact Organizer
-      .body-form-event style="height:170px;"
+.modal-dialog.modal-sm
+  .modal-content.wrap-create-event style="height: auto !important;"
+    .header-form-event
+      h1.text-center Contact Organizer
+    .body-form-event style="height:180px;"
+      = form_tag create_contact_organizer_path, method: :post, class: "form", id: "send-message" do
         .form-group
           .col-md-10
             = hidden_field_tag :event_id, @event_id
@@ -15,5 +15,22 @@
             label.left Message
           .col-md-10
       	    = text_area_tag "message", "", class: "form-control"
-      .footer-form-event
-      	= submit_tag "Send", class: "btn btn-find"
+    .footer-form-event
+      button.btn.btn-find#btn-contact style="margin:7px 15px;" Send
+      button.btn.btn-find style="margin-left: 10px;" data-dismiss="modal" Cancel
+
+
+javascript:
+  $('#btn-contact').click(function(){
+    var subject = $('#subject').val();
+    var message = $('#message').val();
+
+    if (subject == "" || message == "")
+    {
+      alert('please add subject and message!');
+    }
+    else
+    {
+      $('#send-message').submit();
+    }
+  });

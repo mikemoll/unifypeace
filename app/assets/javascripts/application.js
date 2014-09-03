@@ -16,6 +16,7 @@
 //= require jquery-ui
 //= require maps-leaflet
 //= require plugins/leaflet.markercluster-src
+//= require plugins/leaflet-providers
 //= require jstz-1.0.4.min
 //= require timezone
 //= require jquery.geocomplete

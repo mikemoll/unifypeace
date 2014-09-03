@@ -15,7 +15,7 @@
  *= require images
 
  */
- 
+
 
 
 #map {
@@ -117,6 +117,10 @@
 
 .leaflet-popup-tip {
   display: none !important;
+}
+
+.leaflet-marker-icon, .leaflet-marker-shadow {
+  width: 30px;
 }
 
 /*.leaflet-container a {

@@ -12,7 +12,7 @@ ActiveAdmin.register Event do
   #   permitted << :other if resource.something?
   #   permitted
   # end
-
+  config.batch_actions = false
   controller do
     def find_resource
       scoped_collection.friendly.find(params[:id])
@@ -43,23 +43,23 @@ ActiveAdmin.register Event do
     end
   end
 
-  batch_action :approve, method: :get do |event|
-    events_approved = Event.where(id: params[:collection_selection]).update_all(status: "approved")
-    events = Event.where(id: params[:collection_selection])
+  # batch_action :approve, method: :get do |event|
+  #   events_approved = Event.where(id: params[:collection_selection]).update_all(status: "approved")
+  #   events = Event.where(id: params[:collection_selection])
 
-    events.each do |event|
-      EventApprovedMailer.event_approved_information(event.title, event.slug, event.organizer_email).deliver
-    end
+  #   events.each do |event|
+  #     EventApprovedMailer.event_approved_information(event.title, event.slug, event.organizer_email).deliver
+  #   end
 
-    flash[:notice] = "Event has been approved"
-    redirect_to :back
-  end
+  #   flash[:notice] = "Event has been approved"
+  #   redirect_to :back
+  # end
 
-  batch_action :unapproved, method: :get do |event|
-    events_approved = Event.where(id: params[:collection_selection]).update_all(status: "pending")
-    events = Event.where(id: params[:collection_selection])
+  # batch_action :unapproved, method: :get do |event|
+  #   events_approved = Event.where(id: params[:collection_selection]).update_all(status: "pending")
+  #   events = Event.where(id: params[:collection_selection])
 
-    flash[:error] = "Event has been unapproved"
-    redirect_to :back
-  end
+  #   flash[:error] = "Event has been unapproved"
+  #   redirect_to :back
+  # end
 end

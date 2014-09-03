@@ -264,6 +264,7 @@ var putMarker = function(position, options){
       putMarker(newAddedMarker.getLatLng(), options);
     });
   }
+
   var jqxhr = {abort: function () {}};
   jqxhr.abort();
   jqxhr = $.ajax({
@@ -276,19 +277,20 @@ var putMarker = function(position, options){
     },
     success: function(data){
       if(data){
+        console.log(data)
         $("#event_latitude").val(data.latitude);
         $("#event_longitude").val(data.longitude);
         $("#geocomplete").val(data.address);
-        $("#address").val(data.formatted_address);
-        $("#event_country").val(data.region);
+        $("#event_country").val(data.country_name);
+        $("#event_city").val(data.region);
         $("#event_postal_code").val(data.postal_code);
       }else{
         map.removeLayer(newAddedMarker);
         $("#event_latitude").val("");
         $("#event_longitude").val("");
         $("#geocomplete").val("");
-        $("#address").val("");
         $("#event_country").val("");
+        $("#event_city").val("");
         $("#event_postal_code").val("");
         var alertNotice = $('.notif-modal-change-new').html("<p>Failed to add marker. Please try again.</p>");
         alertNotice.show("drop", { direction: "up"}, 200).delay(1000).hide("drop", { direction: "up"}, 300);

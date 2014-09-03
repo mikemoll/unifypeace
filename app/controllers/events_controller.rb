@@ -63,7 +63,6 @@ class EventsController < ApplicationController
           user = User.invite!(email: @event.organizer_email, name: @event.organizer_name) do |u|
             u.skip_invitation = true
           end
-
           @event.update_attribute('user_id', user.id)
         else
           @event.update_attribute('user_id', check_user.id)

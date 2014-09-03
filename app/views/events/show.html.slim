@@ -13,8 +13,14 @@
 - content_for :javascript do
   = javascript_include_tag :maps
 
-p id="notice"
-  = notice
+- if notice
+  p class="alert alert-success alert-dismissible" role="alert"
+    button type="button" class="close" data-dismiss="alert"
+      span aria-hidden="true"
+        | &times;
+      span class="sr-only"
+        | Close
+    = notice
 
 .col-md-5.body-see-event
   h1 = @event_show.title
@@ -35,9 +41,8 @@ p id="notice"
       | Official Event Page
       span = image_tag "fb.png", height: "30px", style: "padding-left: 4px;"
     br
-    - if user_signed_in?
-      - if current_user.email.eql?(@event_show.organizer_email) && @event.status.eql?("approved")
-        = link_to 'Edit', edit_event_path(@event_show), class: "btn btn-default", style: "margin-top:10px;"
+    - if admin_user_signed_in?
+      = link_to 'Edit', edit_event_path(@event_show), class: "btn btn-default", style: "margin-top:10px;"
   .pull-right style="margin-top: 10px;"
     p = image_tag("#{@affiliated.picture_organization}", style: "width: 200px;")
 

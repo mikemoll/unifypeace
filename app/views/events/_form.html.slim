@@ -70,7 +70,7 @@
         .col-md-5.text-right style="font-size:12px;line-height:35px;"
           | Address
         .col-md-7
-          = f.text_field :location, class: "form-control", placeholder: ("Street Address"), id: "geocomplete"
+          = f.text_field :location, class: "form-control geocomplete", placeholder: ("Street Address")
           .field
             = f.hidden_field :country, name: "country"
             = f.hidden_field :region, name: "administrative_area_level_1"

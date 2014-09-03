@@ -170,7 +170,6 @@ html
         li = image_tag "log (10).jpg"
     .modal.fade.bs-example-modal-sm tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
     .modal.fade.bs-example-modal-sm#contact-organizer tabindex="-1" role="dialog" aria-labelledby="contactOrganizer"
-      = render "home/find_event"
 
     - if session[:location]
       #map-used data-map="#{session[:location][:map_type]}"

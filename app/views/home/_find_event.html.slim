@@ -1,29 +1,5 @@
 = form_tag(find_event_path, method: :post, id: "find_event", remote: true) do
-  = text_field_tag "location[address]", (params[:location][:address] if params[:location]), class: "form-control find-location", id: "city", autofocus: "true", placeholder: "Find an Event"
+  = text_field_tag "location[address]", (params[:location][:address] if params[:location]), class: "form-control geocomplete", autofocus: "true", placeholder: "Find an Event"
   = hidden_field_tag "location[longitude]", (@location[:longitude] if @location)
   = hidden_field_tag "location[latitude]", (@location[:latitude] if @location)
   = submit_tag "Find", class: "btn btn-default btn-find btn-find-md", style:"margin-left: 5px;"
-
-javascript:
-  $(".new-location").focus()
-  $(function(){
-    $("#city").geocomplete({
-      details: "form",
-      types: ["geocode", "establishment"]
-    }).bind("geocode:result", function(event, result){
-      console.log(r = result);
-      var lat = result["geometry"]["location"]["k"]
-      var lng = result["geometry"]["location"]["B"]
-      $('#location_longitude').val(lng);
-      $('#location_latitude').val(lat);
-      map.setView(new L.LatLng(lat, lng), 10);
-      if(newAddedMarker){
-        newAddedMarker.setLatLng([lat, lng]);
-      }else{
-        newAddedMarker = L.marker([lat, lng], {}).addTo(map);
-      }
-    });
-    $("#city").click(function(){
-      $("#city").trigger("geocode");
-    });
-  });

@@ -378,31 +378,27 @@ label.control-label span {
 }
 
 .body-see-event{
-  background: #105567; /* Old browsers */
-  background: -moz-linear-gradient(top,  #105567 0%, #105567 0%, #00b7ea 5%, #d0f5ff 47%, #129abe 96%, #105567 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#105567), color-stop(0%,#105567), color-stop(5%,#00b7ea), color-stop(47%,#d0f5ff), color-stop(96%,#129abe), color-stop(100%,#105567)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top,  #105567 0%,#105567 0%,#00b7ea 5%,#d0f5ff 47%,#129abe 96%,#105567 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top,  #105567 0%,#105567 0%,#00b7ea 5%,#d0f5ff 47%,#129abe 96%,#105567 100%); /* Opera 11.10+ */
-  background: -ms-linear-gradient(top,  #105567 0%,#105567 0%,#00b7ea 5%,#d0f5ff 47%,#129abe 96%,#105567 100%); /* IE10+ */
-  background: linear-gradient(to bottom,  #105567 0%,#105567 0%,#00b7ea 5%,#d0f5ff 47%,#129abe 96%,#105567 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#105567', endColorstr='#105567',GradientType=0 ); /* IE6-9 */
+  background: image-url('bg-nav.png') repeat;
   position: absolute;
   // bottom: -61px;
   // left: 103px;
   height: 551px;
-  width: 40%;
+  width: 33%;
   padding-bottom: 25px;
 
   h1 {
    font-family: 'bebas-neue';
    color: #fff;
    letter-spacing: 5px;
+   font-size: 25px;
  }
 
- h2 {
+ h3 {
   font-family: 'droid-reguler';
   color: #fff;
   line-height: 18px;
+  font-size: 15px;
+  margin: 10px 0 10px 0;
   }
 }
 
@@ -415,7 +411,9 @@ label.control-label span {
 .see-event {
   background: #fff;
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
+  width: 100%;
+  min-height: 150px;
 }
 
 .body-see-event-tooltip{

@@ -25,7 +25,88 @@ html
       .col-md-6.col-md-offset-3.col-xs-12.col-sm-8.col-sm-offset-2
       = image_tag "Map-Banner.jpeg"  
 
-    nav.navbar.navbar-default.navbar-wpc.hidden-md role="navigation"
+    .warp-header-peace
+      .row
+        .col-sm-5.col-md-6.pad-right-7five
+          .row
+            .col-sm-7.pad-right-7five
+              .input-group
+                input type="text" class="form-control form-custom" placeholder="Find an Event"
+                span class="input-group-btn"
+                  button class="btn btn-find btn-finder" type="button" Find
+            .col-sm-5.pad-left-7five
+              button class="btn btn-find btn-finder" type="button" Create An Event
+        .col-sm-7.col-md-6.pad-left-7five
+          ul.list-days
+            li.list-date-top
+              | 17
+            li.list-date-bottom
+              | Days
+          ul.list-days
+            li.list-date-top
+              | 23
+            li.list-date-bottom
+              | Hours
+          ul.list-days
+            li.list-date-top
+              | 32
+            li.list-date-bottom
+              | Mins
+
+          ul.list-result-event
+            li.list-result-left
+              | 1
+            li.list-result-right
+              | Events
+
+          ul.list-result-event
+            li.list-result-left
+              | 12PM
+              b PST
+            li.list-result-right
+              | World Peace Moment
+
+    .warp-header-peace.mobile
+      ul.peace-mobile
+        li
+          button class="btn btn-find btn-finder" type="button" Create An Event
+      ul.list-days
+        li.list-date-top
+          | 17
+        li.list-date-bottom
+          | Days
+      ul.list-days
+        li.list-date-top
+          | 23
+        li.list-date-bottom
+          | Hours
+      ul.list-days
+        li.list-date-top
+          | 32
+        li.list-date-bottom
+          | Mins
+      ul.peace-mobile
+        li style="max-width:150px;clear: both;display: block;overflow: hidden;margin: 0 auto;padding: 3% 20%;"
+          .input-group
+            input type="text" class="form-control form-custom" placeholder="Find an Event"
+            span class="input-group-btn"
+              button class="btn btn-find btn-finder" type="button" Find
+      div style="clear:both;display:block;"
+        ul.list-result-event
+          li.list-result-left
+            | 1
+          li.list-result-right
+            | Events
+
+        ul.list-result-event
+          li.list-result-left
+            | 12PM
+            b PST
+          li.list-result-right
+            | World Peace Moment
+
+
+    nav.navbar.navbar-default.navbar-wpc.wrap-big-navbar role="navigation"
       .container-fluid
         /! Brand and toggle get grouped for better mobile display
         .navbar-header
@@ -34,18 +115,19 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          
+
         /! Collect the nav links, forms, and other content for toggling
         #bs-example-navbar-collapse-1.collapse.navbar-collapse.navbar-collasps-wpc
           .navbar-form.navbar-left.form-wpc role="search"
-            .col-xs-8
-              = render "home/find_event"
-            .col-xs-3
-            - if request.filtered_parameters["action"].eql?("index")
-              button.btn.btn-default.btn-find.show_create_event.btn-find-md type="submit"  Create an Event
-            - else
-              a href="#{new_event_path}"
-                button.btn.btn-default.btn-find type="submit"  Create an Event
+            .row
+              .col-xs-8.pad-right-7five
+                = render "home/find_event"
+              .col-xs-4.pad-left-7five
+                - if request.filtered_parameters["action"].eql?("index")
+                  button.btn.btn-default.btn-find.show_create_event.btn-find-md type="submit"  Create an Event
+                - else
+                  a href="#{new_event_path}"
+                    button.btn.btn-default.btn-find type="submit"  Create an Event
           #myModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
             .modal-dialog
               .modal-content
@@ -86,70 +168,6 @@ html
                 b PST
               span.pst-count style="padding-top: 18px;"
                 = "World Peace Moment"
-
-                
-    nav.navbar.navbar-default.navbar-wpc role="navigation"
-      .container-fluid
-        /! Brand and toggle get grouped for better mobile display
-        .navbar-header
-          button.navbar-toggle.collapsed data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          
-        /! Collect the nav links, forms, and other content for toggling
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse.navbar-collasps-wpc
-          .navbar-form.navbar-left.form-wpc role="search"
-            .col-xs-8
-              = render "home/find_event"
-            .col-xs-3
-            - if request.filtered_parameters["action"].eql?("index")
-              button.btn.btn-default.btn-find.show_create_event.btn-find-md type="submit"  Create an Event
-            - else
-              a href="#{new_event_path}"
-                button.btn.btn-default.btn-find type="submit"  Create an Event
-          #myModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
-            .modal-dialog
-              .modal-content
-                .modal-header
-                  button.close data-dismiss="modal" type="button"
-                    span aria-hidden="true"  &times;
-                    span.sr-only Close
-                  h4#myModalLabel.modal-title Change Location
-                .modal-body.modal-body-wpc
-                  .col-md-12
-                    .form-group
-                      label for="exampleInputEmail1"  New Location
-                      input#exampleInputEmail1.form-control placeholder=("Enter email") type="text"
-                    .form-group
-                      label for="exampleInputEmail1"  Show Result Within
-                      .row
-                        .col-md-6
-                          select.form-control
-                            option 1
-                            option 2
-                            option 3
-                            option 4
-                            option 5
-                        .col-md-6
-                          button.btn.btn-default.btn-location Set Location
-                .modal-footer
-                  button.btn.btn-default.btn-location data-dismiss="modal" type="button"  Close
-          .countdown
-          ul.nav.navbar-nav.countdown-result
-            li
-              span.seperator-result
-                = @event_count
-              span.event-count style="padding-top: 18px;"
-                = "Events"
-            li
-              span.seperator-result
-                | 12PM
-                b PST
-              span.pst-count style="padding-top: 18px;"
-                = "World Peace Moment"
-
 
     .maps
       #show style="display:none"

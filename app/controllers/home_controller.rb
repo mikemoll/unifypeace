@@ -72,7 +72,7 @@ class HomeController < ApplicationController
 
     set_title_location(@location)
 
-    render template: "home/index"
+    respond_to :js
   end
 
   def embed

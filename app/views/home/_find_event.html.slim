@@ -1,27 +1,8 @@
 = form_tag(find_event_path, method: :post, id: "find_event") do
-  .modal-dialog.modal-sm
-    .modal-content.wrap-create-event style="height:auto !important;"
-      .header-form-event
-        h1.text-center Find an Event near me
-      .body-form-event style="height:150px;"
-        .form-group
-          .col-md-10
-            label class="left inline" for="city" Location
-          .col-md-10
-            = text_field_tag "location[address]", (@location[:address] if @location), class: "form-control find-location", id: "city", autofocus: "true", placeholder: "Search for place, and things", style: "margin-bottom: 10px !important;"
-            = hidden_field_tag "location[longitude]", (@location[:longitude] if @location)
-            = hidden_field_tag "location[latitude]", (@location[:latitude] if @location)
-        .form-group
-          .col-md-10
-            label class="left inline" for="location_distance" Show Result Within
-        .form-group
-          .col-md-10
-            = select_tag "location[nearby]", options_for_select(DISTANCES, ["20 KM", 20]), {class: "form-control", style: "margin-bottom: 10px !important;"}
-        .clear
-      .footer-form-event
-        = submit_tag "Set Location", class: "btn btn-find", disable_with: "Search Location ..."
-        .loader-ajax-set-location.pull-left style="margin:7px 15px;"
-        = link_to "Show Events Worldwide", events_path, class: "btn btn-find", style: "margin-left: 10px;"
+  = text_field_tag "location[address]", (params[:location][:address] if params[:location]), class: "form-control find-location", id: "city", autofocus: "true", placeholder: "Find an Event"
+  = hidden_field_tag "location[longitude]", (@location[:longitude] if @location)
+  = hidden_field_tag "location[latitude]", (@location[:latitude] if @location)
+  = submit_tag "Find", class: "btn btn-default btn-find btn-find-md", style:"margin-left: 5px;"
 
 javascript:
   $(".new-location").focus()
@@ -35,6 +16,12 @@ javascript:
       var lng = result["geometry"]["location"]["B"]
       $('#location_longitude').val(lng);
       $('#location_latitude').val(lat);
+      map.setView(new L.LatLng(lat, lng), 10);
+      if(newAddedMarker){
+        newAddedMarker.setLatLng([lat, lng]);
+      }else{
+        newAddedMarker = L.marker([lat, lng], {}).addTo(map);
+      }
     });
     $("#city").click(function(){
       $("#city").trigger("geocode");

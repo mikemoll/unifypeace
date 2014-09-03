@@ -1,23 +1,23 @@
 div style="width: 40%;"
   .col-md-5.body-see-event-tooltip
-    h1 = link_to content.title, content, style: "color: white;"
-    h2 = content.event_type
-    h2 = content.start_date.strftime("%B %d, %l:%M %p")
-    h2 = content.location
-    .see-event-tooltip
-      p = raw truncate_html(strip_tags(content.description), length: 500)
+    .pull-left
+      h1 = link_to content.title, content, style: "color: white;"
+      h2 = content.event_type
+      h2 = content.start_date.strftime("%B %d, %l:%M %p")
+      h2 = content.location
+    .pull-right style="margin-top: -10px;"
+      p = picture(content)
 
     .pull-left
-      = link_to contact_organizer_path(id: content.id), remote: true, class: "btn btn-default btn-detail", :"data-toggle" => "modal", :"data-target" => "#contact-organizer", style: "color: white !important;" do
+      = link_to contact_organizer_path(id: content.id), remote: true, class: "btn btn-default btn-detail", :"data-toggle" => "modal", :"data-target" => "#contact-organizer", style: "color: white !important; margin-right: 4px;" do
         | Contact Organizer
         span
           = image_tag "user.png", height: "30px"
 
-      br
       a.btn.btn-default.btn-fb href="#{content.link}" target="_blank" style="color: white !important;"
         | Official Event Page
         span = image_tag "fb.png", height: "30px", style: "padding-left: 4px;"
-    .pull-right style="margin-top: -10px;"
-      p = picture(content)
+      .triangel-tooltip
+        = image_tag "triangel.png"
 
-  div style="clear: both;"
+ 

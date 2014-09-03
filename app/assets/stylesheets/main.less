@@ -360,6 +360,7 @@ label.control-label span {
  margin-top: 10px;
  text-transform: uppercase;
  color: #fff;
+ border: none;
  &:hover {
   background-color: #ff74d6;
   color: #fff;
@@ -402,7 +403,13 @@ label.control-label span {
   font-family: 'droid-reguler';
   color: #fff;
   line-height: 18px;
+  }
 }
+
+.triangel-tooltip {
+  position: relative;
+  top: 38px;
+  left: 180px;
 }
 
 .see-event {
@@ -416,9 +423,9 @@ label.control-label span {
   position: absolute;
   // bottom: -61px;
   // left: 103px;
-  height: 515px;
-  width: 96%;
-  padding-bottom: 25px;
+  width: 87%;
+  padding-bottom: 22px;
+  left: 34px;
 
   h1 {
    font-family: 'bebas-neue';
@@ -428,9 +435,9 @@ label.control-label span {
 
  h2 {
   font-family: 'droid-reguler';
-  font-size: 20px;
+  font-size: 17px;
   color: #fff;
-  line-height: 18px;
+  line-height: 10px;
 }
 }
 
@@ -452,6 +459,27 @@ label.control-label span {
 
 .pad-right-7five {
   padding-right: 7.5px;
+}
+
+@media (max-width: 321px) {
+  .navbar-wpc {
+    display: none;
+  }
+}
+
+@media (min-width: 480px) {
+   .navbar-wpc {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar-wpc {
+    display: block;
+  }
+  .warp-header-peace {
+    display: none;
+  }
 }
 
 @media (max-width: 800px) {
@@ -484,17 +512,7 @@ label.control-label span {
   } 
 }
 
-@media (min-width: 801px) {
-  .hidden-md {
-   display: none;
-  }
-  .warp-header-peace,.warp-header-peace.mobile {
-    display: none;
-  }
-  .wrap-big-navbar {
-    display: block;
-  } 
-}
+
 
 @media (max-width:760px){
   .warp-header-peace {

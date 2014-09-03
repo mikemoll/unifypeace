@@ -7,9 +7,9 @@ class HomeController < ApplicationController
       @all = []
 
       @all << if @location[:area].eql?("worldwide")
-        Event.where(["status = ? AND latitude IS NOT NULL AND longitude IS NOT NULL", "approved"])
+        Event.approved
       else
-        Event.where(["status = ? AND latitude IS NOT NULL AND longitude IS NOT NULL", "approved"]).near([@location[:latitude], @location[:longitude]], @location[:nearby].to_i, units: :km) rescue nil
+        Event.approved.near([@location[:latitude], @location[:longitude]], @location[:nearby].to_i, units: :km) rescue nil
       end
 
       @all = @all.flatten
@@ -59,9 +59,9 @@ class HomeController < ApplicationController
     @all = []
 
     @all << if @location[:address].present?
-      Event.where(status: "approved").near([@location[:latitude], @location[:longitude]], 20, units: :km) rescue nil
+      Event.approved.near([@location[:latitude], @location[:longitude]], 30, units: :km) rescue nil
     else
-      Event.where(status: "approved")
+      Event.approved
     end
 
     @all = @all.flatten
@@ -72,12 +72,12 @@ class HomeController < ApplicationController
 
     set_title_location(@location)
 
-    render template: "home/index"
+    respond_to :js
   end
 
   def embed
     @location = {area: "worldwide", longitude: 0.0, latitude: 0.0}
-    @events = Event.where(status: "approved")
+    @events = Event.approved
 
     @markers = get_marker_and_location(@events) if @events rescue nil
     @event = Event.new

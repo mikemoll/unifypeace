@@ -58,7 +58,7 @@ class HomeController < ApplicationController
     @location = params[:location]
     @all = []
 
-    @all << if @location[:address].present?
+    @all << if @location[:latitude].present?
       Event.approved.near([@location[:latitude], @location[:longitude]], 30, units: :km) rescue nil
     else
       Event.approved

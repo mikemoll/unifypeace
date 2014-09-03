@@ -51,7 +51,9 @@ html
         /! Collect the nav links, forms, and other content for toggling
         #bs-example-navbar-collapse-1.collapse.navbar-collapse.navbar-collasps-wpc
           .navbar-form.navbar-left.form-wpc role="search"
-            button.btn.btn-default.btn-find.find-event data-toggle="modal" data-target=".bs-example-modal-sm" Find an Event near me
+            .col-xs-8
+              = render "home/find_event"
+            .col-xs-3
             - if request.filtered_parameters["action"].eql?("index")
               button.btn.btn-default.btn-find.show_create_event.btn-find-md type="submit"  Create an Event
             - else
@@ -98,16 +100,6 @@ html
               span.pst-count style="padding-top: 18px;"
                 = "World Peace Moment"
 
-          - if user_signed_in?
-            a.btn.btn-default.btn-find href="#{destroy_user_session_path}" style="margin-top: 10px; margin-right: 10px;" data-method="delete" Logout
-            a href="#{my_events_events_path(email: current_user.email)}"
-              button.btn.btn-default.btn-find type="submit" style="margin-top: 10px;" data-method="" My Events
-          - else
-            a href="#{new_user_session_path}"
-              button.btn.btn-default.btn-find type="submit" style="margin-top: 10px;" Login
-
-          .clear
-
 
     .maps
       #show style="display:none"
@@ -127,7 +119,7 @@ html
         li = image_tag "log (13).png"
         li = image_tag "log (10).jpg"
     .modal.fade.bs-example-modal-sm tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
-    .modal.fade.bs-example-modal-sm#contact-organizer tabindex="-1" role="dialog" aria-labelledby="contactOrganizer" 
+    .modal.fade.bs-example-modal-sm#contact-organizer tabindex="-1" role="dialog" aria-labelledby="contactOrganizer"
       = render "home/find_event"
 
     - if session[:location]

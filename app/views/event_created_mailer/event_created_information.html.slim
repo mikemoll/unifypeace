@@ -2,8 +2,8 @@ p
 	| Thank you for creating an event for World Peace Day, we will confirm your event within 48 hours, and contact you once it has been approved. 
 p 
 	| To manage your event, please register by&nbsp;
-	= link_to "click here", accept_user_invitation_url(:invitation_token => @token)
+	= link_to "clicking here", accept_user_invitation_url(invitation_token: @token, slug: @slug)
 p 
 	| . To view or edit you event, please&nbsp;
-	= link_to "click here", event_url(@slug)
+	= link_to "clicking here", event_url(@slug)
 p . Peace - The Unify Team

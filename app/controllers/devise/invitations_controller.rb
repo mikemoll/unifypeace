@@ -41,6 +41,8 @@ class Devise::InvitationsController < DeviseController
   # PUT /resource/invitation
   def update
     self.resource = accept_resource
+    @event = Event.new
+    @categories = Category.all
     update = self.resource.update_attributes(name: params[:user][:name], username: params[:user][:username])
     if update
       AfterRegister.after_register(self.resource.email).deliver
@@ -50,7 +52,7 @@ class Devise::InvitationsController < DeviseController
       flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
       set_flash_message :notice, flash_message if is_flashing_format?
       sign_in(resource_name, resource)
-      redirect_to root_url
+      redirect_to event_path(id: params[:slug])
       # respond_with resource, :location => root_url
     else
       respond_with_navigational(resource){ render :edit }

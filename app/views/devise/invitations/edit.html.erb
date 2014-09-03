@@ -13,6 +13,7 @@
   <%= f.password_field :password %></p>
   <p><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></p>
+  <%= hidden_field_tag :slug, nil, value: params[:slug] %>
 
   <p><%= f.submit t("devise.invitations.edit.submit_button") %></p>
 <% end %>

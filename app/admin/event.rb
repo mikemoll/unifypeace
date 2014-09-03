@@ -3,7 +3,7 @@ ActiveAdmin.register Event do
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  # permit_params :list, :of, :attributes, :on, :model
+  # permit_params :title, :category_ids, :website_link, :start_date, :description, :location, :organizer_name, :organizer_email, :affiliated_organization_id
   #
   # or
   #
@@ -13,7 +13,12 @@ ActiveAdmin.register Event do
   #   permitted
   # end
 
-  actions :all, except: [:new, :create, :show]
+  controller do
+    def find_resource
+      scoped_collection.friendly.find(params[:id])
+    end
+  end
+  actions :all, except: [:new, :create, :show, :edit]
 
   index do
     selectable_column
@@ -27,7 +32,6 @@ ActiveAdmin.register Event do
     column :location
     column :organizer_name
     column :organizer_email
-    column :organizer_name
     column(:affiliated_organization_id) { |event| AffiliatedOrganization.where(id: event.id).pluck(:name).first }
     column :status
     actions defaults: true do |event|
@@ -48,6 +52,14 @@ ActiveAdmin.register Event do
     end
 
     flash[:notice] = "Event has been approved"
+    redirect_to :back
+  end
+
+  batch_action :unapproved, method: :get do |event|
+    events_approved = Event.where(id: params[:collection_selection]).update_all(status: "pending")
+    events = Event.where(id: params[:collection_selection])
+
+    flash[:error] = "Event has been unapproved"
     redirect_to :back
   end
 end

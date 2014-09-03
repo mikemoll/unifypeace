@@ -45,6 +45,8 @@ var leafletMapsView = function(dataContent, latLong, mapLocation){
 
 var leafletMapsViewContent = function(eventType, latLongContent){
   var iconUrl = null;
+  style = L.tileLayer.provider('MapBox.rezalina.jdd24no0');
+
   generateMapContent(latLongContent);
 
   if(eventType === "multi"){
@@ -60,4 +62,5 @@ var leafletMapsViewContent = function(eventType, latLongContent){
   redIcon = L.icon({ iconUrl: iconUrl, iconAnchor: [13, 33], popupAnchor: [0, -30] });
 
   var marker = L.marker([parseFloat(latLongContent[0]), parseFloat(latLongContent[1])], {icon: redIcon}).addTo(mapContent)
+  style.addTo(mapContent);
 }

@@ -40,7 +40,7 @@ Rails.application.configure do
     :address              => "smtp.gmail.com",
     :port                 => 587,
     :domain               => '41studio.com',
-    :user_name            => 'do-not-reply@41studio.com',
+    :user_name            => 'test-do-not-reply@41studio.com',
     :password             => 'Fd5(q"T,Q-Ov4[C',
     :authentication       => 'plain',
     :enable_starttls_auto => true

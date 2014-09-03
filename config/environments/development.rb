@@ -37,11 +37,11 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   config.action_mailer.smtp_settings = {
-    :address              => "unify.org",
-    :port                 => 25,
-    :domain               => 'unify.org',
-    :user_name            => 'do-not-reply@unify.org',
-    :password             => 'b4ng0c1D!',
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :domain               => '41studio.com',
+    :user_name            => 'do-not-reply@41studio.com',
+    :password             => 'Fd5(q"T,Q-Ov4[C',
     :authentication       => 'plain',
     :enable_starttls_auto => true
   }

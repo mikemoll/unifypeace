@@ -173,7 +173,7 @@ class EventsController < ApplicationController
       category = "multi"
     end
 
-    events = Event.where(status: "approved")
+    events = Event.where(["status = ? AND latitude IS NOT NULL AND longitude IS NOT NULL", "approved"])
     @all = []
     events.each do |event|
       if category == "all"

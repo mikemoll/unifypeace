@@ -17,9 +17,10 @@
 div#content-for-map data-contents="#{@markers}"
 div#location-for-map data-contents="#{[@location[:latitude], @location[:longitude]]}"
 
-.event-legend.col-md-5.hidden-xs
+.event-legend.col-md-6.col-md-6-cs.hidden-xs
   ul.list-event-legend
     li.compass Event Legend
+    span.compass-img = image_tag "legend.png"
     li
       = link_to "Show All", "#", class: "subcategory", data: {filter: "all"}
     li
@@ -29,7 +30,8 @@ div#location-for-map data-contents="#{[@location[:latitude], @location[:longitud
       = link_to image_tag("markers/musi-icon.png", class: "music"), "#", class: "subcategory", data: {filter: "music"}
       | Music
     li
-      = link_to image_tag("markers/march-icon.png", class: "march"), "#", class: "subcategory", data: {filter: "march"}
+      a class="subcategory" data-filter="march" href="#"
+        img alt="March icon" class="march" src="/assets/markers/march-icon.png"
       | March
     li
       = link_to image_tag("markers/multi-icon.png", class: "multiple"), "#", class: "subcategory", data: {filter: "multi"}

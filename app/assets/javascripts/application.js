@@ -16,6 +16,7 @@
 //= require jquery-ui
 //= require maps-leaflet
 //= require plugins/leaflet.markercluster-src
+//= require plugins/leaflet-providers
 //= require jstz-1.0.4.min
 //= require timezone
 //= require jquery.geocomplete
@@ -24,24 +25,41 @@
 //= require new_content
 $(document).on('ready page:load', function(){
   navigationAction();
-});
-$(function(){
-	$("#geocomplete").geocomplete({
-	  details: "form",
-	  types: ["geocode", "establishment"]
-	}).bind("geocode:result", function(event, result){
-	  console.log(r = result);
-	  var lat = result["geometry"]["location"]["k"]
-	  var lng = result["geometry"]["location"]["B"]
-	  map.setView(new L.LatLng(lat, lng), 15);
-	  if(newAddedMarker){
-	    newAddedMarker.setLatLng([lat, lng]);
-	  }else{
-	    newAddedMarker = L.marker([lat, lng], {}).addTo(map);
-	  }
-	});
+  $(".geocomplete").geocomplete({
+    details: "form",
+    types: ["geocode", "establishment"]
+  }).bind("geocode:result", function(event, result){
+    console.log(r = result);
+    var lat = result["geometry"]["location"]["k"]
+    var lng = result["geometry"]["location"]["B"]
+    map.setView(new L.LatLng(lat, lng), 15);
+    if(newAddedMarker){
+      newAddedMarker.setLatLng([lat, lng]);
+    }else{
+      newAddedMarker = L.marker([lat, lng], {}).addTo(map);
+    }
+  });
 
-	$("#geocomplete").click(function(){
-	  $("#geocomplete").trigger("geocode");
-	});
+  $(".geocomplete").click(function(){
+    $(".geocomplete").trigger("geocode");
+  });
+
+  $(".find_location").geocomplete({
+    details: "form",
+    types: ["geocode", "establishment"]
+  }).bind("geocode:result", function(event, result){
+    console.log(r = result);
+    var lat = result["geometry"]["location"]["k"]
+    var lng = result["geometry"]["location"]["B"]
+    map.setView(new L.LatLng(lat, lng), 15);
+    if(newAddedMarker){
+      newAddedMarker.setLatLng([lat, lng]);
+    }else{
+      newAddedMarker = L.marker([lat, lng], {}).addTo(map);
+    }
+  });
+
+  $(".find_location").click(function(){
+    $(".find_location").trigger("geocode");
+  });
 });

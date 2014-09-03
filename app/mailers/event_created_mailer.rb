@@ -1,5 +1,6 @@
 class EventCreatedMailer < ActionMailer::Base
-  default from: "unify@information.com"
+  default from: "do-not-reply@unify.org"
+
   def event_created_information(slug, organizer_email, token)
     @slug = slug
     @token = token

@@ -19,10 +19,10 @@ div#location-for-map data-contents="#{[@location[:latitude], @location[:longitud
 
 .event-legend.col-md-6.col-md-6-cs.hidden-xs
   ul.list-event-legend
-    li.compass Event Legend
+    li.compass
+      = link_to "Event Legend", "#", class: "btn subcategory", data: {filter: "all"}
+
     span.compass-img = image_tag "legend.png"
-    li
-      = link_to "Show All", "#", class: "subcategory", data: {filter: "all"}
     li
       = link_to image_tag("markers/medi-icon.png", class: "meditation"), "#", class: "subcategory", data: {filter: "meditation"}
       | Meditation

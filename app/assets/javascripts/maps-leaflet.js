@@ -1,6 +1,8 @@
 var leafletMapsView = function(dataContent, latLong, mapLocation){
   latlngbounds = new L.LatLngBounds();
   markers = L.markerClusterGroup();
+  style = L.tileLayer.provider('MapBox.rezalina.jdd24no0');
+
   generateMap(latLong);
 
   if(dataContent.length > 0){
@@ -38,6 +40,7 @@ var leafletMapsView = function(dataContent, latLong, mapLocation){
   if(mapLocation == "worldwide"){
     map.setView(new L.LatLng(0, 0),2);
   }
+  style.addTo(map);
 }
 
 var leafletMapsViewContent = function(eventType, latLongContent){

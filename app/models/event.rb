@@ -12,6 +12,8 @@ class Event < ActiveRecord::Base
   end
   belongs_to :user
 
+  scope :approved, -> { where(["status = ? AND latitude IS NOT NULL AND longitude IS NOT NULL", "approved"]) }
+
   validates_presence_of :title, :category_ids, :start_date, :description, :organizer_name, :organizer_email, :location
 
   def date_event(timezone)

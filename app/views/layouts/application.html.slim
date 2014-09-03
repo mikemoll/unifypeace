@@ -25,21 +25,21 @@ html
       .container
         .row
           .col-md-offset-2
-            .col-md-3
+            .col-md-3.col-xs-4
               .logo-title
                 h1.text-right World
                 h2.text-right September 21, 2014
                 h3.text-right INT'L DAY OF PEACE
-            .col-md-3
+            .col-md-3.col-xs-4
               h1.text-center
                 = link_to image_tag("log (11).png"), root_path
             .logo-title
-              .col-md-3
+              .col-md-3.col-xs-4
                 h1.text-left Peace
                 h2.text-left Global Events Map
                 h3.text-left Peace Day Coalition
     nav.navbar.navbar-default.navbar-wpc role="navigation"
-      .container
+      .container-fluid
         /! Brand and toggle get grouped for better mobile display
         .navbar-header
           button.navbar-toggle.collapsed data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
@@ -49,9 +49,11 @@ html
             span.icon-bar
           .navbar-brand.navbar-brand-wpc.hidden-lg.hidden-md Menu
         /! Collect the nav links, forms, and other content for toggling
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse.navbar-collasps-wpc
           .navbar-form.navbar-left.form-wpc role="search"
-            button.btn.btn-default.btn-find.find-event data-toggle="modal" data-target=".bs-example-modal-sm" Find an Event near me
+            .col-xs-8
+              = render "home/find_event"
+            .col-xs-3
             - if request.filtered_parameters["action"].eql?("index")
               button.btn.btn-default.btn-find.show_create_event.btn-find-md type="submit"  Create an Event
             - else
@@ -97,17 +99,6 @@ html
                 b PST
               span.pst-count style="padding-top: 18px;"
                 = "World Peace Moment"
-          ul
-            - if user_signed_in?
-              li
-                = link_to "logout", destroy_user_session_path(), method: "delete"
-              li
-                = link_to "my events", my_events_events_path(email: current_user.email)
-            - else
-              li
-                = link_to "Login", new_user_session_path
-
-          .clear
 
 
     .maps
@@ -128,6 +119,7 @@ html
         li = image_tag "log (13).png"
         li = image_tag "log (10).jpg"
     .modal.fade.bs-example-modal-sm tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+    .modal.fade.bs-example-modal-sm#contact-organizer tabindex="-1" role="dialog" aria-labelledby="contactOrganizer"
       = render "home/find_event"
 
     - if session[:location]
@@ -139,9 +131,9 @@ javascript:
   var resizeMap = function(){
     console.log(i+=1);
     if (i % 2 === 0) {
-      $("#map").attr("style", "width:100%; float: right;margin-right: 3px;min-height: 551px;position: relative;");
+      $("#map").attr("style", "width:100%; float: right;margin-right: 0;min-height: 551px;position: relative;");
     } else {
-      $("#map").attr("style", "width:78%; float: right;margin-right: 3px;min-height: 551px;position: relative;");
+      $("#map").attr("style", "width: 78.4%; float: right;margin-right: 0;min-height: 551px;position: relative;");
     }
   };
 
@@ -149,7 +141,7 @@ javascript:
     $("#show").hide();
     resizeMap();
   })
-  
+
   $(".show_create_event").click(function(){
     $("#show").slideToggle();
     resizeMap();

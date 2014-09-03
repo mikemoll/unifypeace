@@ -25,32 +25,90 @@ html
       .container
         .row
           .col-md-offset-2
-            .col-md-3
+            .col-md-3.col-xs-4
               .logo-title
                 h1.text-right World
                 h2.text-right September 21, 2014
                 h3.text-right INT'L DAY OF PEACE
-            .col-md-3
+            .col-md-3.col-xs-4
               h1.text-center
                 = link_to image_tag("log (11).png"), root_path
             .logo-title
-              .col-md-4
+              .col-md-3.col-xs-4
                 h1.text-left Peace
                 h2.text-left Global Events Map
                 h3.text-left Peace Day Coalition
     nav.navbar.navbar-default.navbar-wpc role="navigation"
-      .container style="width: 800px !important;"
-        .countdown
-        ul.nav.navbar-nav.countdown-result
+      .container
+        /! Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle.collapsed data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          .navbar-brand.navbar-brand-wpc.hidden-lg.hidden-md Menu
+        /! Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          .navbar-form.navbar-left.form-wpc role="search"
+            button.btn.btn-default.btn-find.find-event data-toggle="modal" data-target=".bs-example-modal-sm" Find an Event near me
+            - if request.filtered_parameters["action"].eql?("index")
+              button.btn.btn-default.btn-find.show_create_event.btn-find-md type="submit"  Create an Event
+            - else
+              a href="#{new_event_path}"
+                button.btn.btn-default.btn-find type="submit"  Create an Event
+          #myModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  button.close data-dismiss="modal" type="button"
+                    span aria-hidden="true"  &times;
+                    span.sr-only Close
+                  h4#myModalLabel.modal-title Change Location
+                .modal-body.modal-body-wpc
+                  .col-md-12
+                    .form-group
+                      label for="exampleInputEmail1"  New Location
+                      input#exampleInputEmail1.form-control placeholder=("Enter email") type="text"
+                    .form-group
+                      label for="exampleInputEmail1"  Show Result Within
+                      .row
+                        .col-md-6
+                          select.form-control
+                            option 1
+                            option 2
+                            option 3
+                            option 4
+                            option 5
+                        .col-md-6
+                          button.btn.btn-default.btn-location Set Location
+                .modal-footer
+                  button.btn.btn-default.btn-location data-dismiss="modal" type="button"  Close
+          .countdown
+          ul.nav.navbar-nav.countdown-result
             li
               span.seperator-result
                 = @event_count
-              span.event-count Events
+              span.event-count style="padding-top: 18px;"
+                = "Events"
             li
               span.seperator-result
                 | 12PM
                 b PST
-              span.pst-count World Peace Moment
+              span.pst-count style="padding-top: 18px;"
+                = "World Peace Moment"
+          ul
+            - if user_signed_in?
+              li
+                = link_to "logout", destroy_user_session_path(), method: "delete"
+              li
+                = link_to "my events", my_events_events_path(email: current_user.email)
+            - else
+              li
+                = link_to "Login", new_user_session_path
+
+          .clear
+
     .maps
       = yield
     .footer

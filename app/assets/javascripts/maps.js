@@ -280,7 +280,7 @@ var putMarker = function(position, options){
         console.log(data)
         $("#event_latitude").val(data.latitude);
         $("#event_longitude").val(data.longitude);
-        $("#geocomplete").val(data.address);
+        $(".geocomplete").val(data.address);
         $("#event_country").val(data.country_name);
         $("#event_city").val(data.region);
         $("#event_postal_code").val(data.postal_code);
@@ -288,7 +288,7 @@ var putMarker = function(position, options){
         map.removeLayer(newAddedMarker);
         $("#event_latitude").val("");
         $("#event_longitude").val("");
-        $("#geocomplete").val("");
+        $(".geocomplete").val("");
         $("#event_country").val("");
         $("#event_city").val("");
         $("#event_postal_code").val("");

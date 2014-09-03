@@ -107,7 +107,8 @@
 }
 
 .leaflet-popup-content-wrapper {
-  border-radius: 3px !important;
+  background: transparent;
+  box-shadow: none;
   height: 530px;
   padding: 1px;
   text-align: left;

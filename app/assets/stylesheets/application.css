@@ -129,17 +129,26 @@
 */
 .leaflet-container a.leaflet-popup-close-button {
   background: none repeat scroll 0 0 transparent;
-  color: black;
-  font: bold 16px/14px Tahoma,Verdana,sans-serif;
+  color: white;
+  font: bold 20px/13px Tahoma,Verdana,sans-serif;
   height: 14px;
-  padding: 4px 4px 0 0;
+  padding: 3px 0px 0 0;
   position: absolute;
-  right: 6px;
+  right: 20px;
   text-align: center;
   text-decoration: none;
-  top: 2px;
+  top: 17px;
   width: 18px;
   z-index: 9999;
+  border: 1px white;
+  border-radius: 50%;
+  width: 17px;
+  height: 17px; 
+  background-color: #ccc;
+}
+
+.circle {
+  /* width and height can be anything, as long as they're equal */
 }
 
 a.link {

@@ -113,16 +113,16 @@ html
       = yield
     .footer
       ul.list-footer-logo
-        li = image_tag "log (6).png"
-        li = image_tag "log (3).png"
-        li = image_tag "log (3).jpg"
-        li = image_tag "log (5).jpg"
-        li = image_tag "log (7).png"
-        li = image_tag "log (4).jpg"
-        li = image_tag "log (6).jpg"
-        li = image_tag "log (8).png"
-        li = image_tag "log (13).png"
-        li = image_tag "log (10).jpg"
+        li = link_to (image_tag "log (6).png"), "http://www.worldpeace.org"
+        li = link_to (image_tag "log (3).png"), "http://pathwaystopeace.org"
+        li = link_to (image_tag "log (3).jpg"), "http://www.upliftconnect.com"
+        li = link_to (image_tag "log (5).jpg"), "http://we.net"
+        li = link_to (image_tag "log (7).png"), "http://1giantmind.org"
+        li = link_to (image_tag "log (4).jpg"), "http://www.uri.org"
+        li = link_to (image_tag "log (6).jpg"), "http://www.artofliving.org"
+        li = link_to (image_tag "log (8).png"), "http://compassiongames.org"
+        li = link_to (image_tag "log (13).png"), "http://summerofpeace.net"
+        li = link_to (image_tag "log (10).jpg"), "http://internationaldayofpeace.org"
     - if session[:location]
       #map-used data-map="#{session[:location][:map_type]}"
     = yield :javascript

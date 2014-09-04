@@ -46,11 +46,6 @@
       span = image_tag "fb.png", height: "30px", style: "padding-left: 4px;"
 
   br
-  - if admin_user_signed_in?
-    = link_to 'Edit', edit_event_path(@event_show), class: "btn btn-default", style: "margin-top:10px;"
-
-
-  br
 
   .pull-right style="margin-top: 5px;"
     p = image_tag("#{@affiliated.picture_organization}", style: "height: 90px; background: #fff; padding:2px;")

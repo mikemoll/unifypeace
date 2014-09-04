@@ -7,9 +7,9 @@ class Event < ActiveRecord::Base
   alias_attribute :long, :longitude
 
   has_and_belongs_to_many :categories
-  with_options dependent: :destroy do |relation|
-    relation.has_many :affiliated_organizations
-  end
+  # with_options dependent: :destroy do |relation|
+  #   relation.has_many :affiliated_organizations
+  # end
   belongs_to :user
 
   scope :approved, -> { where(["status = ? AND latitude IS NOT NULL AND longitude IS NOT NULL", "approved"]) }

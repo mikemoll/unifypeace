@@ -18,5 +18,5 @@ div style="width: 40%;"
         = image_tag "triangel.png"
       br
     .pull-right style="margin-top: -13px;"
-      p = picture(content)
+      p = picture(content) unless content.affiliated_organization_id.blank?
 

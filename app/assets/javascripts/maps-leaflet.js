@@ -11,7 +11,7 @@ var leafletMapsView = function(dataContent, latLong, mapLocation){
       if(dataContent[i][2] === "multi"){
         redIcon = L.icon({ iconUrl: '/assets/markers/multi-icon.png', iconAnchor: [13, 33], popupAnchor: [-3, -20] });
       }else if(dataContent[i][2] === "Meditation / Ceremony / Prayer"){
-        redIcon = L.icon({ iconUrl: '/assets/markers/medi-icon.png', iconAnchor: [13, 33], popupAnchor: [-3, -20] });
+        redIcon = L.icon({ iconUrl: '/assets/markers/medi-icon.png', className: 'marker-meditation', iconAnchor: [13, 33], popupAnchor: [-3, -20] });
       }else if(dataContent[i][2] === "Music / Dance / Celebration"){
         redIcon = L.icon({ iconUrl: '/assets/markers/musi-icon.png', iconAnchor: [13, 33], popupAnchor: [-3, -20] });
       }else if(dataContent[i][2] === "March / Action"){

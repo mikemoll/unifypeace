@@ -18,6 +18,7 @@ group :development do
   gem "better_errors"
   gem "spring"
   gem "thin"
+  gem "quiet_assets"
 end
 
 group :production do 

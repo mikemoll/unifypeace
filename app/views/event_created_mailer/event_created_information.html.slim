@@ -3,13 +3,14 @@ p
 p
 	| To manage your event, please&nbsp;
 	- if @token.blank?
-		login&nbsp;
+		| login&nbsp;
 		= link_to "clicking here", new_user_session_url(slug: @slug)
 	- else
-		register by&nbsp;
+		| register by&nbsp;
 		= link_to "clicking here", accept_user_invitation_url(invitation_token: @token, slug: @slug)
 p
-	| . To view or edit you event, please&nbsp;
+	| To view or edit you event, please&nbsp;
 	= link_to "clicking here", event_url(@slug)
 p Peace
-p - The Unify Team
+p 
+	| - The Unify Team

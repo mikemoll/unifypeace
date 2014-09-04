@@ -58,8 +58,9 @@ class EventsController < ApplicationController
     @event.estimated_attendees = params[:estimated_attendees]
     respond_to do |format|
       if @event.save
-        check_user = User.find_by_email("@event.organizer_email") rescue nil
+        check_user = User.find_by_email(@event.organizer_email) rescue nil
         if check_user.blank?
+          error
           user = User.invite!(email: @event.organizer_email, name: @event.organizer_name) do |u|
             u.skip_invitation = true
           end
@@ -67,8 +68,8 @@ class EventsController < ApplicationController
         else
           @event.update_attribute('user_id', check_user.id)
         end
-
-        EventCreatedMailer.delay.event_created_information(@event.slug, @event.organizer_email, user.raw_invitation_token)
+        EventCreatedMailer.delay.event_created_information(@event.slug, @event.organizer_email, user.raw_invitation_token, user)
+        
         format.html { redirect_to root_url, notice: 'Thank you for creating an event for World Peace Day, we will confirm your event within 48 hours, and contact you once it has been approved.' }
         format.json { render :index, status: :created, location: @event }
       else
@@ -81,8 +82,6 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-    @event = Event.new
-    @categories = Category.all
     @event.categories.destroy
     @event.affiliated_organization_id = params[:affiliated_organization_id]
     @event.category_ids = params[:category_ids]

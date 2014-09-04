@@ -60,7 +60,6 @@ class EventsController < ApplicationController
       if @event.save
         check_user = User.find_by_email(@event.organizer_email) rescue nil
         if check_user.blank?
-          error
           user = User.invite!(email: @event.organizer_email, name: @event.organizer_name) do |u|
             u.skip_invitation = true
           end

@@ -4,7 +4,7 @@ class EventCreatedMailer < ActionMailer::Base
   def event_created_information(slug, organizer_email, token)
     @slug = slug
     @token = token
-    mail(:to =>organizer_email, :subject => "Unify event information")
+    mail(:to =>organizer_email, :subject => "Unify Event Information")
   end
 
   def contact_organizer(subject, message, organizer_name, organizer_email)

@@ -119,18 +119,20 @@
 }
 */
 .leaflet-container a.leaflet-popup-close-button {
-  background: none repeat scroll 0 0 transparent;
-  color: black;
+  color: white;
   font: bold 16px/14px Tahoma,Verdana,sans-serif;
-  height: 14px;
-  padding: 4px 4px 0 0;
+  height: auto;
+  padding: 4px;
   position: absolute;
-  right: 6px;
+  right: 20px;
   text-align: center;
   text-decoration: none;
   top: 2px;
-  width: 18px;
+  width: auto;
   z-index: 9999;
+  background: #666;
+  border-radius: 15px;
+  border: 2px #fff solid;
 }
 
 a.link {

@@ -1,11 +1,10 @@
 div style="width: 40%;"
   .col-md-5.body-see-event-tooltip
-    .pull-left
+    .pull-left style="margin-bottom: 10px;"
       h1 = link_to content.title, content, style: "color: white;"
       h2 = content.event_type
       h2 = content.start_date.strftime("%B %d, %l:%M %p")
       h2 = content.location
-
     .pull-left
       = link_to contact_organizer_path(id: content.id), remote: true, class: "btn btn-default btn-detail", :"data-toggle" => "modal", :"data-target" => "#contact-organizer", style: "color: white !important;" do
         | Contact Organizer
@@ -18,6 +17,6 @@ div style="width: 40%;"
       .triangel-tooltip
         = image_tag "triangel.png"
       br
-    .pull-right style="margin-top: -10px;"
+    .pull-right style="margin-top: -13px;"
       p = picture(content)
 

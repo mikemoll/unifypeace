@@ -11,6 +11,6 @@ module ApplicationHelper
 
   def picture(content)
     affiliated = AffiliatedOrganization.find(content.affiliated_organization_id)
-    image_tag("#{affiliated.picture_organization}", width: "100px;")
+    image_tag("#{affiliated.picture_organization}", height: "90px;", style: "background: #fff;")
   end
 end

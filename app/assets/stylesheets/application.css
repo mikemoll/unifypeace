@@ -46,15 +46,6 @@
  min-height: 551px;
 }
 
-#map-content{
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  float: right;
-  height: 350px;
-  margin-right: 0px;
-  min-height: 551px;
-  width: 60%;
-}
-
 .page-not-found {
   margin: 15% 20%;
   position: relative;

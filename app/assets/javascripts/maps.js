@@ -59,7 +59,7 @@ var generateMap = function(latLong){
     scrollWheelZoom: false,
     zoom: 20,
     layers: [mapquest],
-    zoomControl: true
+    zoomControl: false
   });
 }
 
@@ -75,7 +75,7 @@ var generateMapContent = function(latLong){
     scrollWheelZoom: false,
     zoom: 8,
     layers: [mapquestContent],
-    zoomControl: true
+    zoomControl: false
   });
 }
 

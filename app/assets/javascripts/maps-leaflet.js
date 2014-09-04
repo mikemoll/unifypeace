@@ -2,6 +2,7 @@ var leafletMapsView = function(dataContent, latLong, mapLocation){
   latlngbounds = new L.LatLngBounds();
   markers = L.markerClusterGroup();
   style = L.tileLayer.provider('MapBox.rezalina.jdd24no0');
+  zoom = L.control.zoom({ position: 'topright' });
 
   generateMap(latLong);
 
@@ -41,6 +42,7 @@ var leafletMapsView = function(dataContent, latLong, mapLocation){
     map.setView(new L.LatLng(0, 0),2);
   }
   style.addTo(map);
+  map.addControl(L.control.zoom({position: 'topright'}));
 }
 
 var leafletMapsViewContent = function(eventType, latLongContent){
@@ -63,4 +65,5 @@ var leafletMapsViewContent = function(eventType, latLongContent){
 
   var marker = L.marker([parseFloat(latLongContent[0]), parseFloat(latLongContent[1])], {icon: redIcon}).addTo(mapContent)
   style.addTo(mapContent);
+  mapContent.addControl(L.control.zoom({position: 'topright'}));
 }

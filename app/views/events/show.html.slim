@@ -1,5 +1,5 @@
 .show_maker_map style="display:none"
-  #map style="width:60%; float:right; position:relative;"
+  #map style="width:100%; float:right; position:relative;"
 .text_show style="display:none; margin-top:0px !important;"
   h1.text-center Loading map...
 .hidden_maker_map
@@ -23,13 +23,14 @@
     = notice
 
 .col-md-5.body-see-event
-  .col-md-7.pull-left style="margin-bottom: 20px;"
+  .pull-left style="margin-bottom: 20px;"
     h1 = @event_show.title
     h3 = @event_show.event_type
     h3 = @event_show.start_date.strftime("%B %d, %l:%M %p")
     h3 = @event_show.location
-  .pull-right style="margin-top: 10px;"
-    p = image_tag("#{@affiliated.picture_organization}", style: "width: 160px;")
+  .pull-right
+    - if admin_user_signed_in?
+      = link_to 'Edit', edit_event_path(@event_show), class: "btn btn-default", style: "margin-top:10px;"
   .clear
   .pull-left.see-event
     p = raw truncate_html(strip_tags(@event_show.description), length: 1000)
@@ -39,15 +40,14 @@
       | Contact Organizer
       span
         = image_tag "user.png", height: "30px"
-
-  .pull-right
+    br
     a.btn.btn-default.btn-fb href="http://#{@event_show.website_link}" target="_blank"
       | Official Event Page
       span = image_tag "fb.png", height: "30px", style: "padding-left: 4px;"
     br
-    - if admin_user_signed_in?
-      = link_to 'Edit', edit_event_path(@event_show), class: "btn btn-default", style: "margin-top:10px;"
-  
+
+  .pull-right style="margin-top: 10px;"
+    p = image_tag("#{@affiliated.picture_organization}", style: "width: 160px;")
 
   br
   br

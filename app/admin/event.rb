@@ -48,7 +48,7 @@ ActiveAdmin.register Event do
     events = Event.where(id: params[:collection_selection])
 
     events.each do |event|
-      EventApprovedMailer.event_approved_information(event.title, event.slug, event.organizer_email).deliver
+      EventApprovedMailer.delay.event_approved_information(event.title, event.slug, event.organizer_email)
     end
 
     flash[:notice] = "Event has been approved"

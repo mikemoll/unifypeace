@@ -45,7 +45,7 @@ class Devise::InvitationsController < DeviseController
     @categories = Category.all
     update = self.resource.update_attributes(name: params[:user][:name], username: params[:user][:username])
     if update
-      AfterRegister.after_register(self.resource.email).deliver
+      AfterRegister.delay.after_register(self.resource.email)
     end
     if resource.errors.empty?
       yield resource if block_given?

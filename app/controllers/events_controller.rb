@@ -68,7 +68,7 @@ class EventsController < ApplicationController
           @event.update_attribute('user_id', check_user.id)
         end
 
-        EventCreatedMailer.event_created_information(@event.slug, @event.organizer_email, user.raw_invitation_token).deliver
+        EventCreatedMailer.delay.event_created_information(@event.slug, @event.organizer_email, user.raw_invitation_token)
         format.html { redirect_to root_url, notice: 'Thank you for creating an event for World Peace Day, we will confirm your event within 48 hours, and contact you once it has been approved.' }
         format.json { render :index, status: :created, location: @event }
       else
@@ -117,7 +117,7 @@ class EventsController < ApplicationController
     event = Event.where(id: params[:id]).first
     if params[:unapproved].blank?
       event.update(status: "approved")
-      EventApprovedMailer.event_approved_information(event.title, event.slug, event.organizer_email).deliver
+      EventApprovedMailer.delay.event_approved_information(event.title, event.slug, event.organizer_email)
     else
       event.update(status: "pending")
     end
@@ -125,7 +125,7 @@ class EventsController < ApplicationController
   end
 
   def approved_all_events
-    EventApprovedMailer.event_approved_information(event.title, event.slug, event.organizer_email).deliver
+    EventApprovedMailer.delay.event_approved_information(event.title, event.slug, event.organizer_email)
   end
 
   def categories

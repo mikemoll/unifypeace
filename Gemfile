@@ -40,3 +40,4 @@ gem "less-rails"
 gem "therubyracer"
 gem "devise_invitable"
 gem 'kaminari'
+gem 'delayed_job_active_record'

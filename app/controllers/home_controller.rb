@@ -42,7 +42,7 @@ class HomeController < ApplicationController
   def create_contact_organizer
     if params[:event_id] && params[:subject]
       event = Event.find params[:event_id]
-      EventCreatedMailer.contact_organizer(params[:subject], params[:message], event.organizer_name, event.organizer_email).deliver
+      EventCreatedMailer.delay.contact_organizer(params[:subject], params[:message], event.organizer_name, event.organizer_email)
     end
 
     redirect_to root_url, notice: "Sent message to organizer successfully!!"

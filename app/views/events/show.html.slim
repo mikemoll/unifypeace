@@ -48,7 +48,8 @@
   br
 
   .pull-right style="margin-top: 5px;"
-    p = image_tag("#{@affiliated.picture_organization}", style: "height: 90px; background: #fff; padding:2px;")
+    - unless @affiliated.blank?
+      p = image_tag("#{@affiliated.picture_organization}", style: "height: 90px; background: #fff; padding:2px;")
 
 
   br

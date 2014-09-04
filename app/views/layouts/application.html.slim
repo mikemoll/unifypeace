@@ -37,10 +37,10 @@ html
                   button class="btn btn-find btn-finder button-find-event" type="button" Find
             .col-sm-5.pad-left-7five
               a href="#{new_event_path}"
-                button class="btn btn-find btn-finder" type="button" style="font-size: 18px; padding-bottom: 11px;" Create An Event
+                button class="btn btn-find btn-finder" type="button" Create An Event
         .col-sm-7.col-md-6.pad-left-7five
           .countdown.list-days
-          ul.list-result-event style="margin-left: 6%;"
+          ul.list-result-event
             li.list-result-left
               = @event_count
             li.list-result-right
@@ -53,6 +53,109 @@ html
             li.list-result-right
               | World Peace Moment
 
+    .warp-header-peace.mobile
+      ul.peace-mobile
+        li
+          a href="#{new_event_path}"
+            button class="btn btn-find btn-finder" type="button" Create An Event
+      ul.list-days
+        li.list-date-top
+          | 17
+        li.list-date-bottom
+          | Days
+      ul.list-days
+        li.list-date-top
+          | 23
+        li.list-date-bottom
+          | Hours
+      ul.list-days
+        li.list-date-top
+          | 32
+        li.list-date-bottom
+          | Mins
+      ul style="float: right;"
+        li style="max-width:176px;clear: both;display: block;overflow: hidden;margin: 0 auto;"
+          .input-group
+            = text_field_tag "location[address]", (params[:location][:address] if params[:location]), class: "form-control find_location", autofocus: "true", placeholder: "Find an Event"
+            span class="input-group-btn"
+              button class="btn btn-find btn-finder button-find-event" type="button" style="font-size: 22px;" Find
+      div style="clear:both;display:block;"
+        ul.list-result-event
+          li.list-result-left
+            | 1
+          li.list-result-right
+            | Events
+
+        ul.list-result-event
+          li.list-result-left
+            | 12PM
+            b PST
+          li.list-result-right
+            | World Peace Moment
+
+    nav.navbar.navbar-default.navbar-wpc role="navigation"
+      .container
+        /! Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle.collapsed data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+
+        /! Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse.navbar-collasps-wpc
+          .navbar-form.navbar-left.form-wpc role="search"
+            .row
+              .col-xs-8.pad-right-7five
+                = render "home/find_event"
+              .col-xs-4.pad-left-7five
+                - if request.filtered_parameters["action"].eql?("index")
+                  button.btn.btn-default.btn-find.show_create_event.btn-find-md type="submit"  Create an Event
+                - else
+                  a href="#{new_event_path}"
+                    button.btn.btn-default.btn-find type="submit"  Create an Event
+          #myModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  button.close data-dismiss="modal" type="button"
+                    span aria-hidden="true"  &times;
+                    span.sr-only Close
+                  h4#myModalLabel.modal-title Change Location
+                .modal-body.modal-body-wpc
+                  .col-md-12
+                    .form-group
+                      label for="exampleInputEmail1"  New Location
+                      input#exampleInputEmail1.form-control placeholder=("Enter email") type="text"
+                    .form-group
+                      label for="exampleInputEmail1"  Show Result Within
+                      .row
+                        .col-md-6
+                          select.form-control
+                            option 1
+                            option 2
+                            option 3
+                            option 4
+                            option 5
+                        .col-md-6
+                          button.btn.btn-default.btn-location Set Location
+                .modal-footer
+                  button.btn.btn-default.btn-location data-dismiss="modal" type="button"  Close
+          .countdown
+          ul.nav.navbar-nav.countdown-result
+            li
+              span.seperator-result
+                = @event_count
+              span.event-count style="padding-top: 18px;"
+                = "Events"
+            li
+              span.seperator-result
+                | 12PM
+                b PST
+              span.pst-count style="padding-top: 18px;"
+                = "World Peace Moment"
+
     .maps
       #show style="display:none"
         = render "events/form"
@@ -60,6 +163,17 @@ html
 
     .footer style="text-align: center;"
       ul.list-footer-logo
+        li = link_to (image_tag "log (6).png"), "http://www.worldpeace.org", target: "_blank"
+        li = link_to (image_tag "log (3).png"), "http://pathwaystopeace.org", target: "_blank"
+        li = link_to (image_tag "log (3).jpg"), "http://www.upliftconnect.com", target: "_blank"
+        li = link_to (image_tag "log (5).jpg"), "http://we.net", target: "_blank"
+        li = link_to (image_tag "log (7).png"), "http://1giantmind.org", target: "_blank"
+        li = link_to (image_tag "log (4).jpg"), "http://www.uri.org", target: "_blank"
+        li = link_to (image_tag "log (6).jpg"), "http://www.artofliving.org", target: "_blank"
+        li = link_to (image_tag "log (8).png"), "http://compassiongames.org", target: "_blank"
+        li = link_to (image_tag "log (13).png"), "http://summerofpeace.net", target: "_blank"
+        li = link_to (image_tag "log (10).jpg"), "http://internationaldayofpeace.org", target: "_blank"
+      ul.list-footer-logo-iframe
         li = link_to (image_tag "log (6).png"), "http://www.worldpeace.org", target: "_blank"
         li = link_to (image_tag "log (3).png"), "http://pathwaystopeace.org", target: "_blank"
         li = link_to (image_tag "log (3).jpg"), "http://www.upliftconnect.com", target: "_blank"

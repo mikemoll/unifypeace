@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_filter :set_user_location, only: [:new, :page_not_found]
+  before_filter :set_user_location, only: [:new, :page_not_found, :embed]
   before_filter :set_location, only: [:index, :page_not_found, :tags]
 
   def index
@@ -76,16 +76,26 @@ class HomeController < ApplicationController
   end
 
   def embed
-    @location = {area: "worldwide", longitude: 0.0, latitude: 0.0}
-    @events = Event.approved
+    if @location
+      @all = []
 
-    @markers = get_marker_and_location(@events) if @events rescue nil
+      @all << if @location[:area].eql?("worldwide")
+        Event.approved
+      else
+        Event.approved.near([@location[:latitude], @location[:longitude]], @location[:nearby].to_i, units: :km) rescue nil
+      end
+
+      @all = @all.flatten
+      @markers = get_marker_and_location(@all) if @all rescue nil
+    end
+
     @event = Event.new
     @categories = Category.all
 
     set_title_location(@location)
-
-    render template: "home/index"
+    respond_to do |format|
+      format.html {render :layout => 'embed'}
+    end
   end
 
   def page_not_found; end

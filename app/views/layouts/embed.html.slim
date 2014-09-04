@@ -22,111 +22,110 @@ html
     body data-location-scope="#{(@location ? @location[:area] : "")}" data-action="#{action_name}" data-content-type="#{controller_name.singularize.titleize}" data-test="#{apikey(request.url)}" data-user-id="#{(@user ? @user.id : "")}" data-parent-id="#{(@parent_project ? @parent_project.id : "")}"
   body
     .banner-wpc
-      .container
-        .row
-          .col-md-offset-2
-            .col-md-3.col-xs-4
-              .logo-title
-                h1.text-right World
-                h2.text-right September 21, 2014
-                h3.text-right INT'L DAY OF PEACE
-            .col-md-3.col-xs-4
-              h1.text-center
-                = link_to image_tag("log (11).png"), root_path
-            .logo-title
-              .col-md-3.col-xs-4
-                h1.text-left Peace
-                h2.text-left Global Events Map
-                h3.text-left Peace Day Coalition
-    nav.navbar.navbar-default.navbar-wpc role="navigation"
-      .container
-        /! Brand and toggle get grouped for better mobile display
-        .navbar-header
-          button.navbar-toggle.collapsed data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          .navbar-brand.navbar-brand-wpc.hidden-lg.hidden-md Menu
-        /! Collect the nav links, forms, and other content for toggling
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          .navbar-form.navbar-left.form-wpc role="search"
-            button.btn.btn-default.btn-find.find-event data-toggle="modal" data-target=".bs-example-modal-sm" Find an Event near me
-            - if request.filtered_parameters["action"].eql?("index")
-              button.btn.btn-default.btn-find.show_create_event.btn-find-md type="submit"  Create an Event
-            - else
-              a href="#{new_event_path}"
-                button.btn.btn-default.btn-find type="submit"  Create an Event
-          #myModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
-            .modal-dialog
-              .modal-content
-                .modal-header
-                  button.close data-dismiss="modal" type="button"
-                    span aria-hidden="true"  &times;
-                    span.sr-only Close
-                  h4#myModalLabel.modal-title Change Location
-                .modal-body.modal-body-wpc
-                  .col-md-12
-                    .form-group
-                      label for="exampleInputEmail1"  New Location
-                      input#exampleInputEmail1.form-control placeholder=("Enter email") type="text"
-                    .form-group
-                      label for="exampleInputEmail1"  Show Result Within
-                      .row
-                        .col-md-6
-                          select.form-control
-                            option 1
-                            option 2
-                            option 3
-                            option 4
-                            option 5
-                        .col-md-6
-                          button.btn.btn-default.btn-location Set Location
-                .modal-footer
-                  button.btn.btn-default.btn-location data-dismiss="modal" type="button"  Close
-          .countdown
-          ul.nav.navbar-nav.countdown-result
-            li
-              span.seperator-result
-                = @event_count
-              span.event-count style="padding-top: 18px;"
-                = "Events"
-            li
-              span.seperator-result
-                | 12PM
-                b PST
-              span.pst-count style="padding-top: 18px;"
-                = "World Peace Moment"
-          ul
-            - if user_signed_in?
-              li
-                = link_to "logout", destroy_user_session_path(), method: "delete"
-              li
-                = link_to "my events", my_events_events_path(email: current_user.email)
-            - else
-              li
-                = link_to "Login", new_user_session_path
+      .col-md-6.col-md-offset-3.col-xs-12.col-sm-8.col-sm-offset-2
+      = link_to image_tag("Map-Banner.jpeg"), root_path
 
-          .clear
+    .warp-header-peace
+      .row
+        .col-sm-5.col-md-6.pad-right-7five style="padding-left: 2px; margin-top: 11px"
+          .row.finder-and-create-event
+            .col-sm-7.pad-right-7five
+              .input-group
+                = text_field_tag "location[address]", (params[:location][:address] if params[:location]), class: "form-control find_location", autofocus: "true", placeholder: "Find an Event"
+                //input type="text" class="form-control form-custom" placeholder="Find an Event"
+                span class="input-group-btn"
+                  button class="btn btn-find btn-finder button-find-event" type="button" Find
+            .col-sm-5.pad-left-7five
+              a href="#{new_event_path}"
+                button class="btn btn-find btn-finder" type="button" style="font-size: 18px; padding-bottom: 11px;" Create An Event
+        .col-sm-7.col-md-6.pad-left-7five style="padding-left: 0px;"
+          .countdown.list-days
+          ul.list-result-event style="margin-left: 6%;"
+            li.list-result-left
+              = @event_count
+            li.list-result-right style="padding-top: 20px; margin-top: 0px;"
+              | Events
+
+          ul.list-result-event
+            li.list-result-left
+              | 12PM
+              b PST
+            li.list-result-right style="padding-top: 20px; margin-top: 0px;"
+              | World Peace Moment
 
     .maps
+      #show style="display:none"
+        = render "events/form"
       = yield
-    .footer
+
+    .footer style="text-align: center;"
       ul.list-footer-logo
-        li = link_to (image_tag "log (6).png"), "http://www.worldpeace.org"
-        li = link_to (image_tag "log (3).png"), "http://pathwaystopeace.org"
-        li = link_to (image_tag "log (3).jpg"), "http://www.upliftconnect.com"
-        li = link_to (image_tag "log (5).jpg"), "http://we.net"
-        li = link_to (image_tag "log (7).png"), "http://1giantmind.org"
-        li = link_to (image_tag "log (4).jpg"), "http://www.uri.org"
-        li = link_to (image_tag "log (6).jpg"), "http://www.artofliving.org"
-        li = link_to (image_tag "log (8).png"), "http://compassiongames.org"
-        li = link_to (image_tag "log (13).png"), "http://summerofpeace.net"
-        li = link_to (image_tag "log (10).jpg"), "http://internationaldayofpeace.org"
+        li = link_to (image_tag "log (6).png"), "http://www.worldpeace.org", target: "_blank"
+        li = link_to (image_tag "log (3).png"), "http://pathwaystopeace.org", target: "_blank"
+        li = link_to (image_tag "log (3).jpg"), "http://www.upliftconnect.com", target: "_blank"
+        li = link_to (image_tag "log (5).jpg"), "http://we.net", target: "_blank"
+        li = link_to (image_tag "log (7).png"), "http://1giantmind.org", target: "_blank"
+        li = link_to (image_tag "log (4).jpg"), "http://www.uri.org", target: "_blank"
+        li = link_to (image_tag "log (6).jpg"), "http://www.artofliving.org", target: "_blank"
+        li = link_to (image_tag "log (8).png"), "http://compassiongames.org", target: "_blank"
+        li = link_to (image_tag "log (13).png"), "http://summerofpeace.net", target: "_blank"
+        li = link_to (image_tag "log (10).jpg"), "http://internationaldayofpeace.org", target: "_blank"
+    .modal.fade.bs-example-modal-sm tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+    .modal.fade.bs-example-modal-sm#contact-organizer tabindex="-1" role="dialog" aria-labelledby="contactOrganizer"
+
     - if session[:location]
       #map-used data-map="#{session[:location][:map_type]}"
     = yield :javascript
+
 javascript:
+  $(document).on('ready page:load', function(){
+    $(".find_location").geocomplete({
+      details: "form",
+      types: ["geocode", "establishment"]
+    }).bind("geocode:result", function(event, result){
+      console.log(r = result);
+      var lat = result["geometry"]["location"]["k"]
+      var lng = result["geometry"]["location"]["B"]
+      $('#long').val(lng);
+      $('#lat').val(lat);
+      map.setView(new L.LatLng(lat, lng), 12);
+      if(newAddedMarker){
+        newAddedMarker.setLatLng([lat, lng]);
+      }else{
+        newAddedMarker = L.marker([lat, lng], {}).addTo(map);
+      }
+    });
+
+    $(".find_location").click(function(){
+      $(".find_location").trigger("geocode");
+    });
+    $(".button-find-event").click(function(){
+      $.ajax({
+        url: "/find_event",
+        data: {location: {latitude: $('#lat').val(), longitude: $('#long').val()}}
+      });
+    });
+  });
+  var i = 0;
+  var resizeMap = function(){
+    console.log(i+=1);
+    if (i % 2 === 0) {
+      $("#map").attr("style", "width:100%; float: right;margin-right: 0;min-height: 551px;position: relative;");
+    } else {
+      $("#map").attr("style", "width: 78.4%; float: right;margin-right: 0;min-height: 551px;position: relative;");
+    }
+  };
+
+  $('.close-form-create ').click(function(){
+    $("#show").hide();
+    resizeMap();
+  })
+
+  $(".show_create_event").click(function(){
+    $("#show").slideToggle();
+    resizeMap();
+  })
+
   timezone = jstz.determine()
   date = new Date("09/21/2014 19:00:00")
   $('.countdown').countdown({until: date, format: 'dHM'});

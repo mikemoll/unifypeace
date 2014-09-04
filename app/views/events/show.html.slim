@@ -31,6 +31,11 @@
   .pull-right
     - if admin_user_signed_in?
       = link_to 'Edit', edit_event_path(@event_show), class: "btn btn-default", style: "margin-top:10px;"
+
+  .pull-right
+    - if user_signed_in? && @event_show.user.eql?(current_user)
+      = link_to 'Edit', edit_event_path(@event_show), class: "btn btn-default", style: "margin-top:10px;"
+
   .clear
   .pull-left.see-event style="min-height: 250px;"
     p = raw truncate_html(strip_tags(@event_show.description), length: 1000)

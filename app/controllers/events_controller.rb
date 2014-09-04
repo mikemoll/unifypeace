@@ -58,7 +58,7 @@ class EventsController < ApplicationController
     @event.estimated_attendees = params[:estimated_attendees]
     respond_to do |format|
       if @event.save
-        check_user = User.find_by_email("@event.organizer_email") rescue nil
+        check_user = User.find_by_email(@event.organizer_email) rescue nil
         if check_user.blank?
           user = User.invite!(email: @event.organizer_email, name: @event.organizer_name) do |u|
             u.skip_invitation = true
@@ -81,8 +81,6 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-    @event = Event.new
-    @categories = Category.all
     @event.categories.destroy
     @event.affiliated_organization_id = params[:affiliated_organization_id]
     @event.category_ids = params[:category_ids]

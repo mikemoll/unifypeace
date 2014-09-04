@@ -24,17 +24,17 @@ div#location-for-map data-contents="#{[@location[:latitude], @location[:longitud
 
     span.compass-img = image_tag "legend.png"
     li
-      = link_to image_tag("markers/medi-icon.png", class: "meditation"), "#", class: "subcategory", data: {filter: "meditation"}
+      = link_to image_tag("markers/medi-icon-legend.png", class: "meditation"), "#", class: "subcategory", data: {filter: "meditation"}
       | Meditation
     li
-      = link_to image_tag("markers/musi-icon.png", class: "music"), "#", class: "subcategory", data: {filter: "music"}
+      = link_to image_tag("markers/musi-icon-legend.png", class: "music"), "#", class: "subcategory", data: {filter: "music"}
       | Music
     li
       a class="subcategory" data-filter="march" href="#"
-        img alt="March icon" class="march" src="/assets/markers/march-icon.png"
+        img alt="March icon" class="march" src="/assets/markers/march-icon-legend.png"
       | March
     li
-      = link_to image_tag("markers/multi-icon.png", class: "multiple"), "#", class: "subcategory", data: {filter: "multi"}
+      = link_to image_tag("markers/multi-icon-legend.png", class: "multiple"), "#", class: "subcategory", data: {filter: "multi"}
       | Multiple
 
 .powered-logo = image_tag "pbu.png"

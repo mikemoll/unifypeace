@@ -357,7 +357,7 @@ label.control-label span {
  font-family: 'droid-reguler';
  background-color: #ff74d6;
  border-radius: 0px;
- margin-top: 10px;
+ margin-top: 5px;
  text-transform: uppercase;
  color: #fff;
  border: none;
@@ -365,6 +365,9 @@ label.control-label span {
   background-color: #ff74d6;
   color: #fff;
 }
+  span{
+    margin-left: 5px;
+  }
 }
 
 .btn-fb {
@@ -379,25 +382,30 @@ label.control-label span {
 
 .body-see-event{
   background: image-url('bg-nav.png') repeat;
+  top: 1%;
   position: absolute;
   // bottom: -61px;
   // left: 103px;
-  width: 34%;
+  // width: 34%;
+  // height: 551px;
+  width: 37%;
+  padding-bottom: 25px;
   border: 3px #fff solid;
   padding-bottom: 10px;
 
   h1 {
    font-family: 'bebas-neue';
    color: #fff;
-   letter-spacing: 5px;
-   font-size: 25px;
+   letter-spacing: 2px;
+   font-size: 27px;
  }
 
  h3 {
-  font-family: 'droid-reguler';
-  color: #fff;
-  line-height: 18px;
-  font-size: 15px;
+  font-family: 'sans-serif';
+  font-size: 14px;
+  color: #C7C7C7;
+  line-height: 10px;
+  font-weight: bold;
   margin: 10px 0 10px 0;
   }
 }
@@ -410,10 +418,10 @@ label.control-label span {
 
 .see-event {
   background: #fff;
-  border-radius: 5px;
   padding: 10px;
   width: 100%;
   min-height: 150px;
+  margin-bottom: 10px;
 }
 
 .body-see-event-tooltip{
@@ -421,9 +429,13 @@ label.control-label span {
   position: absolute;
   // bottom: -61px;
   // left: 103px;
+<<<<<<< HEAD
   width: 87%;
   margin-top: 18px;
   padding-bottom: 10px;
+=======
+  width: 95%;
+>>>>>>> d9fea4cfaacc9399bc99b94a371891a29879eb32
   left: 34px;
 
   h1 {
@@ -433,10 +445,11 @@ label.control-label span {
  }
 
  h2 {
-  font-family: 'droid-reguler';
+  font-family: sans-serif;
   font-size: 17px;
-  color: #fff;
-  line-height: 10px;
+  color: #C7C7C7;
+  line-height: 5px;
+  font-weight: bold;
 }
 }
 
@@ -465,6 +478,12 @@ label.control-label span {
     display: none;
   }
 }
+
+// @media (max-width: 320px) {
+//   .clear-mobile {
+//     clear: left;
+//   }
+// }
 
 @media (min-width: 480px) {
    .navbar-wpc {
@@ -508,9 +527,22 @@ label.control-label span {
 
  .wrap-big-navbar,.warp-header-peace.mobile {
     display: none;
-  } 
-}
+  }
 
+  .event-legend {
+    width: 446px !important;
+  }
+  .list-event-legend {
+    font-size: 16px;
+    li.compass {
+      margin-right: -22px;
+      margin-top: 17px;
+      img {
+        width: 78px;
+      }
+    }
+  }
+}
 
 
 @media (max-width:760px){

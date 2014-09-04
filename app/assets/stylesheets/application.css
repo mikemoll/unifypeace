@@ -46,15 +46,6 @@
  min-height: 551px;
 }
 
-#map-content{
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  float: right;
-  height: 350px;
-  margin-right: 0px;
-  min-height: 551px;
-  width: 60%;
-}
-
 .page-not-found {
   margin: 15% 20%;
   position: relative;
@@ -147,9 +138,24 @@
   background-color: #ccc;
 }
 
-.circle {
-  /* width and height can be anything, as long as they're equal */
+/*.circle {
+  width and height can be anything, as long as they're equal
+  color: white;
+  font: bold 16px/14px Tahoma,Verdana,sans-serif;
+  height: auto;
+  padding: 4px;
+  position: absolute;
+  right: -20px;
+  text-align: center;
+  text-decoration: none;
+  top: 2px;
+  width: auto;
+  z-index: 9999;
+  background: #666;
+  border-radius: 15px;
+  border: 2px #fff solid;
 }
+*/
 
 a.link {
   color: #fff !important;

@@ -25,7 +25,7 @@
 .col-md-5.body-see-event style="min-height: 538px;"
   .pull-left style="margin-bottom: 20px;"
     h1 = @event_show.title
-    h3 = @event_show.event_type
+    h3 = @event_show.event_type.eql?("multi") ? "Multiple" : @event_show.event_type
     h3 = @event_show.start_date.strftime("%B %d, %l:%M %p")
     h3 = @event_show.location
   .pull-right

@@ -1,6 +1,6 @@
-p 
-	| Thank you for creating an event for World Peace Day, we will confirm your event within 48 hours, and contact you once it has been approved. 
-p 
+p
+	| Thank you for creating an event for World Peace Day, we will confirm your event within 48 hours, and contact you once it has been approved.
+p
 	| To manage your event, please&nbsp;
 	- if @token.blank?
 		login&nbsp;
@@ -8,8 +8,8 @@ p
 	- else
 		register by&nbsp;
 		= link_to "clicking here", accept_user_invitation_url(invitation_token: @token, slug: @slug)
-p 
-	| To view or edit you event, please&nbsp;
+p
+	| . To view or edit you event, please&nbsp;
 	= link_to "clicking here", event_url(@slug)
-p Peace 
+p Peace
 p - The Unify Team

@@ -31,7 +31,8 @@ html
           .row
             .col-sm-7.pad-right-7five
               .input-group
-                input type="text" class="form-control form-custom" placeholder="Find an Event"
+                = text_field_tag "location[address]", (params[:location][:address] if params[:location]), class: "form-control find_location", autofocus: "true", placeholder: "Find an Event"
+                //input type="text" class="form-control form-custom" placeholder="Find an Event"
                 span class="input-group-btn"
                   button class="btn btn-find btn-finder" type="button" Find
             .col-sm-5.pad-left-7five
@@ -87,12 +88,13 @@ html
           | 32
         li.list-date-bottom
           | Mins
-      ul.peace-mobile
-        li style="max-width:150px;clear: both;display: block;overflow: hidden;margin: 0 auto;padding: 3% 20%;"
+      ul style="float: right;"
+        li style="max-width:176px;clear: both;display: block;overflow: hidden;margin: 0 auto;"
           .input-group
-            input type="text" class="form-control form-custom" placeholder="Find an Event"
+            = text_field_tag "location[address]", (params[:location][:address] if params[:location]), class: "form-control find_location", autofocus: "true", placeholder: "Find an Event"
+            / input type="text" class="form-control form-custom" placeholder="Find an Event"
             span class="input-group-btn"
-              button class="btn btn-find btn-finder" type="button" Find
+              button class="btn btn-find btn-finder" type="button" style="font-size: 22px;" Find
       div style="clear:both;display:block;"
         ul.list-result-event
           li.list-result-left
@@ -106,9 +108,6 @@ html
             b PST
           li.list-result-right
             | World Peace Moment
-
-
-    
 
     nav.navbar.navbar-default.navbar-wpc role="navigation"
       .container

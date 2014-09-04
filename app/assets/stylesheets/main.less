@@ -469,6 +469,9 @@ label.control-label span {
   .navbar-wpc {
     display: none;
   }
+  .warp-header-peace.mobile {
+    display: none;
+  }
 }
 
 // @media (max-width: 320px) {
@@ -481,6 +484,27 @@ label.control-label span {
    .navbar-wpc {
     display: none;
   }
+    .warp-header-peace.mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 321px) {
+   .navbar-wpc {
+    display: block;
+  }
+    .warp-header-peace.mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 321px) {
+   .navbar-wpc {
+    display: block;
+  }
+    .warp-header-peace.mobile {
+    display: none;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -489,6 +513,14 @@ label.control-label span {
   }
   .warp-header-peace {
     display: none;
+  }
+  .warp-header-peace.mobile {
+    display: none !important;
+  }
+}
+@media (max-width: 480px){
+  .warp-header-peace.mobile {
+    display: none !important;
   }
 }
 
@@ -545,6 +577,7 @@ label.control-label span {
   .warp-header-peace.mobile {
     display: block;
   }
+
 }
 
 // --------------------------------------- Delip Code

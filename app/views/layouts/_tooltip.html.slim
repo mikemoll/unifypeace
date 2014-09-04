@@ -2,7 +2,7 @@ div style="width: 40%;"
   .col-md-5.body-see-event-tooltip
     .pull-left style="margin-bottom: 10px;"
       h1 = link_to content.title, content, style: "color: white;"
-      h2 = content.event_type
+      h2 = content.event_type.eql?("multi") ? "Multiple" : content.event_type
       h2 = content.start_date.strftime("%B %d, %l:%M %p")
       h2 = content.location
     .pull-left

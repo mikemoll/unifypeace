@@ -24,7 +24,7 @@ class EventsController < ApplicationController
     @event_show = Event.friendly.find(params[:id])
     @categories_event = @event_show.categories
     @categories = Category.all
-    @affiliated = AffiliatedOrganization.find(@event_show.affiliated_organization_id)
+    @affiliated = AffiliatedOrganization.find(@event_show.affiliated_organization_id) unless @event_show.affiliated_organization_id.blank?
     if @location
       @markers = get_marker_and_location([@event_show]) if @all rescue nil
     end

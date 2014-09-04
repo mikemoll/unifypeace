@@ -28,36 +28,21 @@ html
     .warp-header-peace
       .row
         .col-sm-5.col-md-6.pad-right-7five
-          .row
+          .row.finder-and-create-event
             .col-sm-7.pad-right-7five
               .input-group
                 = text_field_tag "location[address]", (params[:location][:address] if params[:location]), class: "form-control find_location", autofocus: "true", placeholder: "Find an Event"
                 //input type="text" class="form-control form-custom" placeholder="Find an Event"
                 span class="input-group-btn"
-                  button class="btn btn-find btn-finder" type="button" Find
+                  button class="btn btn-find btn-finder button-find-event" type="button" Find
             .col-sm-5.pad-left-7five
               a href="#{new_event_path}"
                 button class="btn btn-find btn-finder" type="button" Create An Event
         .col-sm-7.col-md-6.pad-left-7five
-          ul.list-days
-            li.list-date-top
-              | 17
-            li.list-date-bottom
-              | Days
-          ul.list-days
-            li.list-date-top
-              | 23
-            li.list-date-bottom
-              | Hours
-          ul.list-days
-            li.list-date-top
-              | 32
-            li.list-date-bottom
-              | Mins
-
+          .countdown.list-days
           ul.list-result-event
             li.list-result-left
-              | 1
+              = @event_count
             li.list-result-right
               | Events
 
@@ -92,9 +77,8 @@ html
         li style="max-width:176px;clear: both;display: block;overflow: hidden;margin: 0 auto;"
           .input-group
             = text_field_tag "location[address]", (params[:location][:address] if params[:location]), class: "form-control find_location", autofocus: "true", placeholder: "Find an Event"
-            / input type="text" class="form-control form-custom" placeholder="Find an Event"
             span class="input-group-btn"
-              button class="btn btn-find btn-finder" type="button" style="font-size: 22px;" Find
+              button class="btn btn-find btn-finder button-find-event" type="button" style="font-size: 22px;" Find
       div style="clear:both;display:block;"
         ul.list-result-event
           li.list-result-left
@@ -123,7 +107,7 @@ html
         #bs-example-navbar-collapse-1.collapse.navbar-collapse.navbar-collasps-wpc
           .navbar-form.navbar-left.form-wpc role="search"
             .row
-              .col-xs-8.pad-right-7five 
+              .col-xs-8.pad-right-7five
                 = render "home/find_event"
               .col-xs-4.pad-left-7five
                 - if request.filtered_parameters["action"].eql?("index")
@@ -189,6 +173,17 @@ html
         li = link_to (image_tag "log (8).png"), "http://compassiongames.org", target: "_blank"
         li = link_to (image_tag "log (13).png"), "http://summerofpeace.net", target: "_blank"
         li = link_to (image_tag "log (10).jpg"), "http://internationaldayofpeace.org", target: "_blank"
+      ul.list-footer-logo-iframe
+        li = link_to (image_tag "log (6).png"), "http://www.worldpeace.org", target: "_blank"
+        li = link_to (image_tag "log (3).png"), "http://pathwaystopeace.org", target: "_blank"
+        li = link_to (image_tag "log (3).jpg"), "http://www.upliftconnect.com", target: "_blank"
+        li = link_to (image_tag "log (5).jpg"), "http://we.net", target: "_blank"
+        li = link_to (image_tag "log (7).png"), "http://1giantmind.org", target: "_blank"
+        li = link_to (image_tag "log (4).jpg"), "http://www.uri.org", target: "_blank"
+        li = link_to (image_tag "log (6).jpg"), "http://www.artofliving.org", target: "_blank"
+        li = link_to (image_tag "log (8).png"), "http://compassiongames.org", target: "_blank"
+        li = link_to (image_tag "log (13).png"), "http://summerofpeace.net", target: "_blank"
+        li = link_to (image_tag "log (10).jpg"), "http://internationaldayofpeace.org", target: "_blank"
     .modal.fade.bs-example-modal-sm tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
     .modal.fade.bs-example-modal-sm#contact-organizer tabindex="-1" role="dialog" aria-labelledby="contactOrganizer"
 
@@ -197,6 +192,34 @@ html
     = yield :javascript
 
 javascript:
+  $(document).on('ready page:load', function(){
+    $(".find_location").geocomplete({
+      details: "form",
+      types: ["geocode", "establishment"]
+    }).bind("geocode:result", function(event, result){
+      console.log(r = result);
+      var lat = result["geometry"]["location"]["k"]
+      var lng = result["geometry"]["location"]["B"]
+      $('#long').val(lng);
+      $('#lat').val(lat);
+      map.setView(new L.LatLng(lat, lng), 12);
+      if(newAddedMarker){
+        newAddedMarker.setLatLng([lat, lng]);
+      }else{
+        newAddedMarker = L.marker([lat, lng], {}).addTo(map);
+      }
+    });
+
+    $(".find_location").click(function(){
+      $(".find_location").trigger("geocode");
+    });
+    $(".button-find-event").click(function(){
+      $.ajax({
+        url: "/find_event",
+        data: {location: {latitude: $('#lat').val(), longitude: $('#long').val()}}
+      });
+    });
+  });
   var i = 0;
   var resizeMap = function(){
     console.log(i+=1);

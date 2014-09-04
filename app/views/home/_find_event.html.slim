@@ -3,33 +3,3 @@
 = hidden_field_tag "location[latitude]", (params[:location][:latitude] if params[:location]), id: "lat"
 
 button.btn.btn-default.btn-find.btn-find-md.button-find-event style="margin-left: 5px;" Find
-
-javascript:
-  $(document).on('ready page:load', function(){
-    $(".find_location").geocomplete({
-      details: "form",
-      types: ["geocode", "establishment"]
-    }).bind("geocode:result", function(event, result){
-      console.log(r = result);
-      var lat = result["geometry"]["location"]["k"]
-      var lng = result["geometry"]["location"]["B"]
-      $('#long').val(lng);
-      $('#lat').val(lat);
-      map.setView(new L.LatLng(lat, lng), 12);
-      if(newAddedMarker){
-        newAddedMarker.setLatLng([lat, lng]);
-      }else{
-        newAddedMarker = L.marker([lat, lng], {}).addTo(map);
-      }
-    });
-
-    $(".find_location").click(function(){
-      $(".find_location").trigger("geocode");
-    });
-    $(".button-find-event").click(function(){
-      $.ajax({
-        url: "/find_event",
-        data: {location: {latitude: $('#lat').val(), longitude: $('#long').val()}}
-      });
-    });
-  });
